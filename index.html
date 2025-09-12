@@ -283,6 +283,74 @@
             box-shadow: 0 2px 8px #A259FF33;
             letter-spacing: 0.05em;
         }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+
+        .section-title {
+            color: #1e3a8a;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+        }
+
+        .match-bar-bg {
+            background-color: #e2e8f0;
+        }
+
+        .match-bar-fill {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+        }
+
+        /* Gaya baru untuk satu kolom */
+        .single-column-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Gaya baru untuk border neon */
+        .neon-border {
+            border: 2px solid transparent;
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-border:hover {
+            box-shadow: 0 0 20px rgba(71, 85, 105, 0.3), 0 0 40px rgba(71, 85, 105, 0.2);
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            padding: 3px;
+            background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neon-pulse 5s infinite linear;
+        }
+
+        @keyframes neon-pulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 
@@ -380,7 +448,7 @@
                             <div class="epic-shape shape-1"></div>
                             <div class="epic-shape shape-2"></div>
                             <div class="epic-icon">
-                                <img src="./assets/img/ai.png" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" />
+                                <img src="./assets/img/bxs-brain.svg" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" />
                             </div>
                             <div class="epic-title">Personalized AI</div>
                             <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
@@ -391,9 +459,9 @@
                             <div class="epic-shape shape-2"></div>
                             <div class="epic-shape shape-1"></div>
                             <div class="epic-icon" style="background: linear-gradient(135deg, #00FFFF 0%, #A259FF 100%);">
-                                <img src="./assets/img/roadmap.png" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" />
+                                <img src="./assets/img/bx-map-alt.svg" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" />
                             </div>
-                            <div class="epic-title" style="color:#00FFFF;">Career Readiness</div>
+                            <div class="epic-title" style="color:#397777;">Career Readiness</div>
                             <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
                             <span class="epic-badge" style="background: linear-gradient(90deg, #00FFFF, #A259FF);">Roadmap</span>
                         </div>
@@ -402,7 +470,7 @@
                             <div class="epic-shape shape-1"></div>
                             <div class="epic-shape shape-2"></div>
                             <div class="epic-icon" style="background: linear-gradient(135deg, #FF00FF 0%, #A259FF 100%);">
-                                <img src="./assets/img/connector.png" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" />
+                                <img src="./assets/img/bxs-briefcase.svg" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" />
                             </div>
                             <div class="epic-title" style="color:#FF00FF;">Career Connector</div>
                             <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
@@ -412,9 +480,90 @@
                 </div>
             </div>
         </section>
+<section>
+    <!-- Konten dalam satu kolom -->
+    <section class="py-24 md:py-12 px-4 sm:px-6 lg:px-8" style="background-color: #fff;">
+            <div class="container mx-auto max-w-7xl">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        Intelligent Lab Career Dashboard
+                    </h2>
+                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
+                        Dapatkan Informasi Detail Mengenai Rekomendasi Pengembangan Karirmu.
+                    </p>
+                </div>
+                <div class="card neon-border"> <div class="p-12"></div>
+            <!-- Konten Ringkasan Diri -->
+            <div>
+                <h2 class="text-2xl font-bold section-title">Ringkasan Diri</h2>
+                <p class="mt-1 text-sm section-subtitle">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
+                
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Kartu Role Utama -->
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                        <span class="text-sm text-gray-500">Role Utama</span>
+                        <p class="mt-2 text-xl font-semibold text-blue-900">The Innovator</p>
+                    </div>
+                    
+                    <!-- Kartu Base Fit Score -->
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                        <span class="text-sm text-gray-500">Base Fit Score</span>
+                        <p class="mt-2 text-xl font-semibold text-blue-900">88%</p>
+                    </div>
+                    
+                    <!-- Kartu Kekuatan Utama -->
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                        <span class="text-sm text-gray-500">Kekuatan Utama</span>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Analitis</span>
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Kreatif</span>
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <hr class="my-8 border-gray-200">
+
+            <!-- Konten Job Match -->
+            <div>
+                <h2 class="text-2xl font-bold section-title">Job Match</h2>
+                
+                <!-- Item Job Match 1 -->
+                <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-200 pb-6">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-blue-900">Product Manager</h3>
+                        <p class="mt-1 text-sm text-gray-600">Tech Startup "Inovasi Digital" - Jakarta</p>
+                    </div>
+                    <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
+                        <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
+                            <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width: 92%;"></div>
+                        </div>
+                        <p class="mt-1 text-right text-xs text-gray-600">Match Score: 92%</p>
+                    </div>
+                    <button class="mt-4 md:mt-0 px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition w-full md:w-auto">Lihat Detail</button>
+                </div>
+                
+                <!-- Item Job Match 2 -->
+                <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-blue-900">UI/UX Researcher</h3>
+                        <p class="mt-1 text-sm text-gray-600">Creative Agency "Visuara" - Bandung</p>
+                    </div>
+                    <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
+                        <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
+                            <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width: 85%;"></div>
+                        </div>
+                        <p class="mt-1 text-right text-xs text-gray-600">Match Score: 85%</p>
+                    </div>
+                    <button class="mt-4 md:mt-0 px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition w-full md:w-auto">Lihat Detail</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
         <!-- Pricing Section -->
-        <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#fff]">
+        <section class="py-12 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#fff]">
     <div class="container mx-auto max-w-7xl">
         <div class="rounded-3xl p-8 md:p-12 lg:p-16 bg-brand-ivory dark:bg-dark-secondary"
              style="box-shadow: 0 0 32px #A259FF22, 0 0 64px #00FFFF22; border: 2px solid #A259FF;">
