@@ -1,748 +1,684 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arunika - Playlist Karir Personalmu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arunika - Playlist Karir Personalmu</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+  <!-- Tailwind (CSS framework OK) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <style>
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+  <style>
+    /* ---------- Warna Adaptif (Light/Dark) ---------- */
+    :root{
+      --bg-page:#F0F4F8; --surface-1:#FFFFFF; --surface-2:#F8FAFC;
+      --text:#1A202C; --text-muted:#4A5568;
+      --accent-blue:#3182CE; --accent-purple:#A259FF; --accent-cyan:#00FFFF; --accent-fuchsia:#FF00FF; --accent-red:#E53E3E;
+      --border:#CBD5E0; --border-soft:#E2E8F0;
+      --glass-bg: rgba(255,255,255,0.18); --glass-border: rgba(0,0,0,0.06);
+    }
+    .dark{
+      --bg-page:#070812; --surface-1:#0E1020; --surface-2:#141833;
+      --text:#E6EAF2; --text-muted:#A5B1C2;
+      --accent-blue:#00FFFF; --accent-purple:#B57CFF; --accent-fuchsia:#FF55FF; --accent-red:#FF3366;
+      --border:#252B3B; --border-soft:#1C2233;
+      --glass-bg: rgba(7,8,18,0.22); --glass-border: rgba(255,255,255,0.08);
+    }
 
-        :root {
-            --color-primary-bg-light: #F0F4F8;
-            --color-secondary-bg-light: #FFFFFF;
-            --color-text-light: #1A202C;
-            --color-text-secondary-light: #4A5568;
-            --color-accent-blue-light: #3182CE;
-            --color-accent-purple-light: #A259FF;
-            --color-accent-red-light: #E53E3E;
-            --color-border-light: #CBD5E0;
-        }
+    body{
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text);
+    }
+    body.dark{
+      background-image:
+        linear-gradient(rgba(23,25,44,0.6) 1px, transparent 1px),
+        linear-gradient(to right, rgba(23,25,44,0.6) 1px, var(--bg-page) 1px);
+      background-size:40px 40px;
+    }
 
-        .dark {
-            --color-primary-bg-dark: #0B0C1B;
-            --color-secondary-bg-dark: #17192C;
-            --color-text-dark: #E2E8F0;
-            --color-text-secondary-dark: #A0AEC0;
-            --color-accent-blue-dark: #00FFFF;
-            --color-accent-purple-dark: #FF00FF;
-            --color-accent-red-dark: #FF3366;
-            --color-border-dark: #2D3748;
-        }
+    /* Utilities */
+    .bg-brand-cream{background-color:var(--bg-page)} .bg-brand-ivory{background-color:var(--surface-1)}
+    .text-brand-d-brown{color:var(--text)} .text-muted{color:var(--text-muted)}
+    .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
+    .border-soft{border-color:var(--border-soft)} .border-strong{border-color:var(--border)}
+    .bg-brand-gold{background:var(--accent-blue)} .border-brand-gold{border-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
+    .focus\:ring-brand-gold:focus{--tw-ring-color:var(--accent-blue)}
+    .bg-brand-red{background:var(--accent-red)} .border-brand-red{border-color:var(--accent-red)} .text-brand-red{color:var(--accent-red)}
+    .wave-fill{ fill:var(--bg-page) }
 
-        .bg-brand-cream { background-color: var(--color-primary-bg-light); }
-        .bg-brand-ivory { background-color: var(--color-secondary-bg-light); }
-        .text-brand-d-brown { color: var(--color-text-light); }
-        .dark .bg-dark-primary { background-color: var(--color-primary-bg-dark); }
-        .dark .bg-dark-secondary { background-color: var(--color-secondary-bg-dark); }
-        .dark .text-brand-cream { color: var(--color-text-dark); }
+    .ai-gradient-text{
+      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .dark .ai-gradient-text{
+      background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      animation:text-glow-dark 2s ease-in-out infinite alternate;
+    }
+    @keyframes text-glow-dark{
+      from{ text-shadow:0 0 6px var(--accent-cyan),0 0 10px var(--accent-purple) }
+      to{   text-shadow:0 0 10px var(--accent-purple),0 0 20px var(--accent-cyan) }
+    }
 
-        body.dark {
-            background-color: var(--color-primary-bg-dark);
-            background-image: 
-                linear-gradient(rgba(23, 25, 44, 0.6) 1px, transparent 1px),
-                linear-gradient(to right, rgba(23, 25, 44, 0.6) 1px, var(--color-primary-bg-dark) 1px);
-            background-size: 40px 40px;
-        }
+    /* Navbar blur */
+    .navbar-blur{ background:rgba(255,255,255,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.25) }
+    .dark .navbar-blur{ background:rgba(10,12,28,.55); border:1px solid rgba(255,255,255,.08); box-shadow:0 0 24px #00FFFF22,0 0 48px #A259FF22 }
+    .nav-link{ color:var(--text-muted); transition:color .3s, background-color .3s }
+    .nav-link:hover{ color:var(--text); background-color:rgba(0,0,0,.05) }
+    .dark .nav-link:hover{ color:var(--text); text-shadow:0 0 8px var(--accent-cyan); background-color:rgba(255,255,255,.05) }
 
-        .bg-brand-gold { background-color: var(--color-accent-blue-light); }
-        .border-brand-gold { border-color: var(--color-accent-blue-light); }
-        .text-brand-gold { color: var(--color-accent-blue-light); }
-        .focus\:ring-brand-gold:focus { --tw-ring-color: var(--color-accent-blue-light); }
+    /* Top Glass (blur transparan saat scroll) */
+    #top-glass{
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      z-index: 40; pointer-events: none;
+      background: var(--glass-bg); border-bottom: 1px solid var(--glass-border);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      backdrop-filter: saturate(140%) blur(14px);
+      opacity: 0; transition: opacity .28s ease;
+    }
+    body.scrolled #top-glass{ opacity: 1; }
 
-        .bg-brand-red { background-color: var(--color-accent-red-light); }
-        .border-brand-red { border-color: var(--color-accent-red-light); }
-        .text-brand-red { color: var(--color-accent-red-light); }
+    /* Hero */
+    .hero-btn{
+      font-size:1.125rem; padding:.875rem 2.5rem; border-radius:9999px;
+      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
+      color:#fff; transition:all .3s ease-in-out; font-weight:600; display:inline-flex; align-items:center;
+    }
+    .hero-btn:hover{ transform:scale(1.05) translateY(-2px); box-shadow:0 10px 20px -5px rgba(107,70,193,.4) }
+    .dark .hero-btn:hover{ box-shadow:0 0 25px var(--accent-cyan),0 0 15px var(--accent-purple) }
 
-        .dark .bg-brand-gold { background-color: var(--color-accent-purple-dark); }
-        .dark .border-brand-gold { border-color: var(--color-accent-purple-dark); }
-        .dark .text-brand-gold { color: var(--color-accent-purple-dark); }
-        .dark .focus\:ring-brand-gold:focus { --tw-ring-color: var(--color-accent-purple-dark); }
-        .dark .bg-brand-red { background-color: var(--color-accent-red-dark); }
-        .dark .border-brand-red { border-color: var(--color-accent-red-dark); }
-        .dark .text-brand-red { color: var(--color-accent-red-dark); }
+    .hero-bg, .hero-gradient, #particles-bg, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
+.animated-gradient-text {
+  background: linear-gradient(
+    -45deg,
+    #A259FF,
+    #00FFFF,
+    #FF00FF,
+    #3182CE
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 6s ease infinite;
+}
 
-        .ai-gradient-text {
-            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .dark .ai-gradient-text {
-             background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: text-glow-dark 2s ease-in-out infinite alternate;
-        }
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+    /* Epic cards + dekor sudut */
+    .epic-card{
+      transition:box-shadow .4s cubic-bezier(.34,1.56,.64,1);
+      box-shadow:0 8px 32px rgba(162,89,255,.12), 0 1.5px 8px rgba(0,0,0,.08);
+      position:relative; overflow:visible; background:var(--surface-1);
+      border-radius:1.5rem;
+    }
+    .epic-card:hover{ transform: scale(1.07) rotate(-2deg) translateY(-8px); box-shadow:0 16px 48px 0 #A259FF55, 0 4px 24px 0 #00FFFF33; z-index: 2; }
+    .epic-card::after{
+      content:''; position:absolute; inset:-8px; border-radius:2rem; z-index:0;
+      background:linear-gradient(120deg,var(--accent-purple) 0%,var(--accent-cyan) 100%);
+      opacity:0; transition:.4s; filter:blur(16px);
+    }
+    .epic-card:hover::after{ opacity:.35 }
+    .epic-card > *{ position:relative; z-index:1 }
+    .epic-shape{ position:absolute; width:64px; height:64px; opacity:.18; pointer-events:none; z-index:0; filter:saturate(1.1); }
+    .epic-shape.shape-1{ top:-32px; left:-32px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--accent-purple) 0%, transparent 70%) }
+    .epic-shape.shape-2{ bottom:-32px; right:-32px; border-radius:30% 70% 70% 30%/30% 30% 70% 70%; background:conic-gradient(from 90deg, var(--accent-cyan) 0%, var(--accent-purple) 60%, transparent 100%) }
+    .epic-card .epic-icon{ background:linear-gradient(135deg,var(--accent-purple) 0%, var(--accent-cyan) 100%); border-radius:1.5rem; padding:.75rem; margin-top:-2.5rem; margin-bottom:1.5rem; box-shadow:0 4px 24px #A259FF33; display:inline-block; }
+    .epic-title{ font-size:1.25rem; font-weight:800; letter-spacing:.04em; color:var(--accent-purple); margin-bottom:.5rem }
+    .dark .epic-title{ color:var(--accent-cyan); text-shadow:0 2px 8px #A259FF }
+    .epic-desc{ color:var(--text-muted) } .dark .epic-desc{ color:var(--text) }
+    .epic-badge{ position:absolute; top:1.25rem; right:1.25rem; background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan)); color:#fff; font-size:.75rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; letter-spacing:.05em; box-shadow:0 2px 8px #A259FF33; }
 
-        @keyframes text-glow-dark {
-            from { text-shadow: 0 0 5px var(--color-accent-blue-dark), 0 0 10px var(--color-accent-purple-dark); }
-            to { text-shadow: 0 0 10px var(--color-accent-purple-dark), 0 0 20px var(--color-accent-blue-dark); }
-        }
-        
-        /* Card Glow Effect */
-        .ai-card-border-glow {
-            position: relative;
-            border: 1px solid var(--color-border-light);
-        }
-        .dark .ai-card-border-glow {
-            border: 1px solid var(--color-border-dark);
-        }
-        .dark .ai-card-border-glow::before {
-            content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
-            background: linear-gradient(45deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-            filter: blur(8px); opacity: 0; transition: opacity 0.3s ease-in-out;
-        }
-        .dark .ai-card-border-glow:hover::before {
-            opacity: 0.5;
-        }
-        
-        .navbar-blur {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .dark .navbar-blur {
-            background-color: rgba(11, 12, 27, 0.6);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .nav-link {
-            color: var(--color-text-secondary-light);
-            transition: color 0.3s, background-color 0.3s;
-        }
-        .dark .nav-link {
-            color: var(--color-text-secondary-dark);
-        }
-        .nav-link:hover {
-            color: var(--color-text-light);
-            background-color: rgba(0,0,0,0.05);
-        }
-        .dark .nav-link:hover {
-            color: var(--color-text-dark);
-            text-shadow: 0 0 8px var(--color-accent-blue-dark);
-            background-color: rgba(255,255,255,0.05);
-        }
+/* Intelligent Lab Career Dashboard */
+.neon-border {
+  border: 2px solid transparent;
+  position: relative;
+  border-radius: 12px;
+  background: var(--surface-1);
+  overflow: hidden;
+}
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: neon-pulse 5s infinite linear;
+}
+@keyframes neon-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-        .hero-btn {
-            font-size: 1.125rem;
-            padding: 0.875rem 2.5rem;
-            border-radius: 9999px;
-            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
-            color: white;
-            transition: all 0.3s ease-in-out;
-            font-weight: 600;
-        }
-        .dark .hero-btn {
-            background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-        }
-        .hero-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(107, 70, 193, 0.4);
-        }
-        .dark .hero-btn:hover {
-            box-shadow: 0 0 25px var(--color-accent-blue-dark), 0 0 15px var(--color-accent-purple-dark);
-        }
-        
-        /* Footer Enhancements */
-        .footer-cyber-bg {
-            background: linear-gradient(135deg, #E0F7FA 0%, #F0F4F8 100%);
-            position: relative;
-        }
-        .dark .footer-cyber-bg {
-            background: linear-gradient(135deg, #0B0C1B 0%, #17192C 100%);
-            border-top: 1px solid var(--color-border-dark);
-        }
-        .dark .footer-cyber-bg::before {
-            content: ''; position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(23, 25, 44, 0.8) 1px, transparent 1px),
-                linear-gradient(to right, rgba(23, 25, 44, 0.8) 1px, var(--color-primary-bg-dark) 1px);
-            background-size: 30px 30px;
-            opacity: 0.1; z-index: 0;
-        }
-        .footer-link-hover {
-            color: var(--color-text-secondary-light);
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        .dark .footer-link-hover {
-             color: var(--color-text-secondary-dark);
-        }
-        .footer-link-hover:hover {
-            color: var(--color-accent-purple-light);
-        }
-        .dark .footer-link-hover:hover {
-            color: var(--color-accent-purple-dark);
-            text-shadow: 0 0 5px var(--color-accent-purple-dark);
-        }
-        @keyframes gradient-move {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .animated-gradient-text {
-            background: linear-gradient(90deg, #A259FF, #e2bff7, #00FFFF, #FF00FF, #A259FF);
-            background-size: 300% 300%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            animation: gradient-move 3s linear infinite;
-        }
-        /* Card Epic Animation */
-        .epic-card {
-            transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), box-shadow 0.4s cubic-bezier(.34,1.56,.64,1);
-            box-shadow: 0 8px 32px 0 rgba(162,89,255,0.12), 0 1.5px 8px 0 rgba(0,0,0,0.08);
-            position: relative;
-            overflow: visible;
-        }
-        .epic-card:hover {
-            transform: scale(1.07) rotate(-2deg) translateY(-8px);
-            box-shadow: 0 16px 48px 0 #A259FF55, 0 4px 24px 0 #00FFFF33;
-            z-index: 2;
-        }
-        .epic-card::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 2rem;
-            z-index: -1;
-            background: linear-gradient(120deg, #A259FF 0%, #00FFFF 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-            filter: blur(16px);
-        }
-        .epic-card:hover::after {
-            opacity: 0.4;
-        }
-        .epic-card .epic-shape {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            z-index: 1;
-            opacity: 0.18;
-            pointer-events: none;
-        }
-        .epic-card .epic-shape.shape-1 {
-            top: -30px; left: -30px;
-            background: radial-gradient(circle at 30% 30%, #A259FF 0%, transparent 80%);
-            border-radius: 50%;
-        }
-        .epic-card .epic-shape.shape-2 {
-            bottom: -30px; right: -30px;
-            background: conic-gradient(from 90deg, #00FFFF 0%, #A259FF 60%, transparent 100%);
-            border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
-        }
-        .epic-card .epic-icon {
-            background: linear-gradient(135deg, #A259FF 0%, #00FFFF 100%);
-            border-radius: 1.5rem;
-            padding: 0.75rem;
-            margin-top: -2.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 24px #A259FF33;
-            display: inline-block;
-        }
-        .epic-card .epic-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            color: #A259FF;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 8px #e2bff7;
-        }
-        .epic-card .epic-desc {
-            color: #4A5568;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .dark .epic-card .epic-title {
-            color: #00FFFF;
-            text-shadow: 0 2px 8px #A259FF;
-        }
-        .dark .epic-card .epic-desc {
-            color: #E2E8F0;
-        }
-        .epic-card .epic-badge {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: linear-gradient(90deg, #A259FF, #00FFFF);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            box-shadow: 0 2px 8px #A259FF33;
-            letter-spacing: 0.05em;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-        }
+/* Pricing Card */
+.pricing-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.pricing-card:hover {
+  box-shadow: 0 0 25px #A259FF, 0 0 50px #00FFFF;
+  transform: scale(1.05);
+}
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(45deg, #A259FF, #00FFFF, #FF00FF);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pricing-card:hover::before {
+  opacity: 1;
+}
 
-        .section-title {
-            color: #1e3a8a;
-        }
+    /* Komponen lain */
+    .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
+    .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
+    .match-bar-bg{ background:#e2e8f0 } .dark .match-bar-bg{ background:#1f2937 }
+    .match-bar-fill{ background-image:linear-gradient(to right,#6366f1,#8b5cf6) } .dark .match-bar-fill{ background-image:linear-gradient(90deg,var(--accent-cyan),var(--accent-fuchsia)) }
 
-        .section-subtitle {
-            color: #64748b;
-        }
+    /* Footer */
+    .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
+    .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
+    .dark .footer-cyber-bg::before{
+      content:''; position:absolute; inset:0;
+      background-image:linear-gradient(rgba(23,25,44,.8) 1px, transparent 1px),
+                       linear-gradient(to right, rgba(23,25,44,.8) 1px, var(--bg-page) 1px);
+      background-size:30px 30px; opacity:.1; z-index:0;
+    }
+    .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
 
-        .match-bar-bg {
-            background-color: #e2e8f0;
-        }
-
-        .match-bar-fill {
-            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
-        }
-
-        /* Gaya baru untuk satu kolom */
-        .single-column-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Gaya baru untuk border neon */
-        .neon-border {
-            border: 2px solid transparent;
-            position: relative;
-            background: #ffffff;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .neon-border:hover {
-            box-shadow: 0 0 20px rgba(71, 85, 105, 0.3), 0 0 40px rgba(71, 85, 105, 0.2);
-        }
-
-        .neon-border::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 12px;
-            padding: 3px;
-            background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-            animation: neon-pulse 5s infinite linear;
-        }
-
-        @keyframes neon-pulse {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-    </style>
+    /* -------- Scroll-Reveal (retriggerable) -------- */
+    @media (prefers-reduced-motion:no-preference){
+      .sr{
+        opacity:0; filter:blur(6px);
+        transform:translateY(28px);
+        will-change:transform,opacity,filter;
+        transition:
+          opacity .7s cubic-bezier(.21,.6,.2,1),
+          transform .7s cubic-bezier(.21,.6,.2,1),
+          filter .7s cubic-bezier(.21,.6,.2,1);
+        transition-delay: var(--sr-delay, 0ms);
+      }
+      .sr-in{ opacity:1; filter:blur(0); transform:none }
+      .sr-left{ transform:translateX(-28px) }
+      .sr-right{ transform:translateX(28px) }
+      .sr-zoom{ transform: translateY(12px) scale(.96) }
+      .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
+    }
+  
+    
+  </style>
 </head>
 
-<body class="font-sans bg-brand-cream text-brand-d-brown">
+<body class="bg-brand-cream text-brand-d-brown">
+  <!-- Top Glass Blur -->
+  <div id="top-glass" aria-hidden="true"></div>
 
-    <!-- Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 p-4">
-        <div class="container mx-auto flex justify-center">
-            <div
-                class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
-                style="background-color: #481057; border: 1px solid #481057; box-shadow: 0 0 24px #A259FF, 0 0 48px #A259FF66;">
-                <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
-                    <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
-                </a>
-                <nav class="flex items-center space-x-1">
-    <a href="lab-career.html" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
-    </a>
-    <a href="#" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
-    </a>
-    <a href="#" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">About Us</span>
-    </a>
-</nav>
-                <div class="flex items-center gap-2 pr-2">
-                    <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
-                    <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </a>
-                    <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
-                        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section 
-            class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden"
-            style="background-image: url('./assets/img/imgg.png'); background-size: cover; background-position: center;">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30"></div>
-            <!-- Animated Particles -->
-            <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
-            <div class="relative z-10">
-                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
-                    Jika Karir Adalah Musik,
-                    <br class="hidden md:block">
-                    Apa <span class="animated-gradient-text">Playlist-mu?</span>
-                </h1>
-                <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
-                    Berhenti menebak-nebak. Melalui analisis AI yang mendalam,
-                    Arunika membantumu menemukan "genre" karir yang paling
-                    sesuai dengan kepribadian dan kekuatanmu.
-                </p>
-                <button id="goToSkillMatch" class="mt-10 hero-btn">
-                    Temukan Playlist Karirmu &rarr;
-                </button>
-            </div>
-            <!-- SVG Wave Divider -->
-            <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
-                <path fill="#F0F4F8" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
+           style="background-color:#481057; border:1px solid #481057; box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66;">
+        <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
+          <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
+        </a>
+        <nav class="flex items-center space-x-1">
+          <a href="lab-career.html" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+          </a>
+          <a href="#" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
+          </a>
+          <a href="#" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">About Us</span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2">
+          <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
+          <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
             </svg>
-        </section>
-
-        <!-- Epic Cards Section -->
-        <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #fff;">
-            <div class="container mx-auto max-w-7xl">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
-                        Bukan Sekadar Tes, Tapi Strategi Karir Personalmu
-                    </h2>
-                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
-                        Arunika dirancang untuk memberikan kejelasan, bukan keraguan.
-                        Inilah cara kami membantumu mencapai tujuan.
-                    </p>
-                </div>
-                <div class="mt-16 max-w-6xl mx-auto">
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                        <!-- Card 1 -->
-                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
-                            <div class="epic-shape shape-1"></div>
-                            <div class="epic-shape shape-2"></div>
-                            <div class="epic-icon">
-                                <img src="./assets/img/bxs-brain.svg" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" />
-                            </div>
-                            <div class="epic-title">Personalized AI</div>
-                            <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
-                            <span class="epic-badge">AI Powered</span>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
-                            <div class="epic-shape shape-2"></div>
-                            <div class="epic-shape shape-1"></div>
-                            <div class="epic-icon" style="background: linear-gradient(135deg, #00FFFF 0%, #A259FF 100%);">
-                                <img src="./assets/img/bx-map-alt.svg" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" />
-                            </div>
-                            <div class="epic-title" style="color:#397777;">Career Readiness</div>
-                            <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
-                            <span class="epic-badge" style="background: linear-gradient(90deg, #00FFFF, #A259FF);">Roadmap</span>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
-                            <div class="epic-shape shape-1"></div>
-                            <div class="epic-shape shape-2"></div>
-                            <div class="epic-icon" style="background: linear-gradient(135deg, #FF00FF 0%, #A259FF 100%);">
-                                <img src="./assets/img/bxs-briefcase.svg" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" />
-                            </div>
-                            <div class="epic-title" style="color:#FF00FF;">Career Connector</div>
-                            <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
-                            <span class="epic-badge" style="background: linear-gradient(90deg, #FF00FF, #A259FF);">Networking</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-<section>
-    <!-- Konten dalam satu kolom -->
-    <section class="py-24 md:py-12 px-4 sm:px-6 lg:px-8" style="background-color: #fff;">
-            <div class="container mx-auto max-w-7xl">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
-                        Intelligent Lab Career Dashboard
-                    </h2>
-                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
-                        Dapatkan Informasi Detail Mengenai Rekomendasi Pengembangan Karirmu.
-                    </p>
-                </div>
-                <div class="card neon-border"> <div class="p-12"></div>
-            <!-- Konten Ringkasan Diri -->
-            <div>
-                <h2 class="text-2xl font-bold section-title">Ringkasan Diri</h2>
-                <p class="mt-1 text-sm section-subtitle">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
-                
-                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Kartu Role Utama -->
-                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
-                        <span class="text-sm text-gray-500">Role Utama</span>
-                        <p class="mt-2 text-xl font-semibold text-blue-900">The Innovator</p>
-                    </div>
-                    
-                    <!-- Kartu Base Fit Score -->
-                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
-                        <span class="text-sm text-gray-500">Base Fit Score</span>
-                        <p class="mt-2 text-xl font-semibold text-blue-900">88%</p>
-                    </div>
-                    
-                    <!-- Kartu Kekuatan Utama -->
-                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl">
-                        <span class="text-sm text-gray-500">Kekuatan Utama</span>
-                        <div class="mt-2 flex flex-wrap gap-2">
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Analitis</span>
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Kreatif</span>
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Problem Solving</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="my-8 border-gray-200">
-
-            <!-- Konten Job Match -->
-            <div>
-                <h2 class="text-2xl font-bold section-title">Job Match</h2>
-                
-                <!-- Item Job Match 1 -->
-                <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-200 pb-6">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-blue-900">Product Manager</h3>
-                        <p class="mt-1 text-sm text-gray-600">Tech Startup "Inovasi Digital" - Jakarta</p>
-                    </div>
-                    <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                        <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                            <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width: 92%;"></div>
-                        </div>
-                        <p class="mt-1 text-right text-xs text-gray-600">Match Score: 92%</p>
-                    </div>
-                    <button class="mt-4 md:mt-0 px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition w-full md:w-auto">Lihat Detail</button>
-                </div>
-                
-                <!-- Item Job Match 2 -->
-                <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-blue-900">UI/UX Researcher</h3>
-                        <p class="mt-1 text-sm text-gray-600">Creative Agency "Visuara" - Bandung</p>
-                    </div>
-                    <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                        <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                            <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width: 85%;"></div>
-                        </div>
-                        <p class="mt-1 text-right text-xs text-gray-600">Match Score: 85%</p>
-                    </div>
-                    <button class="mt-4 md:mt-0 px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition w-full md:w-auto">Lihat Detail</button>
-                </div>
-            </div>
+          </a>
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
+            <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
         </div>
+      </div>
     </div>
-</section>
-        <!-- Pricing Section -->
-        <section class="py-12 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#fff]">
-    <div class="container mx-auto max-w-7xl">
-        <div class="rounded-3xl p-8 md:p-12 lg:p-16 bg-brand-ivory dark:bg-dark-secondary"
-             style="box-shadow: 0 0 32px #A259FF22, 0 0 64px #00FFFF22; border: 2px solid #A259FF;">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="max-w-md">
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
-                        Buka Level Baru Dalam Karirmu
-                    </h2>
-                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
-                        Pilih rencana yang mendukung petualangan karirmu. Kamu punya peta jalan yang tepat untukmu.
-                    </p>
-                </div>
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <!-- Card Free -->
-                    <div class="relative rounded-2xl p-6 flex flex-col bg-brand-cream dark:bg-dark-primary transition-all duration-300
-                        border-2 border-[#A259FF] shadow-xl
-                        hover:shadow-[0_0_32px_0_#A259FF,0_0_64px_0_#A259FF55] hover:border-[#A259FF] group">
-                        <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400">Free</h3>
-                        <p class="text-4xl font-bold mt-2">Rp 0</p>
-                        <p class="text-sm text-gray-400 mt-1">Selamanya</p>
-                        <ul class="mt-6 space-y-3 flex-grow text-brand-d-brown/90 dark:text-brand-cream/90 text-sm">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Skill Connector</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Road Map Dasar</span>
-                            </li>
-                        </ul>
-                        <button class="mt-8 w-full font-semibold py-3 rounded-lg border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300">Pilih Paket</button>
-                        <span class="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-[#A259FF] group-hover:ring-offset-2 group-hover:ring-offset-white transition-all duration-300"></span>
-                    </div>
-                    <!-- Card Tahunan -->
-                    <div class="relative rounded-2xl p-6 flex flex-col border-2 border-[#00FFFF] shadow-xl bg-brand-cream dark:bg-dark-primary transition-all duration-300
-                        hover:shadow-[0_0_32px_0_#00FFFF,0_0_64px_0_#00FFFF55] hover:border-[#00FFFF] group">
-                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-full">PALING POPULER</span>
-                        <h3 class="text-lg font-semibold text-brand-red">Tahunan</h3>
-                        <p class="text-4xl font-bold mt-2">Rp 150rb</p>
-                        <p class="text-sm text-gray-400 mt-1">/ tahun</p>
-                        <ul class="mt-6 space-y-3 flex-grow text-brand-d-brown/90 dark:text-brand-cream/90 text-sm">
-                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span><b>Semua fitur paket Free</b></span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Deep Skill Connector</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Readiness Career Report</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Chatbot AI Eksklusif</span></li>
-                        </ul>
-                        <button class="mt-8 w-full font-semibold py-3 rounded-lg bg-brand-red text-white transition-all duration-300">Pilih Paket</button>
-                        <span class="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-[#00FFFF] group-hover:ring-offset-2 group-hover:ring-offset-white transition-all duration-300"></span>
-                    </div>
-                </div>
-            </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <!-- BG -->
+      <div id="hero-bg" class="hero-bg absolute inset-0 z-0"
+           style="background-image:url('./assets/img/imgg.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
+      <!-- Gradient -->
+      <div id="hero-grad" class="hero-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30 z-10"></div>
+      <!-- Particles -->
+      <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
+      <!-- Content -->
+      <div id="hero-content" class="relative z-30">
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
+          Jika Karir Adalah Musik,<br class="hidden md:block">Apa <span class="animated-gradient-text">Playlist-mu?</span>
+        </h1>
+        <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
+          Berhenti menebak-nebak. Melalui analisis AI yang mendalam,
+          Arunika membantumu menemukan "genre" karir yang paling sesuai dengan kepribadian dan kekuatanmu.
+        </p>
+        <button id="goToSkillMatch" class="mt-10 hero-btn group">
+          <span>Temukan Playlist Karirmu</span>
+          <svg class="ml-3 w-5 h-5 transition-transform duration-300 -rotate-45 group-hover:rotate-0 group-hover:translate-x-1.5"
+               viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Wave -->
+      <svg id="hero-wave" class="absolute bottom-0 left-0 w-full translate-y-px z-40" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+        <path class="wave-fill" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
+      </svg>
+    </section>
+
+    <!-- Epic Cards (Scroll-Reveal) -->
+    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-brand-cream -mt-px">
+      <div class="container mx-auto max-w-7xl">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Bukan Sekadar Tes, Tapi Strategi Karir Personalmu</h2>
+          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="120">
+            Arunika dirancang untuk memberikan kejelasan, bukan keraguan. Inilah cara kami membantumu mencapai tujuan.
+          </p>
         </div>
+
+        <div class="mt-16 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sr-stagger" data-sr-group data-sr-stagger="120">
+          <!-- Card 1 -->
+          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
+            <div class="epic-shape shape-1"></div>
+            <div class="epic-shape shape-2"></div>
+            <div class="epic-icon"><img src="./assets/img/bxs-brain.svg" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
+            <div class="epic-title">Personalized AI</div>
+            <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
+            <span class="epic-badge">AI Powered</span>
+          </div>
+          <!-- Card 2 -->
+          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
+            <div class="epic-shape shape-1"></div>
+            <div class="epic-shape shape-2"></div>
+            <div class="epic-icon"><img src="./assets/img/bx-map-alt.svg" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
+            <div class="epic-title">Career Readiness</div>
+            <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
+            <span class="epic-badge">Roadmap</span>
+          </div>
+          <!-- Card 3 -->
+          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
+            <div class="epic-shape shape-1"></div>
+            <div class="epic-shape shape-2"></div>
+            <div class="epic-icon"><img src="./assets/img/bxs-briefcase.svg" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
+            <div class="epic-title">Career Connector</div>
+            <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
+            <span class="epic-badge">Networking</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intelligent Lab Career Dashboard -->
+    <section class="py-24 md:py-12 px-4 sm:px-6 lg:px-8 surface-1">
+      <div class="container mx-auto max-w-7xl">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Intelligent Lab Career Dashboard</h2>
+          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">Dapatkan Informasi Detail Mengenai Rekomendasi Pengembangan Karirmu.</p>
+        </div>
+
+        <div class="card neon-border mt-8 sr" data-sr data-sr-delay="150">
+          <div class="p-2 md:p-6">
+            <!-- Ringkasan Diri -->
+            <div>
+              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Ringkasan Diri</h2>
+              <p class="mt-1 text-sm section-subtitle sr sr-left" data-sr data-sr-delay="80">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
+
+              <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sr-stagger" data-sr-group data-sr-stagger="100">
+                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
+                  <span class="text-sm text-muted">Role Utama</span>
+                  <p class="mt-2 text-xl font-semibold">The Innovator</p>
+                </div>
+                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
+                  <span class="text-sm text-muted">Base Fit Score</span>
+                  <p class="mt-2 text-xl font-semibold">88%</p>
+                </div>
+                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
+                  <span class="text-sm text-muted">Kekuatan Utama</span>
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Analitis</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Kreatif</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Problem Solving</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-8 border border-soft sr" data-sr data-sr-delay="80">
+
+            <!-- Job Match -->
+            <div>
+              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Job Match</h2>
+
+              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-soft pb-6 sr sr-right" data-sr data-sr-delay="100">
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold">Product Manager</h3>
+                  <p class="mt-1 text-sm text-muted">Tech Startup "Inovasi Digital" - Jakarta</p>
+                </div>
+                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
+                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
+                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:92%;"></div>
+                  </div>
+                  <p class="mt-1 text-right text-xs text-muted">Match Score: 92%</p>
+                </div>
+                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
+              </div>
+
+              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6 sr sr-right" data-sr data-sr-delay="160">
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold">UI/UX Researcher</h3>
+                  <p class="mt-1 text-sm text-muted">Creative Agency "Visuara" - Bandung</p>
+                </div>
+                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
+                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
+                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:85%;"></div>
+                  </div>
+                  <p class="mt-1 text-right text-xs text-muted">Match Score: 85%</p>
+                </div>
+                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /card -->
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="py-12 md:py-32 px-4 sm:px-6 lg:px-8 surface-1">
+      <div class="container mx-auto max-w-7xl">
+        <div class="rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 surface-2"
+             style="box-shadow:0 0 32px #A259FF22, 0 0 64px #00FFFF22; border:2px solid var(--accent-purple);">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="max-w-md">
+              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Buka Level Baru Dalam Karirmu</h2>
+              <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">
+                Pilih rencana yang mendukung petualangan karirmu. Kamu punya peta jalan yang tepat untukmu.
+              </p>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6 sr-stagger" data-sr-group data-sr-stagger="140">
+              <!-- Free -->
+              <div class="pricing-card relative rounded-2xl p-6 flex flex-col surface-1 transition-all duration-300 border-2 border-brand-gold shadow-xl group sr sr-zoom" data-sr data-sr-item>
+                <h3 class="text-lg font-semibold text-muted">Free</h3>
+                <p class="text-4xl font-bold mt-2">Rp 0</p>
+                <p class="text-sm text-muted mt-1">Selamanya</p>
+                <ul class="mt-6 space-y-3 flex-grow text-sm">
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Skill Connector</span></li>
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Road Map Dasar</span></li>
+                </ul>
+                <button class="mt-8 w-full font-semibold py-3 rounded-lg border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300">Pilih Paket</button>
+              </div>
+              <!-- Tahunan -->
+              <div class="pricing-card relative rounded-2xl p-6 flex flex-col border-2 sr sr-zoom" data-sr data-sr-item
+                   style="border-color: var(--accent-cyan); background: var(--surface-1);">
+                <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-full">PALING POPULER</span>
+                <h3 class="text-lg font-semibold text-brand-red">Tahunan</h3>
+                <p class="text-4xl font-bold mt-2">Rp 150rb</p>
+                <p class="text-sm text-muted mt-1">/ tahun</p>
+                <ul class="mt-6 space-y-3 flex-grow text-sm">
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span><b>Semua fitur paket Free</b></span></li>
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Deep Skill Connector</span></li>
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Readiness Career Report</span></li>
+                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Chatbot AI Eksklusif</span></li>
+                </ul>
+                <button class="mt-8 w-full font-semibold py-3 rounded-lg bg-brand-red text-white transition-all duration-300 hover:opacity-90">Pilih Paket</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-0 footer-cyber-bg">
+    <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-2">
+          <div class="inline-block [perspective:1000px] sr" data-sr>
+            <img id="footer-logo" src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto footer-tilt" />
+          </div>
+          <p class="mt-4 max-w-xs text-lg leading-relaxed text-muted sr" data-sr data-sr-delay="120">
+            Playlist karir personalmu untuk masa depan yang lebih cerah.
+          </p>
+        </div>
+        <div class="sr" data-sr>
+          <h4 class="font-bold mb-4 text-xl">Perusahaan</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Tentang Kami</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Partner</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Press Kit</a></li>
+          </ul>
+        </div>
+        <div class="sr" data-sr data-sr-delay="80">
+          <h4 class="font-bold mb-4 text-xl">Sosial Media</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Twitter</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Instagram</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Threads</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t text-center text-sm text-muted sr" data-sr data-sr-delay="140" style="border-color:var(--border);">
+        &copy; 2025 Arunika. All Rights Reserved.
+      </div>
     </div>
-</section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="relative z-0" style="background-color: #481057;">
-        <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="col-span-2 md:col-span-2">
-                    <h3 class="text-3xl font-extrabold ai-gradient-text" style="color: #fff;">Arunika</h3>
-                    <p class="mt-4 max-w-xs text-lg leading-relaxed" style="color: #e2bff7;">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Perusahaan</h4>
-                    <ul class="space-y-3 text-lg">
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Tentang Kami</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Partner</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Press Kit</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Sosial Media</h4>
-                    <ul class="space-y-3 text-lg">
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Twitter</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Instagram</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Threads</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-16 pt-8 border-t text-center text-sm" style="border-color: #e2bff7; color: #e2bff7;">
-                &copy; 2025 Arunika. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
+  </footer>
 
-    <script>
-        // --- FUNGSI NAVIGASI ---
-        function navigateTo(page) {
-            window.location.href = page;
-        }
+  <script>
+    // --- NAVIGASI ---
+    function navigateTo(page){ window.location.href = page; }
+    document.getElementById('goToSkillMatch')?.addEventListener('click', () => navigateTo('skill-match.html'));
 
-        document.getElementById('goToSkillMatch').addEventListener('click', function() {
-            navigateTo('skill-match.html');
-        });
+    // --- THEME TOGGLE ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon  = document.getElementById('theme-toggle-dark-icon');
 
-        // --- SCRIPT UNTUK TOGGLE TEMA ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    function setTheme(theme){
+      if(theme === 'dark'){
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark'); document.body.classList.remove('light');
+        darkIcon?.classList.remove('hidden'); lightIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','dark');
+      }else{
+        document.documentElement.classList.remove('dark');
+        document.body.classList.add('light'); document.body.classList.remove('dark');
+        lightIcon?.classList.remove('hidden'); darkIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','light');
+      }
+    }
+    const savedTheme = localStorage.getItem('color-theme');
+    if(savedTheme){ setTheme(savedTheme); }
+    else if(window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark'); }
+    else{ setTheme('light'); }
+    themeToggleBtn?.addEventListener('click', () => {
+      if(document.documentElement.classList.contains('dark')) setTheme('light'); else setTheme('dark');
+    });
 
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-                document.body.classList.remove('light');
-                darkIcon.classList.remove('hidden');
-                lightIcon.classList.add('hidden');
-                localStorage.setItem('color-theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.body.classList.add('light');
-                document.body.classList.remove('dark');
-                lightIcon.classList.remove('hidden');
-                darkIcon.classList.add('hidden');
-                localStorage.setItem('color-theme', 'light');
-            }
-        }
-
-        const savedTheme = localStorage.getItem('color-theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
+    // --- Body scrolled -> aktifkan top glass ---
+    (function(){
+      const onScroll = () => {
+        if ((window.scrollY || document.documentElement.scrollTop) > 4) {
+          document.body.classList.add('scrolled');
         } else {
-            setTheme('light');
+          document.body.classList.remove('scrolled');
         }
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, {passive:true});
+    })();
 
-        themeToggleBtn.addEventListener('click', function() {
-            if (document.documentElement.classList.contains('dark')) {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
-        });
+    // --- Hero: Fireflies (particles) ---
+    (function(){
+      const canvas = document.getElementById('particles-bg'); if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const COUNT = reduce ? 16 : 36;
+      const particles = [];
 
-        // --- Particles Background for Hero Section ---
-        // Simple animated dots/particles for extra dynamic effect
-        window.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('particles-bg');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let w = canvas.width = canvas.offsetWidth;
-            let h = canvas.height = canvas.offsetHeight;
-            let particles = [];
-            for (let i = 0; i < 36; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    r: 1.5 + Math.random() * 2.5,
-                    dx: -0.5 + Math.random(),
-                    dy: -0.5 + Math.random(),
-                    c: `rgba(${150+Math.floor(Math.random()*80)},${80+Math.floor(Math.random()*100)},255,0.25)`
-                });
-            }
-            function draw() {
-                ctx.clearRect(0, 0, w, h);
-                for (let p of particles) {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
-                    ctx.fillStyle = p.c;
-                    ctx.shadowColor = "#A259FF";
-                    ctx.shadowBlur = 8;
-                    ctx.fill();
-                    p.x += p.dx;
-                    p.y += p.dy;
-                    if (p.x < 0 || p.x > w) p.dx *= -1;
-                    if (p.y < 0 || p.y > h) p.dy *= -1;
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-            window.addEventListener('resize', () => {
-                w = canvas.width = canvas.offsetWidth;
-                h = canvas.height = canvas.offsetHeight;
-            });
+      function resize(){
+        canvas.width  = canvas.clientWidth  || window.innerWidth;
+        canvas.height = canvas.clientHeight || window.innerHeight;
+      }
+      resize(); window.addEventListener('resize', resize);
+
+      for(let i=0;i<COUNT;i++){
+        particles.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: 1.5 + Math.random()*2.5,
+          dx: -0.4 + Math.random()*0.8,
+          dy: -0.4 + Math.random()*0.8,
+          hue: 260 + Math.random()*60
         });
-    </script>
+      }
+
+      function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(const p of particles){
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, .28)`;
+          ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, .9)`;
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          p.x += p.dx; p.y += p.dy;
+          if(p.x<0||p.x>canvas.width)  p.dx*=-1;
+          if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // --- Hero: Micro Parallax (mouse) ---
+    (function(){
+      const bg = document.getElementById('hero-bg');
+      const grad = document.getElementById('hero-grad');
+      const content = document.getElementById('hero-content');
+      const wave = document.getElementById('hero-wave');
+      if(!bg || !grad || !content || !wave) return;
+
+      let mx=0,my=0, smx=0,smy=0;
+      const lerp = (a,b,t)=> a+(b-a)*t;
+
+      window.addEventListener('mousemove',(e)=>{
+        const cx = window.innerWidth/2, cy = window.innerHeight/2;
+        mx = (e.clientX - cx)/cx;   // -1..1
+        my = (e.clientY - cy)/cy;
+      }, {passive:true});
+
+      function frame(){
+        smx = lerp(smx,mx,0.08); smy = lerp(smy,my,0.08);
+        bg.style.transform     = `translate3d(${smx*15}px, ${smy*10}px,0) scale(1.08)`;
+        grad.style.transform   = `translate3d(${smx*8}px, ${smy*6}px,0)`;
+        content.style.transform= `translate3d(${-smx*10}px, ${-smy*6}px,0)`;
+        // subtle bob untuk wave agar seam tak terlihat
+        const sy = window.scrollY||0;
+        wave.style.transform = `translateY(${1 + (sy%200)*0.05}px)`;
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    // --- Footer: tilt hover ---
+    (function(){
+      const logo = document.getElementById('footer-logo');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!logo || reduce) return;
+      const MAX=8;
+      logo.parentElement.addEventListener('mousemove', e=>{
+        const r = logo.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width, y=(e.clientY - r.top)/r.height;
+        logo.style.transform = `rotateX(${-(y-0.5)*MAX*2}deg) rotateY(${(x-0.5)*MAX*2}deg) translateZ(0)`;
+      });
+      logo.parentElement.addEventListener('mouseleave', ()=>{ logo.style.transform='rotateX(0) rotateY(0)'; });
+    })();
+
+    // --- Scroll-Reveal retriggerable (vanilla IO) ---
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = Array.from(document.querySelectorAll('[data-sr]'));
+
+      if (reduce) { items.forEach(el => el.classList.add('sr-in')); return; }
+
+      // set stagger untuk group
+      document.querySelectorAll('[data-sr-group]').forEach(group=>{
+        const stagger = parseInt(group.getAttribute('data-sr-stagger') || '120', 10);
+        const children = group.querySelectorAll('[data-sr-item]');
+        children.forEach((el, idx)=>{
+          el.style.setProperty('--sr-delay', `${idx * stagger}ms`);
+          el.classList.add('sr');
+        });
+      });
+
+      // init base class + delay
+      items.forEach(el=>{
+        if (!el.classList.contains('sr')) el.classList.add('sr');
+        const d = el.getAttribute('data-sr-delay');
+        if (d) el.style.setProperty('--sr-delay', `${parseInt(d, 10)}ms`);
+      });
+
+      // observer: retriggerable (keluar -> remove sr-in)
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const el = entry.target;
+          const once = el.hasAttribute('data-sr-once');
+          if (entry.isIntersecting) {
+            el.classList.add('sr-in');
+          } else {
+            if (!once) el.classList.remove('sr-in');
+          }
+        });
+      }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15 });
+
+      items.forEach(el => io.observe(el));
+    })();
+  </script>
 </body>
-
 </html>
