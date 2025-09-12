@@ -1,0 +1,23 @@
+/* Global base */
+body {
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* hanya section canvas yang scroll */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Scrollbar untuk area konten */
+.scrollable-canvas::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollable-canvas::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollable-canvas::-webkit-scrollbar-thumb {
+  background: #B57D3D;
+  border-radius: 10px;
+}
+.scrollable-canvas::-webkit-scrollbar-thumb:hover {
+  background: #a56d2d;
+}
+  
+
