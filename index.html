@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arunika - Playlist Karir Personalmu</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        :root {
+            --color-primary-bg-light: #F0F4F8;
+            --color-secondary-bg-light: #FFFFFF;
+            --color-text-light: #1A202C;
+            --color-text-secondary-light: #4A5568;
+            --color-accent-blue-light: #3182CE;
+            --color-accent-purple-light: #A259FF;
+            --color-accent-red-light: #E53E3E;
+            --color-border-light: #CBD5E0;
+        }
+
+        .dark {
+            --color-primary-bg-dark: #0B0C1B;
+            --color-secondary-bg-dark: #17192C;
+            --color-text-dark: #E2E8F0;
+            --color-text-secondary-dark: #A0AEC0;
+            --color-accent-blue-dark: #00FFFF;
+            --color-accent-purple-dark: #FF00FF;
+            --color-accent-red-dark: #FF3366;
+            --color-border-dark: #2D3748;
+        }
+
+        .bg-brand-cream { background-color: var(--color-primary-bg-light); }
+        .bg-brand-ivory { background-color: var(--color-secondary-bg-light); }
+        .text-brand-d-brown { color: var(--color-text-light); }
+        .dark .bg-dark-primary { background-color: var(--color-primary-bg-dark); }
+        .dark .bg-dark-secondary { background-color: var(--color-secondary-bg-dark); }
+        .dark .text-brand-cream { color: var(--color-text-dark); }
+
+        body.dark {
+            background-color: var(--color-primary-bg-dark);
+            background-image: 
+                linear-gradient(rgba(23, 25, 44, 0.6) 1px, transparent 1px),
+                linear-gradient(to right, rgba(23, 25, 44, 0.6) 1px, var(--color-primary-bg-dark) 1px);
+            background-size: 40px 40px;
+        }
+
+        .bg-brand-gold { background-color: var(--color-accent-blue-light); }
+        .border-brand-gold { border-color: var(--color-accent-blue-light); }
+        .text-brand-gold { color: var(--color-accent-blue-light); }
+        .focus\:ring-brand-gold:focus { --tw-ring-color: var(--color-accent-blue-light); }
+
+        .bg-brand-red { background-color: var(--color-accent-red-light); }
+        .border-brand-red { border-color: var(--color-accent-red-light); }
+        .text-brand-red { color: var(--color-accent-red-light); }
+
+        .dark .bg-brand-gold { background-color: var(--color-accent-purple-dark); }
+        .dark .border-brand-gold { border-color: var(--color-accent-purple-dark); }
+        .dark .text-brand-gold { color: var(--color-accent-purple-dark); }
+        .dark .focus\:ring-brand-gold:focus { --tw-ring-color: var(--color-accent-purple-dark); }
+        .dark .bg-brand-red { background-color: var(--color-accent-red-dark); }
+        .dark .border-brand-red { border-color: var(--color-accent-red-dark); }
+        .dark .text-brand-red { color: var(--color-accent-red-dark); }
+
+        .ai-gradient-text {
+            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dark .ai-gradient-text {
+             background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-glow-dark 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes text-glow-dark {
+            from { text-shadow: 0 0 5px var(--color-accent-blue-dark), 0 0 10px var(--color-accent-purple-dark); }
+            to { text-shadow: 0 0 10px var(--color-accent-purple-dark), 0 0 20px var(--color-accent-blue-dark); }
+        }
+        
+        /* Card Glow Effect */
+        .ai-card-border-glow {
+            position: relative;
+            border: 1px solid var(--color-border-light);
+        }
+        .dark .ai-card-border-glow {
+            border: 1px solid var(--color-border-dark);
+        }
+        .dark .ai-card-border-glow::before {
+            content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+            background: linear-gradient(45deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
+            filter: blur(8px); opacity: 0; transition: opacity 0.3s ease-in-out;
+        }
+        .dark .ai-card-border-glow:hover::before {
+            opacity: 0.5;
+        }
+        
+        .navbar-blur {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .dark .navbar-blur {
+            background-color: rgba(11, 12, 27, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .nav-link {
+            color: var(--color-text-secondary-light);
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .dark .nav-link {
+            color: var(--color-text-secondary-dark);
+        }
+        .nav-link:hover {
+            color: var(--color-text-light);
+            background-color: rgba(0,0,0,0.05);
+        }
+        .dark .nav-link:hover {
+            color: var(--color-text-dark);
+            text-shadow: 0 0 8px var(--color-accent-blue-dark);
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .hero-btn {
+            font-size: 1.125rem;
+            padding: 0.875rem 2.5rem;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
+            color: white;
+            transition: all 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .dark .hero-btn {
+            background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
+        }
+        .hero-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(107, 70, 193, 0.4);
+        }
+        .dark .hero-btn:hover {
+            box-shadow: 0 0 25px var(--color-accent-blue-dark), 0 0 15px var(--color-accent-purple-dark);
+        }
+        
+        /* Footer Enhancements */
+        .footer-cyber-bg {
+            background: linear-gradient(135deg, #E0F7FA 0%, #F0F4F8 100%);
+            position: relative;
+        }
+        .dark .footer-cyber-bg {
+            background: linear-gradient(135deg, #0B0C1B 0%, #17192C 100%);
+            border-top: 1px solid var(--color-border-dark);
+        }
+        .dark .footer-cyber-bg::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(23, 25, 44, 0.8) 1px, transparent 1px),
+                linear-gradient(to right, rgba(23, 25, 44, 0.8) 1px, var(--color-primary-bg-dark) 1px);
+            background-size: 30px 30px;
+            opacity: 0.1; z-index: 0;
+        }
+        .footer-link-hover {
+            color: var(--color-text-secondary-light);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .dark .footer-link-hover {
+             color: var(--color-text-secondary-dark);
+        }
+        .footer-link-hover:hover {
+            color: var(--color-accent-purple-light);
+        }
+        .dark .footer-link-hover:hover {
+            color: var(--color-accent-purple-dark);
+            text-shadow: 0 0 5px var(--color-accent-purple-dark);
+        }
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .animated-gradient-text {
+            background: linear-gradient(90deg, #A259FF, #e2bff7, #00FFFF, #FF00FF, #A259FF);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-move 3s linear infinite;
+        }
+        /* Card Epic Animation */
+        .epic-card {
+            transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), box-shadow 0.4s cubic-bezier(.34,1.56,.64,1);
+            box-shadow: 0 8px 32px 0 rgba(162,89,255,0.12), 0 1.5px 8px 0 rgba(0,0,0,0.08);
+            position: relative;
+            overflow: visible;
+        }
+        .epic-card:hover {
+            transform: scale(1.07) rotate(-2deg) translateY(-8px);
+            box-shadow: 0 16px 48px 0 #A259FF55, 0 4px 24px 0 #00FFFF33;
+            z-index: 2;
+        }
+        .epic-card::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 2rem;
+            z-index: -1;
+            background: linear-gradient(120deg, #A259FF 0%, #00FFFF 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            filter: blur(16px);
+        }
+        .epic-card:hover::after {
+            opacity: 0.4;
+        }
+        .epic-card .epic-shape {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: 1;
+            opacity: 0.18;
+            pointer-events: none;
+        }
+        .epic-card .epic-shape.shape-1 {
+            top: -30px; left: -30px;
+            background: radial-gradient(circle at 30% 30%, #A259FF 0%, transparent 80%);
+            border-radius: 50%;
+        }
+        .epic-card .epic-shape.shape-2 {
+            bottom: -30px; right: -30px;
+            background: conic-gradient(from 90deg, #00FFFF 0%, #A259FF 60%, transparent 100%);
+            border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+        }
+        .epic-card .epic-icon {
+            background: linear-gradient(135deg, #A259FF 0%, #00FFFF 100%);
+            border-radius: 1.5rem;
+            padding: 0.75rem;
+            margin-top: -2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 24px #A259FF33;
+            display: inline-block;
+        }
+        .epic-card .epic-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #A259FF;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px #e2bff7;
+        }
+        .epic-card .epic-desc {
+            color: #4A5568;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .dark .epic-card .epic-title {
+            color: #00FFFF;
+            text-shadow: 0 2px 8px #A259FF;
+        }
+        .dark .epic-card .epic-desc {
+            color: #E2E8F0;
+        }
+        .epic-card .epic-badge {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: linear-gradient(90deg, #A259FF, #00FFFF);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            box-shadow: 0 2px 8px #A259FF33;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-brand-cream text-brand-d-brown">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4">
+        <div class="container mx-auto flex justify-center">
+            <div
+                class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
+                style="background-color: #481057; border: 1px solid #481057; box-shadow: 0 0 24px #A259FF, 0 0 48px #A259FF66;">
+                <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
+                    <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
+                </a>
+                <nav class="flex items-center space-x-1">
+    <a href="#" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+        <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+        <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+    </a>
+    <a href="#" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+        <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+        <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
+    </a>
+    <a href="#" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+        <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+        <span class="hidden lg:inline font-semibold text-base">About Us</span>
+    </a>
+</nav>
+                <div class="flex items-center gap-2 pr-2">
+                    <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
+                    <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
+                        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section 
+            class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden"
+            style="background-image: url('./assets/img/imgg.png'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30"></div>
+            <!-- Animated Particles -->
+            <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+            <div class="relative z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
+                    Jika Karir Adalah Musik,
+                    <br class="hidden md:block">
+                    Apa <span class="animated-gradient-text">Playlist-mu?</span>
+                </h1>
+                <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
+                    Berhenti menebak-nebak. Melalui analisis AI yang mendalam,
+                    Arunika membantumu menemukan "genre" karir yang paling
+                    sesuai dengan kepribadian dan kekuatanmu.
+                </p>
+                <button id="goToSkillMatch" class="mt-10 hero-btn">
+                    Temukan Playlist Karirmu &rarr;
+                </button>
+            </div>
+            <!-- SVG Wave Divider -->
+            <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
+                <path fill="#F0F4F8" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
+            </svg>
+        </section>
+
+        <!-- Epic Cards Section -->
+        <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8" style="background-color: #fff;">
+            <div class="container mx-auto max-w-7xl">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        Bukan Sekadar Tes, Tapi Strategi Karir Personalmu
+                    </h2>
+                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
+                        Arunika dirancang untuk memberikan kejelasan, bukan keraguan.
+                        Inilah cara kami membantumu mencapai tujuan.
+                    </p>
+                </div>
+                <div class="mt-16 max-w-6xl mx-auto">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <!-- Card 1 -->
+                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
+                            <div class="epic-shape shape-1"></div>
+                            <div class="epic-shape shape-2"></div>
+                            <div class="epic-icon">
+                                <img src="./assets/img/ai.png" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" />
+                            </div>
+                            <div class="epic-title">Personalized AI</div>
+                            <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
+                            <span class="epic-badge">AI Powered</span>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
+                            <div class="epic-shape shape-2"></div>
+                            <div class="epic-shape shape-1"></div>
+                            <div class="epic-icon" style="background: linear-gradient(135deg, #00FFFF 0%, #A259FF 100%);">
+                                <img src="./assets/img/roadmap.png" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" />
+                            </div>
+                            <div class="epic-title" style="color:#00FFFF;">Career Readiness</div>
+                            <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
+                            <span class="epic-badge" style="background: linear-gradient(90deg, #00FFFF, #A259FF);">Roadmap</span>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="epic-card rounded-3xl bg-white dark:bg-dark-primary flex flex-col items-center p-8 shadow-xl border-0">
+                            <div class="epic-shape shape-1"></div>
+                            <div class="epic-shape shape-2"></div>
+                            <div class="epic-icon" style="background: linear-gradient(135deg, #FF00FF 0%, #A259FF 100%);">
+                                <img src="./assets/img/connector.png" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" />
+                            </div>
+                            <div class="epic-title" style="color:#FF00FF;">Career Connector</div>
+                            <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
+                            <span class="epic-badge" style="background: linear-gradient(90deg, #FF00FF, #A259FF);">Networking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-[#fff]">
+    <div class="container mx-auto max-w-7xl">
+        <div class="rounded-3xl p-8 md:p-12 lg:p-16 bg-brand-ivory dark:bg-dark-secondary"
+             style="box-shadow: 0 0 32px #A259FF22, 0 0 64px #00FFFF22; border: 2px solid #A259FF;">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="max-w-md">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        Buka Level Baru Dalam Karirmu
+                    </h2>
+                    <p class="mt-6 text-lg text-brand-d-brown/80 dark:text-brand-cream/80 leading-relaxed">
+                        Pilih rencana yang mendukung petualangan karirmu. Kamu punya peta jalan yang tepat untukmu.
+                    </p>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <!-- Card Free -->
+                    <div class="relative rounded-2xl p-6 flex flex-col bg-brand-cream dark:bg-dark-primary transition-all duration-300
+                        border-2 border-[#A259FF] shadow-xl
+                        hover:shadow-[0_0_32px_0_#A259FF,0_0_64px_0_#A259FF55] hover:border-[#A259FF] group">
+                        <h3 class="text-lg font-semibold text-gray-500 dark:text-gray-400">Free</h3>
+                        <p class="text-4xl font-bold mt-2">Rp 0</p>
+                        <p class="text-sm text-gray-400 mt-1">Selamanya</p>
+                        <ul class="mt-6 space-y-3 flex-grow text-brand-d-brown/90 dark:text-brand-cream/90 text-sm">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Skill Connector</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Road Map Dasar</span>
+                            </li>
+                        </ul>
+                        <button class="mt-8 w-full font-semibold py-3 rounded-lg border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300">Pilih Paket</button>
+                        <span class="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-[#A259FF] group-hover:ring-offset-2 group-hover:ring-offset-white transition-all duration-300"></span>
+                    </div>
+                    <!-- Card Tahunan -->
+                    <div class="relative rounded-2xl p-6 flex flex-col border-2 border-[#00FFFF] shadow-xl bg-brand-cream dark:bg-dark-primary transition-all duration-300
+                        hover:shadow-[0_0_32px_0_#00FFFF,0_0_64px_0_#00FFFF55] hover:border-[#00FFFF] group">
+                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-full">PALING POPULER</span>
+                        <h3 class="text-lg font-semibold text-brand-red">Tahunan</h3>
+                        <p class="text-4xl font-bold mt-2">Rp 150rb</p>
+                        <p class="text-sm text-gray-400 mt-1">/ tahun</p>
+                        <ul class="mt-6 space-y-3 flex-grow text-brand-d-brown/90 dark:text-brand-cream/90 text-sm">
+                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span><b>Semua fitur paket Free</b></span></li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Deep Skill Connector</span></li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Readiness Career Report</span></li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Chatbot AI Eksklusif</span></li>
+                        </ul>
+                        <button class="mt-8 w-full font-semibold py-3 rounded-lg bg-brand-red text-white transition-all duration-300">Pilih Paket</button>
+                        <span class="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-[#00FFFF] group-hover:ring-offset-2 group-hover:ring-offset-white transition-all duration-300"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="relative z-0" style="background-color: #481057;">
+        <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="col-span-2 md:col-span-2">
+                    <h3 class="text-3xl font-extrabold ai-gradient-text" style="color: #fff;">Arunika</h3>
+                    <p class="mt-4 max-w-xs text-lg leading-relaxed" style="color: #e2bff7;">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Perusahaan</h4>
+                    <ul class="space-y-3 text-lg">
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Tentang Kami</a></li>
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Partner</a></li>
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Press Kit</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Sosial Media</h4>
+                    <ul class="space-y-3 text-lg">
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Twitter</a></li>
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Instagram</a></li>
+                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Threads</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t text-center text-sm" style="border-color: #e2bff7; color: #e2bff7;">
+                &copy; 2025 Arunika. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- FUNGSI NAVIGASI ---
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        document.getElementById('goToSkillMatch').addEventListener('click', function() {
+            navigateTo('skill-match.html');
+        });
+
+        // --- SCRIPT UNTUK TOGGLE TEMA ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+                document.body.classList.remove('light');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.add('light');
+                document.body.classList.remove('dark');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+                localStorage.setItem('color-theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('color-theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // --- Particles Background for Hero Section ---
+        // Simple animated dots/particles for extra dynamic effect
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('particles-bg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = canvas.offsetWidth;
+            let h = canvas.height = canvas.offsetHeight;
+            let particles = [];
+            for (let i = 0; i < 36; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: 1.5 + Math.random() * 2.5,
+                    dx: -0.5 + Math.random(),
+                    dy: -0.5 + Math.random(),
+                    c: `rgba(${150+Math.floor(Math.random()*80)},${80+Math.floor(Math.random()*100)},255,0.25)`
+                });
+            }
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                for (let p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+                    ctx.fillStyle = p.c;
+                    ctx.shadowColor = "#A259FF";
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0 || p.x > w) p.dx *= -1;
+                    if (p.y < 0 || p.y > h) p.dy *= -1;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+            window.addEventListener('resize', () => {
+                w = canvas.width = canvas.offsetWidth;
+                h = canvas.height = canvas.offsetHeight;
+            });
+        });
+    </script>
+</body>
+
+</html>
