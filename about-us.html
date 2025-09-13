@@ -99,85 +99,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    /* Epic cards + dekor sudut */
-    .epic-card{
-      transition:box-shadow .4s cubic-bezier(.34,1.56,.64,1);
-      box-shadow:0 8px 32px rgba(162,89,255,.12), 0 1.5px 8px rgba(0,0,0,.08);
-      position:relative; overflow:visible; background:var(--surface-1);
-      border-radius:1.5rem;
-    }
-    .epic-card:hover{ transform: scale(1.07) rotate(-2deg) translateY(-8px); box-shadow:0 16px 48px 0 #A259FF55, 0 4px 24px 0 #00FFFF33; z-index: 2; }
-    .epic-card::after{
-      content:''; position:absolute; inset:-8px; border-radius:2rem; z-index:0;
-      background:linear-gradient(120deg,var(--accent-purple) 0%,var(--accent-cyan) 100%);
-      opacity:0; transition:.4s; filter:blur(16px);
-    }
-    .epic-card:hover::after{ opacity:.35 }
-    .epic-card > *{ position:relative; z-index:1 }
-    .epic-shape{ position:absolute; width:64px; height:64px; opacity:.18; pointer-events:none; z-index:0; filter:saturate(1.1); }
-    .epic-shape.shape-1{ top:-32px; left:-32px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--accent-purple) 0%, transparent 70%) }
-    .epic-shape.shape-2{ bottom:-32px; right:-32px; border-radius:30% 70% 70% 30%/30% 30% 70% 70%; background:conic-gradient(from 90deg, var(--accent-cyan) 0%, var(--accent-purple) 60%, transparent 100%) }
-    .epic-card .epic-icon{ background:linear-gradient(135deg,var(--accent-purple) 0%, var(--accent-cyan) 100%); border-radius:1.5rem; padding:.75rem; margin-top:-2.5rem; margin-bottom:1.5rem; box-shadow:0 4px 24px #A259FF33; display:inline-block; }
-    .epic-title{ font-size:1.25rem; font-weight:800; letter-spacing:.04em; color:var(--accent-purple); margin-bottom:.5rem }
-    .dark .epic-title{ color:var(--accent-cyan); text-shadow:0 2px 8px #A259FF }
-    .epic-desc{ color:var(--text-muted) } .dark .epic-desc{ color:var(--text) }
-    .epic-badge{ position:absolute; top:1.25rem; right:1.25rem; background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan)); color:#fff; font-size:.75rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; letter-spacing:.05em; box-shadow:0 2px 8px #A259FF33; }
-    /* Intelligent Lab Career Dashboard */
-    .neon-border {
-      border: 2px solid transparent;
-      position: relative;
-      border-radius: 12px;
-      background: var(--surface-1);
-      overflow: hidden;
-    }
-    .neon-border::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 2px;
-      background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      z-index: -1;
-      animation: neon-pulse 5s infinite linear;
-    }
-    @keyframes neon-pulse {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    /* Pricing Card */
-    .pricing-card {
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    .pricing-card:hover {
-      box-shadow: 0 0 25px #A259FF, 0 0 50px #00FFFF;
-      transform: scale(1.05);
-    }
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 1rem;
-      padding: 2px;
-      background: linear-gradient(45deg, #A259FF, #00FFFF, #FF00FF);
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .pricing-card:hover::before {
-      opacity: 1;
-    }
+  
     /* Komponen lain */
     .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
     .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
@@ -379,7 +301,7 @@
             </div>
           </div>
           
-          <!-- Team Member 3 -->
+          <!-- Team Member 2 -->
           <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="2">
   <span class="epic-badge">ARUNIKA</span>
           <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
@@ -397,7 +319,7 @@
               </a>
             </div>
           </div>
-          <!-- Team Member 2 -->
+          <!-- Team Member 3 -->
           <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="2">
   <span class="epic-badge">ARUNIKA</span>
           <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
