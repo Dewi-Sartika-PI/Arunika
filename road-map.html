@@ -88,117 +88,31 @@
     }
     body.scrolled #top-glass{ opacity: 1; }
 
-    /* Hero */
-    .hero-btn{
-      font-size:1.125rem; padding:.875rem 2.5rem; border-radius:9999px;
-      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
-      color:#fff; transition:all .3s ease-in-out; font-weight:600; display:inline-flex; align-items:center;
+/* Typewriter animation */
+    .typewriter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      white-space: nowrap; /* Prevent line breaks */
     }
-    .hero-btn:hover{ transform:scale(1.05) translateY(-2px); box-shadow:0 10px 20px -5px rgba(107,70,193,.4) }
-    .dark .hero-btn:hover{ box-shadow:0 0 25px var(--accent-cyan),0 0 15px var(--accent-purple) }
 
-    .hero-bg, .hero-gradient, #particles-bg, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
-.animated-gradient-text {
-  background: linear-gradient(
-    -45deg,
-    #A259FF,
-    #00FFFF,
-    #FF00FF,
-    #3182CE
-  );
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientFlow 6s ease infinite;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-    /* Epic cards + dekor sudut */
-    .epic-card{
-      transition:box-shadow .4s cubic-bezier(.34,1.56,.64,1);
-      box-shadow:0 8px 32px rgba(162,89,255,.12), 0 1.5px 8px rgba(0,0,0,.08);
-      position:relative; overflow:visible; background:var(--surface-1);
-      border-radius:1.5rem;
+    .typewriter-text {
+      overflow: hidden; /* Hide overflow to create typing effect */
+      border-right: .15em solid #7209b7; /* The typewriter cursor */
+      font-family: monospace; /* Monospaced font */
     }
-    .epic-card:hover{ transform: scale(1.07) rotate(-2deg) translateY(-8px); box-shadow:0 16px 48px 0 #A259FF55, 0 4px 24px 0 #00FFFF33; z-index: 2; }
-    .epic-card::after{
-      content:''; position:absolute; inset:-8px; border-radius:2rem; z-index:0;
-      background:linear-gradient(120deg,var(--accent-purple) 0%,var(--accent-cyan) 100%);
-      opacity:0; transition:.4s; filter:blur(16px);
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
     }
-    .epic-card:hover::after{ opacity:.35 }
-    .epic-card > *{ position:relative; z-index:1 }
-    .epic-shape{ position:absolute; width:64px; height:64px; opacity:.18; pointer-events:none; z-index:0; filter:saturate(1.1); }
-    .epic-shape.shape-1{ top:-32px; left:-32px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--accent-purple) 0%, transparent 70%) }
-    .epic-shape.shape-2{ bottom:-32px; right:-32px; border-radius:30% 70% 70% 30%/30% 30% 70% 70%; background:conic-gradient(from 90deg, var(--accent-cyan) 0%, var(--accent-purple) 60%, transparent 100%) }
-    .epic-card .epic-icon{ background:linear-gradient(135deg,var(--accent-purple) 0%, var(--accent-cyan) 100%); border-radius:1.5rem; padding:.75rem; margin-top:-2.5rem; margin-bottom:1.5rem; box-shadow:0 4px 24px #A259FF33; display:inline-block; }
-    .epic-title{ font-size:1.25rem; font-weight:800; letter-spacing:.04em; color:var(--accent-purple); margin-bottom:.5rem }
-    .dark .epic-title{ color:var(--accent-cyan); text-shadow:0 2px 8px #A259FF }
-    .epic-desc{ color:var(--text-muted) } .dark .epic-desc{ color:var(--text) }
-    .epic-badge{ position:absolute; top:1.25rem; right:1.25rem; background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan)); color:#fff; font-size:.75rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; letter-spacing:.05em; box-shadow:0 2px 8px #A259FF33; }
 
-/* Intelligent Lab Career Dashboard */
-.neon-border {
-  border: 2px solid transparent;
-  position: relative;
-  border-radius: 12px;
-  background: var(--surface-1);
-  overflow: hidden;
-}
-.neon-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  animation: neon-pulse 5s infinite linear;
-}
-@keyframes neon-pulse {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Pricing Card */
-.pricing-card {
-  position: relative;
-  transition: all 0.3s ease;
-}
-.pricing-card:hover {
-  box-shadow: 0 0 25px #A259FF, 0 0 50px #00FFFF;
-  transform: scale(1.05);
-}
-.pricing-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 1rem;
-  padding: 2px;
-  background: linear-gradient(45deg, #A259FF, #00FFFF, #FF00FF);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.pricing-card:hover::before {
-  opacity: 1;
-}
-
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #7209b7; }
+    }
     /* Komponen lain */
     .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
     .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
@@ -215,7 +129,10 @@
       background-size:30px 30px; opacity:.1; z-index:0;
     }
     .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
-
+    /*footer dark light logo mode*/
+    body.light #footer-logo {
+    filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+}
     /* -------- Scroll-Reveal (retriggerable) -------- */
     @media (prefers-reduced-motion:no-preference){
       .sr{
@@ -234,10 +151,7 @@
       .sr-zoom{ transform: translateY(12px) scale(.96) }
       .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
     }
-  /*footer dark light mode*/
-  body.light #footer-logo {
-  filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
-}
+  
     
   </style>
 </head>
@@ -288,13 +202,10 @@
   </header>
 
   <main class="flex items-center justify-center text-center min-h-screen">
-    <div class="p-8">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight sr" data-sr>
-        HALAMAN INI SEDANG DALAM PROSES DEVELOP
-      </h1>
-      <p class="mt-4 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">
-        Silakan kembali lagi nanti untuk melihat pembaruan.
-      </p>
+    <!-- DEVELOPE NOTICE -->
+    <div class="typewriter-container text-center">
+      <h1 id="typewriter-title" class="typewriter-text text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"></h1>
+      <p id="typewriter-subtitle" class="typewriter-text mt-4 text-lg text-muted leading-relaxed"></p>
     </div>
   </main>
 
@@ -419,36 +330,31 @@
       draw();
     })();
 
-    // --- Hero: Micro Parallax (mouse) ---
-    (function(){
-      const bg = document.getElementById('hero-bg');
-      const grad = document.getElementById('hero-grad');
-      const content = document.getElementById('hero-content');
-      const wave = document.getElementById('hero-wave');
-      if(!bg || !grad || !content || !wave) return;
+    // --- Typewriter animation ---
+    function setupTypewriter(elementId, text, speed, callback = null) {
+        const element = document.getElementById(elementId);
+        let i = 0;
+        element.style.animation = `typing ${text.length * speed}ms steps(${text.length}), blink-caret .75s step-end infinite`;
+        element.style.width = 'fit-content';
 
-      let mx=0,my=0, smx=0,smy=0;
-      const lerp = (a,b,t)=> a+(b-a)*t;
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        element.textContent = ''; // clear text before typing
+        setTimeout(type, 100); // give a small delay before starting
+    }
 
-      window.addEventListener('mousemove',(e)=>{
-        const cx = window.innerWidth/2, cy = window.innerHeight/2;
-        mx = (e.clientX - cx)/cx;   // -1..1
-        my = (e.clientY - cy)/cy;
-      }, {passive:true});
-
-      function frame(){
-        smx = lerp(smx,mx,0.08); smy = lerp(smy,my,0.08);
-        bg.style.transform     = `translate3d(${smx*15}px, ${smy*10}px,0) scale(1.08)`;
-        grad.style.transform   = `translate3d(${smx*8}px, ${smy*6}px,0)`;
-        content.style.transform= `translate3d(${-smx*10}px, ${-smy*6}px,0)`;
-        // subtle bob untuk wave agar seam tak terlihat
-        const sy = window.scrollY||0;
-        wave.style.transform = `translateY(${1 + (sy%200)*0.05}px)`;
-        requestAnimationFrame(frame);
-      }
-      frame();
-    })();
-
+    window.addEventListener('load', () => {
+        setupTypewriter('typewriter-title', 'HALAMAN INI SEDANG DALAM PROSES DEVELOP', 50, () => {
+            setupTypewriter('typewriter-subtitle', 'Silakan kembali lagi nanti untuk melihat pembaruan.', 35);
+        });
+    });
     // --- Footer: tilt hover ---
     (function(){
       const logo = document.getElementById('footer-logo');
