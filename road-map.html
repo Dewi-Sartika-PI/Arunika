@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arunika - Playlist Karir Personalmu</title>
+  <title>Arunika - Roadmap</title>
 
-  <!-- Tailwind (CSS framework OK) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,7 +43,15 @@
     .text-brand-d-brown{color:var(--text)} .text-muted{color:var(--text-muted)}
     .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
     .border-soft{border-color:var(--border-soft)} .border-strong{border-color:var(--border)}
-    .bg-brand-gold{background:var(--accent-blue)} .border-brand-gold{border-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
+    /* Di sini ada perubahan */
+    .bg-brand-gold{
+      background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3);
+      background-size: 200% auto;
+      transition: all 0.5s ease-in-out;
+    }
+    .bg-brand-gold:hover{ background-position: right center; }
+    /* End of changes */
+    .border-brand-gold{border-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
     .focus\:ring-brand-gold:focus{--tw-ring-color:var(--accent-blue)}
     .bg-brand-red{background:var(--accent-red)} .border-brand-red{border-color:var(--accent-red)} .text-brand-red{color:var(--accent-red)}
     .wave-fill{ fill:var(--bg-page) }
@@ -236,10 +243,8 @@
 </head>
 
 <body class="bg-brand-cream text-brand-d-brown">
-  <!-- Top Glass Blur -->
   <div id="top-glass" aria-hidden="true"></div>
 
-  <!-- Navbar -->
   <header class="fixed top-0 left-0 right-0 z-50 p-4">
     <div class="container mx-auto flex justify-center">
       <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
@@ -282,202 +287,17 @@
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <!-- BG -->
-      <div id="hero-bg" class="hero-bg absolute inset-0 z-0"
-           style="background-image:url('./assets/img/imgg.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
-      <!-- Gradient -->
-      <div id="hero-grad" class="hero-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30 z-10"></div>
-      <!-- Particles -->
-      <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
-      <!-- Content -->
-      <div id="hero-content" class="relative z-30">
-        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
-          Jika Karir Adalah Musik,<br class="hidden md:block">Apa <span class="animated-gradient-text">Playlist-mu?</span>
-        </h1>
-        <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
-          Berhenti menebak-nebak. Melalui analisis AI yang mendalam,
-          Arunika membantumu menemukan "genre" karir yang paling sesuai dengan kepribadian dan kekuatanmu.
-        </p>
-        <button id="goToSkillMatch" class="mt-10 hero-btn group">
-          <span>Temukan Playlist Karirmu</span>
-          <svg class="ml-3 w-5 h-5 transition-transform duration-300 -rotate-45 group-hover:rotate-0 group-hover:translate-x-1.5"
-               viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-      <!-- Wave -->
-      <svg id="hero-wave" class="absolute bottom-0 left-0 w-full translate-y-px z-40" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
-        <path class="wave-fill" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
-      </svg>
-    </section>
-
-    <!-- Epic Cards (Scroll-Reveal) -->
-    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-brand-cream -mt-px">
-      <div class="container mx-auto max-w-7xl">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Bukan Sekadar Tes, Tapi Strategi Karir Personalmu</h2>
-          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="120">
-            Arunika dirancang untuk memberikan kejelasan, bukan keraguan. Inilah cara kami membantumu mencapai tujuan.
-          </p>
-        </div>
-
-        <div class="mt-16 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sr-stagger" data-sr-group data-sr-stagger="120">
-          <!-- Card 1 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bxs-brain.svg" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Personalized AI</div>
-            <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
-            <span class="epic-badge">AI Powered</span>
-          </div>
-          <!-- Card 2 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bx-map-alt.svg" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Career Readiness</div>
-            <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
-            <span class="epic-badge">Roadmap</span>
-          </div>
-          <!-- Card 3 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bxs-briefcase.svg" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Career Connector</div>
-            <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
-            <span class="epic-badge">Networking</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Intelligent Lab Career Dashboard -->
-    <section class="py-24 md:py-12 px-4 sm:px-6 lg:px-8 surface-1">
-      <div class="container mx-auto max-w-7xl">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Intelligent Lab Career Dashboard</h2>
-          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">Dapatkan Informasi Detail Mengenai Rekomendasi Pengembangan Karirmu.</p>
-        </div>
-
-        <div class="card neon-border mt-8 sr" data-sr data-sr-delay="150">
-          <div class="p-2 md:p-6">
-            <!-- Ringkasan Diri -->
-            <div>
-              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Ringkasan Diri</h2>
-              <p class="mt-1 text-sm section-subtitle sr sr-left" data-sr data-sr-delay="80">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
-
-              <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sr-stagger" data-sr-group data-sr-stagger="100">
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Role Utama</span>
-                  <p class="mt-2 text-xl font-semibold">The Innovator</p>
-                </div>
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Base Fit Score</span>
-                  <p class="mt-2 text-xl font-semibold">88%</p>
-                </div>
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Kekuatan Utama</span>
-                  <div class="mt-2 flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Analitis</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Kreatif</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Problem Solving</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <hr class="my-8 border border-soft sr" data-sr data-sr-delay="80">
-
-            <!-- Job Match -->
-            <div>
-              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Job Match</h2>
-
-              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-soft pb-6 sr sr-right" data-sr data-sr-delay="100">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold">Product Manager</h3>
-                  <p class="mt-1 text-sm text-muted">Tech Startup "Inovasi Digital" - Jakarta</p>
-                </div>
-                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:92%;"></div>
-                  </div>
-                  <p class="mt-1 text-right text-xs text-muted">Match Score: 92%</p>
-                </div>
-                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
-              </div>
-
-              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6 sr sr-right" data-sr data-sr-delay="160">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold">UI/UX Researcher</h3>
-                  <p class="mt-1 text-sm text-muted">Creative Agency "Visuara" - Bandung</p>
-                </div>
-                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:85%;"></div>
-                  </div>
-                  <p class="mt-1 text-right text-xs text-muted">Match Score: 85%</p>
-                </div>
-                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /card -->
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="py-12 md:py-32 px-4 sm:px-6 lg:px-8 surface-1">
-      <div class="container mx-auto max-w-7xl">
-        <div class="rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 surface-2"
-             style="box-shadow:0 0 32px #A259FF22, 0 0 64px #00FFFF22; border:2px solid var(--accent-purple);">
-          <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="max-w-md">
-              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Buka Level Baru Dalam Karirmu</h2>
-              <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">
-                Pilih rencana yang mendukung petualangan karirmu. Kamu punya peta jalan yang tepat untukmu.
-              </p>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-6 sr-stagger" data-sr-group data-sr-stagger="140">
-              <!-- Free -->
-              <div class="pricing-card relative rounded-2xl p-6 flex flex-col surface-1 transition-all duration-300 border-2 border-brand-gold shadow-xl group sr sr-zoom" data-sr data-sr-item>
-                <h3 class="text-lg font-semibold text-muted">Free</h3>
-                <p class="text-4xl font-bold mt-2">Rp 0</p>
-                <p class="text-sm text-muted mt-1">Selamanya</p>
-                <ul class="mt-6 space-y-3 flex-grow text-sm">
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Skill Connector</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Road Map Dasar</span></li>
-                </ul>
-                <button class="mt-8 w-full font-semibold py-3 rounded-lg border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300">Pilih Paket</button>
-              </div>
-              <!-- Tahunan -->
-              <div class="pricing-card relative rounded-2xl p-6 flex flex-col border-2 sr sr-zoom" data-sr data-sr-item
-                   style="border-color: var(--accent-cyan); background: var(--surface-1);">
-                <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-full">PALING POPULER</span>
-                <h3 class="text-lg font-semibold text-brand-red">Tahunan</h3>
-                <p class="text-4xl font-bold mt-2">Rp 150rb</p>
-                <p class="text-sm text-muted mt-1">/ tahun</p>
-                <ul class="mt-6 space-y-3 flex-grow text-sm">
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span><b>Semua fitur paket Free</b></span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Deep Skill Connector</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Readiness Career Report</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Chatbot AI Eksklusif</span></li>
-                </ul>
-                <button class="mt-8 w-full font-semibold py-3 rounded-lg bg-brand-red text-white transition-all duration-300 hover:opacity-90">Pilih Paket</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main class="flex items-center justify-center text-center min-h-screen">
+    <div class="p-8">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight sr" data-sr>
+        HALAMAN INI SEDANG DALAM PROSES DEVELOP
+      </h1>
+      <p class="mt-4 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">
+        Silakan kembali lagi nanti untuk melihat pembaruan.
+      </p>
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer class="relative z-0 footer-cyber-bg">
     <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
