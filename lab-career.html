@@ -1,337 +1,529 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Arunika — Lab Career</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        /* [SALIN DAN TEMPEL SELURUH BLOK CSS DARI VERSI SEBELUMNYA DI SINI] */
-        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        :root {
-            --color-primary-bg-light: #F0F4F8;
-            --color-secondary-bg-light: #FFFFFF;
-            --color-text-light: #1A202C;
-            --color-text-secondary-light: #4A5568;
-            --color-accent-blue-light: #3182CE;
-            --color-accent-purple-light: #6B46C1;
-            --color-accent-red-light: #E53E3E;
-            --color-border-light: #CBD5E0;
-        }
-        .dark {
-            --color-primary-bg-dark: #0B0C1B;
-            --color-secondary-bg-dark: #17192C;
-            --color-text-dark: #E2E8F0;
-            --color-text-secondary-dark: #A0AEC0;
-            --color-accent-blue-dark: #00FFFF; /* Electric Cyan */
-            --color-accent-purple-dark: #FF00FF; /* Electric Magenta */
-            --color-accent-red-dark: #FF3366;
-            --color-border-dark: #2D3748;
-        }
-        .bg-brand-cream { background-color: var(--color-primary-bg-light); }
-        .bg-brand-ivory { background-color: var(--color-secondary-bg-light); }
-        .text-brand-d-brown { color: var(--color-text-light); }
-        .dark .bg-dark-primary { background-color: var(--color-primary-bg-dark); }
-        .dark .bg-dark-secondary { background-color: var(--color-secondary-bg-dark); }
-        .dark .text-brand-cream { color: var(--color-text-dark); }
-        body.dark {
-            background-color: var(--color-primary-bg-dark);
-            background-image: 
-                linear-gradient(rgba(23, 25, 44, 0.6) 1px, transparent 1px),
-                linear-gradient(to right, rgba(23, 25, 44, 0.6) 1px, var(--color-primary-bg-dark) 1px);
-            background-size: 40px 40px;
-        }
-        .ai-gradient-text {
-            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .dark .ai-gradient-text {
-             background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: text-glow-dark 2s ease-in-out infinite alternate;
-        }
-        @keyframes text-glow-dark {
-            from { text-shadow: 0 0 5px var(--color-accent-blue-dark), 0 0 10px var(--color-accent-purple-dark); }
-            to { text-shadow: 0 0 10px var(--color-accent-purple-dark), 0 0 20px var(--color-accent-blue-dark); }
-        }
-        .ai-card-border-glow { position: relative; border: 1px solid var(--color-border-light); }
-        .dark .ai-card-border-glow { border: 1px solid var(--color-border-dark); }
-        .dark .ai-card-border-glow::before {
-            content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
-            background: linear-gradient(45deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-            filter: blur(8px); opacity: 0; transition: opacity 0.3s ease-in-out;
-        }
-        .dark .ai-card-border-glow:hover::before { opacity: 0.5; }
-        
-        .navbar-blur {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .dark .navbar-blur {
-            background-color: rgba(11, 12, 27, 0.6);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .nav-link { color: var(--color-text-secondary-light); transition: all 0.2s ease-in-out; }
-        .dark .nav-link { color: var(--color-text-secondary-dark); }
-        .nav-link:hover { color: var(--color-text-light); background-color: rgba(0,0,0,0.05); }
-        .dark .nav-link:hover { color: var(--color-text-dark); text-shadow: 0 0 8px var(--color-accent-blue-dark); background-color: rgba(255,255,255,0.05); }
-        .nav-link.active { color: var(--color-accent-purple-light); background-color: rgba(107, 70, 193, 0.1); }
-        .dark .nav-link.active { color: var(--color-accent-purple-dark); text-shadow: 0 0 8px var(--color-accent-purple-dark); background-color: rgba(255, 0, 255, 0.1); }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arunika – Lab Career</title>
 
-        .primary-btn { font-size: 1rem; padding: 0.625rem 1.5rem; border-radius: 9999px; background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light)); color: white; transition: all 0.3s ease-in-out; font-weight: 600; }
-        .dark .primary-btn { background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark)); }
-        .primary-btn:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 10px 20px -5px rgba(107, 70, 193, 0.4); }
-        .dark .primary-btn:hover { box-shadow: 0 0 25px var(--color-accent-blue-dark), 0 0 15px var(--color-accent-purple-dark); }
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 
-        /* --- Lab Career Specific Styles --- */
-        .cyber-badge {
-            background-color: rgba(107, 70, 193, 0.1); color: var(--color-accent-purple-light);
-        }
-        .dark .cyber-badge {
-            background-color: rgba(255, 0, 255, 0.1); color: var(--color-accent-purple-dark);
-            border: 1px solid rgba(255, 0, 255, 0.2);
-        }
-        .cyber-input {
-            background-color: var(--color-secondary-bg-light); border: 1px solid var(--color-border-light);
-        }
-        .dark .cyber-input {
-            background-color: var(--color-secondary-bg-dark); border: 1px solid var(--color-border-dark);
-        }
-        .cyber-input:focus {
-            --tw-ring-color: var(--color-accent-blue-light);
-            border-color: var(--color-accent-blue-light);
-        }
-        .dark .cyber-input:focus {
-             --tw-ring-color: var(--color-accent-blue-dark);
-            border-color: var(--color-accent-blue-dark);
-        }
-        /* Toggle Switch */
-        .toggle-switch-bg {
-            background-color: var(--color-border-light);
-        }
-        .dark .toggle-switch-bg {
-            background-color: var(--color-border-dark);
-        }
-        input:checked + .toggle-switch-bg {
-             background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
-        }
-        .dark input:checked + .toggle-switch-bg {
-             background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-        }
+  <style>
+    /* ===== Design Tokens (Light/Dark) ===== */
+    :root{
+      --bg:#F0F4F8; --surface:#FFFFFF; --surface2:#F8FAFC;
+      --ink:#1A202C; --muted:#4A5568;
+      --accent-blue:#3182CE; --accent-purple:#A259FF; --accent-cyan:#00FFFF; --accent-fuchsia:#FF00FF; --accent-red:#E53E3E;
+      --border:#E5E7EB; --border-strong:#CBD5E0;
+      --nav:#481057;
+      --glass-bg:rgba(255,255,255,.18); --glass-border:rgba(0,0,0,.08);
+      --cover-h:900px;
+    }
+    .dark{
+      --bg:#070812; --surface:#0E1020; --surface2:#141833;
+      --ink:#E6EAF2; --muted:#A5B1C2;
+      --accent-blue:#00FFFF; --accent-purple:#B57CFF; --accent-cyan:#00FFFF; --accent-fuchsia:#FF55FF; --accent-red:#FF3366;
+      --border:#1F2937; --border-strong:#253049;
+      --glass-bg:rgba(7,8,18,.22); --glass-border:rgba(255,255,255,.08);
+    }
 
-        /* Match Score Bar */
-        .match-score-bar-bg { background-color: var(--color-border-light); }
-        .dark .match-score-bar-bg { background-color: var(--color-border-dark); }
-        .match-score-bar-fill { background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light)); }
-        .dark .match-score-bar-fill { background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark)); }
+    html,body{height:100%}
+    body{
+      background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
 
-    </style>
+    /* ===== Top Glass (on scroll) ===== */
+    #top-glass{
+      position:fixed; top:0; left:0; right:0; height:64px; z-index:40; pointer-events:none;
+      background:var(--glass-bg); border-bottom:1px solid var(--glass-border);
+      backdrop-filter:saturate(140%) blur(14px); -webkit-backdrop-filter:saturate(140%) blur(14px);
+      opacity:0; transition:opacity .28s ease;
+    }
+    body.scrolled #top-glass{opacity:1}
+
+    /* ===== Navbar capsule glass (fill) ===== */
+    .navbar-glass{position:relative; isolation:isolate;}
+    .navbar-glass::before{
+      content:""; position:absolute; inset:0; z-index:-1; border-radius:9999px;
+      background:var(--glass-bg); border:1px solid var(--nav);
+      backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%);
+      box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66;
+    }
+    .dark .navbar-glass::before{ border-color:rgba(255,255,255,.08) }
+    .nav-link{ color:#fff; transition:background-color .2s ease-in-out }
+    .nav-link:hover{ background-color:rgba(255,255,255,.1) }
+
+    /* ===== Utilities ===== */
+    .grad-text{
+      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .dark .grad-text{
+      background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .btn-primary{ background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple)); color:#fff }
+    .chip{ border:1px solid var(--accent-purple); color:var(--accent-purple) }
+
+    /* ===== Reveal (clean & subtle) ===== */
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .6s cubic-bezier(.22,.8,.28,1); will-change:transform,opacity}
+    .reveal.in{opacity:1; transform:none}
+    .reveal-up{transform:translateY(16px)}
+    .reveal-fade{transform:none}
+    .reveal-scale{transform:translateY(8px) scale(.98)}
+    @media (prefers-reduced-motion:reduce){ .reveal{transition:none !important} }
+
+    /* ===== Parallax (low-jank) ===== */
+    [data-parallax]{will-change:transform; transform:translate3d(0,0,0)}
+
+    /* ===== Cyber Cover (bg up to Ringkasan Diri) ===== */
+    .top-cyber-cover{
+      position:absolute; top:0; left:0; right:0; height:var(--cover-h); z-index:0; pointer-events:none;
+      background:
+        radial-gradient(1100px 700px at 0% -10%, rgba(162,89,255,.28), transparent 60%),
+        radial-gradient(800px 600px at 100% 0%, rgba(0,255,255,.22), transparent 60%),
+        linear-gradient(180deg, #120b20 0%, #0B0C1B 60%, #0B0C1B 100%);
+      overflow:hidden;
+    }
+    .top-cyber-cover::before{
+      content:""; position:absolute; inset:-40% -10% auto -10%; height:80%;
+      background:conic-gradient(from 220deg, rgba(0,255,255,.35), rgba(162,89,255,.25), rgba(255,0,255,.25), transparent 70%);
+      filter:blur(40px); opacity:.26; animation:aurora 16s linear infinite;
+    }
+    .top-cyber-cover::after{
+      content:""; position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px);
+      background-size:56px 56px; opacity:.10; mix-blend-mode:overlay;
+    }
+    @keyframes aurora{ to{ transform:translateX(10%) rotate(360deg) } }
+
+    /* ===== Summary (Ringkasan Diri) ===== */
+    .summary-title{ font-weight:800; letter-spacing:-.02em; line-height:.95; font-size:clamp(40px,7vw,70px); color:#E2E8F0 }
+    .summary-lead{ color:#cdd6ea; font-size:clamp(14px,2.2vw,16px) }
+    .summary-grid{ display:grid; grid-template-columns:1fr; gap:1rem }
+    @media (min-width:768px){ .summary-grid{ grid-template-columns:repeat(3,1fr); gap:1.25rem } }
+
+    .neo-card{
+      background:linear-gradient(180deg,#1c1d3a 0%, #15162B 60%);
+      border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.25rem;
+      display:flex; flex-direction:column; align-items:center; text-align:center; color:#E2E8F0;
+      box-shadow:0 14px 40px rgba(0,0,0,.45);
+      transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s, border-color .25s;
+    }
+    .neo-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 48px rgba(0,0,0,.6), 0 0 30px rgba(162,89,255,.35), 0 0 24px rgba(0,255,255,.25);
+      border-color:rgba(0,255,255,.35);
+    }
+    .card-title{ font-size:18px; font-weight:800 }
+    .card-text{ font-size:14px; color:#A0AEC0 }
+    .card-list{ margin-top:.75rem; font-size:15px; font-weight:600; display:grid; gap:.5rem }
+    .bullet{
+      width:8px; height:8px; border-radius:999px; margin-right:.5rem; display:inline-block;
+      background:radial-gradient(circle at 30% 30%, #fff 0%, var(--accent-cyan) 50%, var(--accent-purple) 100%);
+      box-shadow:0 0 8px var(--accent-cyan);
+    }
+    .bar{ width:100%; height:8px; border-radius:9999px; background:#2D3748; margin-top:.5rem; }
+    .bar > span{ display:block; height:8px; border-radius:9999px; background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple)) }
+
+    /* ===== Match bar ===== */
+    .match-track{ background:#E5E7EB }
+    .match-fill{ background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple)) }
+
+    /* ===== Footer fixes for dark ===== */
+    .footer-cyber{
+      background:
+        radial-gradient(900px 600px at 100% 0%, rgba(0,255,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 0% 0%, rgba(162,89,255,.20), transparent 60%),
+        linear-gradient(180deg, #0B0C1B 0%, #17192C 100%);
+      color:#e2bff7;
+    }
+    .dark .bg-white{ background-color:var(--surface) !important }
+    .dark .text-gray-600{ color:var(--muted) !important }
+    .dark .border{ border-color:var(--border) !important }
+  </style>
 </head>
-<body class="font-sans bg-brand-cream text-brand-d-brown flex flex-col min-h-screen">
-    
-    <header class="fixed top-0 left-0 right-0 z-50 p-4">
-        <div class="container mx-auto flex justify-center">
-            <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border">
-                <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
-                    <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
-                </a>
-                <nav class="flex items-center space-x-1">
-                    <a href="index.html" title="Home" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full">
-                        <img src="./assets/img/home.svg" alt="Home Icon" class="w-6 h-6 flex-shrink-0" />
-                        <span class="hidden lg:inline font-semibold text-base">Home</span>
-                    </a>
-                    <a href="skill-match.html" title="Skill Match" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full">
-                         <img src="./assets/img/roadmap.svg" alt="Skill Match Icon" class="w-6 h-6 flex-shrink-0" />
-                        <span class="hidden lg:inline font-semibold text-base">Skill</span>
-                    </a>
-                    <a href="lab-career.html" title="Lab Career" class="nav-link active flex items-center gap-2 px-4 py-2.5 rounded-full">
-                        <img src="./assets/img/lab_career.svg" alt="Lab Career Icon" class="w-6 h-6 flex-shrink-0" />
-                        <span class="hidden lg:inline font-semibold text-base">Lab</span>
-                    </a>
-                </nav>
-                <div class="flex items-center gap-2 pr-2">
-                    <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
-                    <a href="login.html" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </a>
-                    <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
-                        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                           <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                           <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                    </button>
-                </div>
+
+<body>
+  <!-- top glass -->
+  <div id="top-glass" aria-hidden="true"></div>
+
+  <!-- cyber cover (with parallax) -->
+  <div class="top-cyber-cover" aria-hidden="true" data-parallax="0.06"></div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="navbar-glass flex items-center gap-4 rounded-full px-2 py-2">
+        <a href="index.html" class="pl-2" title="Halaman Utama Arunika">
+          <img src="./assets/img/logo.png" alt="Arunika" class="h-12 w-auto" />
+        </a>
+        <nav class="flex items-center space-x-1" aria-label="Primary">
+          <a href="lab-career.html" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full">
+            <img src="./assets/img/lab_career.svg" class="w-6 h-6" alt="" />
+            <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+          </a>
+          <a href="skill-match.html" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full">
+            <img src="./assets/img/roadmap.svg" class="w-6 h-6" alt="" />
+            <span class="hidden lg:inline font-semibold text-base">Skill Match</span>
+          </a>
+          <a href="#" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full">
+            <img src="./assets/img/about_us.svg" class="w-6 h-6" alt="" />
+            <span class="hidden lg:inline font-semibold text-base">About Us</span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2">
+          <div class="h-8 w-px bg-white/30"></div>
+          <a href="login.html" class="p-3 rounded-full btn-primary" title="Account" aria-label="Account">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          <!-- SAME ICONS AS INDEX -->
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/10" aria-label="Toggle theme" aria-pressed="false">
+            <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-28 px-4 sm:px-6 lg:px-8">
+    <!-- HERO (with gentle parallax) -->
+    <section id="hero" class="py-16 md:py-20 text-center reveal reveal-up" data-parallax="0.12">
+      <div class="container mx-auto max-w-4xl">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight grad-text">Selamat Datang di Lab Karir</h1>
+        <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto" style="color:var(--muted)">
+          Ini adalah pusat kendali karirmu. Analisis hasil asesmen, temukan lowongan yang paling cocok, dan lihat proyeksi gajimu di sini.
+        </p>
+        <a href="#ringkasan-diri" class="mt-10 inline-block rounded-full px-8 py-4 font-bold text-lg btn-primary shadow-lg shadow-purple-500/20 transition hover:scale-105 transform hover:-translate-y-1">
+          Lihat Hasil Analisis
+        </a>
+      </div>
+    </section>
+
+    <!-- RINGKASAN DIRI -->
+    <section id="ringkasan-diri" class="py-14 reveal reveal-up">
+      <div class="container mx-auto max-w-7xl text-center">
+        <h2 class="summary-title">Grow your career with clarity</h2>
+        <p class="summary-lead mt-3">Ringkasan personal dari Skill Match: kekuatan utama, role & karakter, serta skill gap prioritas.</p>
+
+        <div class="summary-grid mt-10">
+          <!-- Strengths -->
+          <article class="neo-card reveal reveal-scale">
+            <h3 class="card-title text-white">Top Strengths</h3>
+            <p class="card-text mt-1">Berdasarkan asesmen terkini</p>
+            <ul id="strengthList" class="card-list">
+              <li><span class="bullet"></span><span>Analitis</span></li>
+              <li><span class="bullet"></span><span>Kreatif</span></li>
+              <li><span class="bullet"></span><span>Problem Solving</span></li>
+            </ul>
+            <div class="w-full mt-3">
+              <div class="flex justify-between text-[12px] text-white/70"><span>Base Fit</span><span id="fitPct">88%</span></div>
+              <div class="bar"><span id="fitBar" style="width:88%"></span></div>
             </div>
+          </article>
+
+          <!-- Role -->
+          <article class="neo-card reveal reveal-scale">
+            <h3 class="card-title text-white">Your Role</h3>
+            <p id="roleName" class="mt-1 text-[17px] font-extrabold">—</p>
+            <p class="card-text mt-2 max-w-xs mx-auto">
+              <span class="font-semibold">Karakter:</span>
+              <span id="roleTraits">Eksploratif, ideatif, orkestrasi lintas fungsi.</span>
+            </p>
+          </article>
+
+          <!-- Gaps -->
+          <article class="neo-card reveal reveal-scale">
+            <h3 class="card-title text-white">Skill Gaps (90 hari)</h3>
+            <ul id="gapList" class="card-list">
+              <li><span class="bullet"></span><span>Stakeholder mapping</span></li>
+              <li><span class="bullet"></span><span>Delivery cadence</span></li>
+              <li><span class="bullet"></span><span>Leadership communication</span></li>
+            </ul>
+            <a href="skill-match.html" class="mt-4 inline-block rounded-full px-4 py-2 font-semibold btn-primary shadow">Perbarui asesmen →</a>
+          </article>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main class="container mx-auto py-16 px-4 flex-grow pt-32">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <section>
-                <h2 class="text-3xl font-bold ai-gradient-text">Ringkasan Diri</h2>
-                <p class="mt-2 text-lg text-brand-d-brown/70 dark:text-brand-cream/70">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="rounded-xl shadow-lg p-6 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                        <h3 class="text-sm font-semibold text-brand-d-brown/60 dark:text-brand-cream/60">Role Utama</h3>
-                        <p id="role-badge" class="mt-2 text-xl font-bold text-brand-d-brown dark:text-brand-cream">The Innovator</p>
-                    </div>
-                    <div class="rounded-xl shadow-lg p-6 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                        <h3 class="text-sm font-semibold text-brand-d-brown/60 dark:text-brand-cream/60">Base Fit Score</h3>
-                        <p id="base-score" class="mt-2 text-xl font-bold ai-gradient-text">88%</p>
-                    </div>
-                    <div class="rounded-xl shadow-lg p-6 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                         <h3 class="text-sm font-semibold text-brand-d-brown/60 dark:text-brand-cream/60">Kekuatan Utama</h3>
-                         <div id="top-strengths" class="mt-3 flex items-center gap-2">
-                            <span class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">Analitis</span>
-                            <span class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">Kreatif</span>
-                            <span class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">Problem Solving</span>
-                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="rounded-xl shadow-lg p-8 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                <h2 class="text-3xl font-bold ai-gradient-text">Filter & Prioritas</h2>
-                <p class="mt-2 text-lg text-brand-d-brown/70 dark:text-brand-cream/70">Sesuaikan hasil berdasarkan preferensimu.</p>
-                
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end">
-                    <div>
-                        <label for="salary-role" class="block text-sm font-medium text-brand-d-brown dark:text-brand-cream mb-1">Role</label>
-                        <select id="salary-role" class="cyber-input w-full rounded-md shadow-sm p-2 ring-1 ring-inset ring-transparent focus:ring-2 focus:ring-inset">
-                            <option>Product Manager</option>
-                            <option>Data Scientist</option>
-                            <option>UI/UX Researcher</option>
-                        </select>
-                    </div>
-                     <div>
-                        <label for="salary-level" class="block text-sm font-medium text-brand-d-brown dark:text-brand-cream mb-1">Level</label>
-                        <select id="salary-level" class="cyber-input w-full rounded-md shadow-sm p-2 ring-1 ring-inset ring-transparent focus:ring-2 focus:ring-inset">
-                            <option>Entry-Level</option>
-                            <option>Mid-Level</option>
-                            <option>Senior</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="salary-min" class="block text-sm font-medium text-brand-d-brown dark:text-brand-cream mb-1">Minimum Gaji (Median)</label>
-                        <select id="salary-min" class="cyber-input w-full rounded-md shadow-sm p-2 ring-1 ring-inset ring-transparent focus:ring-2 focus:ring-inset">
-                            <option value="0">Semua</option>
-                            <option value="9000000">≥ Rp 9 juta</option>
-                            <option value="12000000">≥ Rp 12 juta</option>
-                            <option value="15000000">≥ Rp 15 juta</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-6">
-                     <label for="prioritize" class="flex items-center cursor-pointer">
-                        <input id="prioritize" type="checkbox" class="sr-only peer">
-                        <div class="relative w-11 h-6 rounded-full peer toggle-switch-bg peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:ring-brand-gold peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                        <span class="ms-3 text-sm font-medium text-brand-d-brown dark:text-brand-cream">Prioritaskan tempat kerja ramah perempuan</span>
-                    </label>
-
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <div class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">Median: <span id="salary-median" class="font-semibold ml-1">Rp 13.5jt</span></div>
-                        <div class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">P25: <span id="salary-p25" class="font-semibold ml-1">Rp 11jt</span></div>
-                        <div class="cyber-badge text-sm font-medium px-3 py-1 rounded-full">P75: <span id="salary-p75" class="font-semibold ml-1">Rp 16jt</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mt-12">
-                <h2 class="text-3xl font-bold ai-gradient-text">Job Match</h2>
-                <div id="job-list" class="mt-6 space-y-6">
-                    <div class="rounded-xl shadow-lg p-6 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                        <div class="flex flex-col md:flex-row justify-between gap-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-brand-d-brown dark:text-brand-cream">Product Manager</h3>
-                                <p class="mt-1 text-brand-d-brown/80 dark:text-brand-cream/80">Tech Startup "Inovasi Digital" - Jakarta</p>
-                            </div>
-                            <a href="#" class="primary-btn self-start md:self-center">Lihat Detail</a>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-sm font-medium text-brand-d-brown/80 dark:text-brand-cream/80 mb-1">Match Score: 92%</p>
-                            <div class="w-full h-2 rounded-full match-score-bar-bg">
-                                <div class="h-2 rounded-full match-score-bar-fill" style="width: 92%;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rounded-xl shadow-lg p-6 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-                        <div class="flex flex-col md:flex-row justify-between gap-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-brand-d-brown dark:text-brand-cream">UI/UX Researcher</h3>
-                                <p class="mt-1 text-brand-d-brown/80 dark:text-brand-cream/80">Creative Agency "Visuara" - Bandung</p>
-                            </div>
-                            <a href="#" class="primary-btn self-start md:self-center">Lihat Detail</a>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-sm font-medium text-brand-d-brown/80 dark:text-brand-cream/80 mb-1">Match Score: 85%</p>
-                            <div class="w-full h-2 rounded-full match-score-bar-bg">
-                                <div class="h-2 rounded-full match-score-bar-fill" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- FILTERS -->
+    <section id="filters" class="py-10 reveal reveal-up">
+      <div class="container mx-auto max-w-6xl">
+        <div class="rounded-2xl p-5 md:p-6" style="background:var(--surface); border:2px solid var(--accent-purple); box-shadow:0 0 24px #A259FF22, 0 0 48px #00FFFF22;">
+          <div class="grid md:grid-cols-5 gap-4">
+            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option>Product Manager</option><option>UI/UX Researcher</option><option>Frontend Developer</option><option>Data Scientist</option>
+            </select>
+            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option>Entry-Level</option><option>Mid-Level</option><option>Senior</option>
+            </select>
+            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option value="ID">Seluruh Indonesia</option><option>Jakarta</option><option>Bandung</option><option>Surabaya</option><option>Medan</option>
+            </select>
+            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option value="0">Gaji: Semua</option>
+              <option value="9000000">≥ Rp 9 jt</option>
+              <option value="12000000">≥ Rp 12 jt</option>
+              <option value="15000000">≥ Rp 15 jt</option>
+            </select>
+            <button class="w-full rounded-full py-2.5 font-bold btn-primary">Terapkan</button>
+          </div>
         </div>
-    </main>
-    
-    <footer class="footer-cyber-bg text-brand-d-brown dark:text-brand-cream relative z-0 mt-16">
-         <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center text-sm text-brand-d-brown/60 dark:text-brand-cream/60">
-                &copy; 2025 Arunika. Angka bersifat estimasi dan dapat bervariasi.
+      </div>
+    </section>
+
+    <!-- JOB MATCH -->
+    <section class="py-12">
+      <div class="container mx-auto max-w-6xl">
+        <h2 class="text-2xl sm:text-3xl font-bold grad-text reveal reveal-up">Job Match</h2>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+          <!-- Card 1 -->
+          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-extrabold text-lg" style="color:var(--ink)">Product Manager</h3>
+                <p class="text-sm" style="color:var(--muted)">Inovasi Digital • Jakarta</p>
+              </div>
+              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
             </div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>92%</span></div>
+              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:92%"></div></div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+              <span class="chip px-2.5 py-1 rounded-full">Leadership</span>
+              <span class="chip px-2.5 py-1 rounded-full">Stakeholder</span>
+              <span class="chip px-2.5 py-1 rounded-full">Roadmap</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-extrabold text-lg" style="color:var(--ink)">UI/UX Researcher</h3>
+                <p class="text-sm" style="color:var(--muted)">Visuara • Bandung</p>
+              </div>
+              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>85%</span></div>
+              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:85%"></div></div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+              <span class="chip px-2.5 py-1 rounded-full">Interview</span>
+              <span class="chip px-2.5 py-1 rounded-full">Usability</span>
+              <span class="chip px-2.5 py-1 rounded-full">Synthesis</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-extrabold text-lg" style="color:var(--ink)">Frontend Developer</h3>
+                <p class="text-sm" style="color:var(--muted)">Tech Labs • Surabaya</p>
+              </div>
+              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>81%</span></div>
+              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:81%"></div></div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+              <span class="chip px-2.5 py-1 rounded-full">React</span>
+              <span class="chip px-2.5 py-1 rounded-full">UI Patterns</span>
+              <span class="chip px-2.5 py-1 rounded-full">Performance</span>
+            </div>
+          </article>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        // --- Theme Toggle Logic ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    <!-- SALARY -->
+    <section class="py-10 reveal reveal-up">
+      <div class="container mx-auto max-w-6xl">
+        <div class="rounded-2xl p-6" style="background:var(--surface); border:2px solid var(--accent-purple); box-shadow:0 0 24px #A259FF22, 0 0 48px #00FFFF22;">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <h3 class="text-xl md:text-2xl font-bold" style="color:var(--ink)">Salary Transparency — Indonesia</h3>
+            <p class="text-sm" style="color:var(--muted)">Angka perkiraan: median & kuartil.</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mt-5">
+            <div class="rounded-xl p-4" style="background:var(--surface2)">
+              <h4 class="font-semibold">Product Manager</h4>
+              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 10jt • Median 13jt • P75 17jt</p>
+              <p class="text-sm" style="color:var(--muted)">Mid: P25 14jt • Median 18jt • P75 24jt</p>
+              <p class="text-sm" style="color:var(--muted)">Senior: P25 22jt • Median 28jt • P75 36jt</p>
+            </div>
+            <div class="rounded-xl p-4" style="background:var(--surface2)">
+              <h4 class="font-semibold">UI/UX Researcher</h4>
+              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 7jt • Median 9jt • P75 12jt</p>
+              <p class="text-sm" style="color:var(--muted)">Mid: P25 10jt • Median 13jt • P75 17jt</p>
+              <p class="text-sm" style="color:var(--muted)">Senior: P25 16jt • Median 21jt • P75 28jt</p>
+            </div>
+            <div class="rounded-xl p-4" style="background:var(--surface2)">
+              <h4 class="font-semibold">Frontend Developer</h4>
+              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 8jt • Median 11jt • P75 14jt</p>
+              <p class="text-sm" style="color:var(--muted)">Mid: P25 12jt • Median 16jt • P75 22jt</p>
+              <p class="text-sm" style="color:var(--muted)">Senior: P25 20jt • Median 26jt • P75 34jt</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-                document.body.classList.remove('light');
-                darkIcon.classList.remove('hidden');
-                lightIcon.classList.add('hidden');
-                localStorage.setItem('color-theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.body.classList.add('light');
-                document.body.classList.remove('dark');
-                lightIcon.classList.remove('hidden');
-                darkIcon.classList.add('hidden');
-                localStorage.setItem('color-theme', 'light');
-            }
+    <!-- CTA -->
+    <section class="py-12 reveal reveal-up">
+      <div class="container mx-auto max-w-6xl">
+        <div class="rounded-2xl p-8" style="background:var(--surface); border:2px solid var(--accent-purple); box-shadow:0 0 24px #A259FF22, 0 0 48px #00FFFF22;">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 class="text-2xl font-bold" style="color:var(--ink)">Siap lanjutkan perjalanan?</h3>
+              <p class="mt-2" style="color:var(--muted)">Simpan preferensi, terima rekomendasi mingguan, dan hubungkan ke mentor.</p>
+            </div>
+            <div class="flex gap-3">
+              <a href="skill-match.html" class="px-6 py-3 rounded-full font-bold btn-primary">Lanjutkan Skill Match</a>
+              <a href="index.html#pricing" class="px-6 py-3 rounded-full border-2 font-semibold" style="border-color:var(--accent-cyan); color:var(--accent-cyan)">Upgrade Pro</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-cyber relative z-0">
+    <div class="container mx-auto max-w-7xl py-14 px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-start">
+        <div class="col-span-2">
+          <img src="./assets/img/logo.png" alt="Arunika" class="h-12 w-auto"/>
+          <p class="mt-4 max-w-xs text-lg leading-relaxed">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
+        </div>
+        <nav aria-label="Perusahaan">
+          <h4 class="font-bold mb-4 text-xl text-white">Perusahaan</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="about.html" style="color:#e2bff7;">Tentang Kami</a></li>
+            <li><a href="#" style="color:#e2bff7;">Partner</a></li>
+            <li><a href="#" style="color:#e2bff7;">Press Kit</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Sosial Media">
+          <h4 class="font-bold mb-4 text-xl text-white">Sosial Media</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" style="color:#e2bff7;">Twitter</a></li>
+            <li><a href="#" style="color:#e2bff7;">Instagram</a></li>
+            <li><a href="#" style="color:#e2bff7;">Threads</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-12 pt-6 border-t text-center text-sm" style="border-color:#6b4ea5; color:#cdbaf0;">
+        &copy; 2025 Arunika. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle (same as index)
+    (function(){
+      const btn=document.getElementById('theme-toggle');
+      if(!btn) return;
+      const light=document.getElementById('theme-toggle-light-icon');
+      const dark =document.getElementById('theme-toggle-dark-icon');
+      function setTheme(mode){
+        const isDark=mode==='dark';
+        document.documentElement.classList.toggle('dark',isDark);
+        document.body.classList.toggle('dark',isDark);
+        document.body.classList.toggle('light',!isDark);
+        dark?.classList.toggle('hidden',!isDark);
+        light?.classList.toggle('hidden',isDark);
+        localStorage.setItem('color-theme',isDark?'dark':'light');
+        btn.setAttribute('aria-pressed',String(isDark));
+      }
+      const saved=localStorage.getItem('color-theme');
+      const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved ? saved : (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click',()=>setTheme(document.documentElement.classList.contains('dark')?'light':'dark'));
+    })();
+
+    // Body scrolled => show top glass
+    (function(){
+      const onScroll=()=>document.body.classList.toggle('scrolled',(window.scrollY||document.documentElement.scrollTop)>4);
+      onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+    })();
+
+    // Scroll Reveal (single observer, retrigger on leave)
+    (function(){
+      const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items=[...document.querySelectorAll('.reveal,[data-sr]')];
+      // Back-compat: legacy data-sr -> reveal
+      items.forEach(el=>{ if(el.hasAttribute('data-sr')) el.classList.add('reveal','reveal-up'); });
+      if(reduce){ items.forEach(el=>el.classList.add('in')); return; }
+      const io=new IntersectionObserver((entries)=>{
+        entries.forEach(e=> e.target.classList.toggle('in', e.isIntersecting));
+      }, {root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15});
+      items.forEach(el=> io.observe(el));
+    })();
+
+    // Parallax (rAF, gentle, mobile-aware)
+    (function(){
+      const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mobile =()=> window.matchMedia('(max-width: 767px)').matches;
+      const els=[...document.querySelectorAll('[data-parallax]')];
+      if(!els.length) return;
+      let ticking=false, lastY=0, enabled=!(reduce||mobile());
+      function apply(y){
+        els.forEach(el=>{
+          const f=parseFloat(el.getAttribute('data-parallax')||'0.1');
+          const ty=Math.round(y*f);
+          el.style.transform=`translate3d(0, ${ty}px, 0)`;
+        });
+      }
+      function onScroll(){
+        if(!enabled) return;
+        lastY=window.scrollY||document.documentElement.scrollTop;
+        if(!ticking){
+          requestAnimationFrame(()=>{ apply(lastY); ticking=false; });
+          ticking=true;
         }
+      }
+      function update(){
+        enabled=!(reduce||mobile());
+        if(!enabled){ els.forEach(el=> el.style.transform=''); }
+        else { onScroll(); }
+      }
+      update();
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', ()=>{ update(); }, {passive:true});
+    })();
 
-        const savedTheme = localStorage.getItem('color-theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-        } else {
-            setTheme('light');
-        }
-
-        themeToggleBtn.addEventListener('click', () => setTheme(localStorage.getItem('color-theme') === 'dark' ? 'light' : 'dark'));
-
-        // --- Logika Halaman (dapat dipindahkan ke lab.js) ---
-        // Script ini hanya untuk demonstrasi, ganti dengan data asli Anda.
-    </script>
+    // Set cyber cover height to bottom of Ringkasan Diri
+    (function(){
+      const section=document.getElementById('ringkasan-diri');
+      const update=()=>{
+        if(!section) return;
+        const r=section.getBoundingClientRect();
+        const top=window.scrollY + r.top;
+        const bottom=top + r.height;
+        document.documentElement.style.setProperty('--cover-h', bottom + 'px');
+      };
+      window.addEventListener('DOMContentLoaded', update);
+      window.addEventListener('resize', update, {passive:true});
+      window.addEventListener('load', update);
+    })();
+  </script>
 </body>
 </html>
