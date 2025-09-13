@@ -1,225 +1,86 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Arunika — Skill Match</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./assets/js/quiz.js"></script>
-    <style>
-        /* [CSS LENGKAP DARI VERSI SEBELUMNYA ADA DI SINI] */
-        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        :root {
-            --color-primary-bg-light: #F0F4F8;
-            --color-secondary-bg-light: #FFFFFF;
-            --color-text-light: #1A202C;
-            --color-text-secondary-light: #4A5568;
-            --color-accent-blue-light: #3182CE;
-            --color-accent-purple-light: #6B46C1;
-            --color-accent-red-light: #E53E3E;
-            --color-border-light: #CBD5E0;
-        }
-        .dark {
-            --color-primary-bg-dark: #0B0C1B;
-            --color-secondary-bg-dark: #17192C;
-            --color-text-dark: #E2E8F0;
-            --color-text-secondary-dark: #A0AEC0;
-            --color-accent-blue-dark: #00FFFF;
-            --color-accent-purple-dark: #FF00FF;
-            --color-accent-red-dark: #FF3366;
-            --color-border-dark: #2D3748;
-        }
-        .bg-brand-cream { background-color: var(--color-primary-bg-light); }
-        .bg-brand-ivory { background-color: var(--color-secondary-bg-light); }
-        .text-brand-d-brown { color: var(--color-text-light); }
-        .dark .bg-dark-primary { background-color: var(--color-primary-bg-dark); }
-        .dark .bg-dark-secondary { background-color: var(--color-secondary-bg-dark); }
-        .dark .text-brand-cream { color: var(--color-text-dark); }
-        body.dark {
-            background-color: var(--color-primary-bg-dark);
-        }
-        .ai-gradient-text {
-            background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .dark .ai-gradient-text {
-             background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .ai-card-border-glow { position: relative; border: 1px solid var(--color-border-light); }
-        .dark .ai-card-border-glow { border: 1px solid var(--color-border-dark); }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arunika — Skill Match</title>
 
-        /* Gaya Navbar Baru */
-        .navbar-blur .nav-link { 
-            transition: all 0.2s ease-in-out; 
-        }
-        .navbar-blur .nav-link:hover { 
-            background-color: rgba(255,255,255,0.1); 
-        }
-        .navbar-blur .nav-link.active { 
-            background-color: rgba(255,255,255,0.2);
-            font-weight: 700;
-        }
-        .bg-brand-gold {
-            background-color: #A259FF;
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/css/skill-match.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-        .primary-btn { font-size: 1.125rem; padding: 0.875rem 2.5rem; border-radius: 9999px; background: linear-gradient(90deg, var(--color-accent-blue-light), var(--color-accent-purple-light)); color: white; transition: all 0.3s ease-in-out; font-weight: 600; }
-        .dark .primary-btn { background: linear-gradient(90deg, var(--color-accent-blue-dark), var(--color-accent-purple-dark)); }
-        .primary-btn:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 10px 20px -5px rgba(107, 70, 193, 0.4); }
-        .dark .primary-btn:hover { box-shadow: 0 0 25px var(--color-accent-blue-dark), 0 0 15px var(--color-accent-purple-dark); }
-        
-        .ghost-btn { font-size: 1.125rem; padding: 0.875rem 2.5rem; border-radius: 9999px; background-color: transparent; border: 2px solid var(--color-border-light); color: var(--color-text-secondary-light); transition: all 0.3s ease-in-out; font-weight: 600; }
-        .dark .ghost-btn { border-color: var(--color-border-dark); color: var(--color-text-secondary-dark); }
-        .ghost-btn:hover { border-color: var(--color-accent-purple-light); color: var(--color-accent-purple-light); }
-        .dark .ghost-btn:hover { border-color: var(--color-accent-purple-dark); color: var(--color-accent-purple-dark); }
-        
-        .footer-cyber-bg { background: linear-gradient(135deg, #E0F7FA 0%, #F0F4F8 100%); position: relative; }
-        .dark .footer-cyber-bg { background: linear-gradient(135deg, #0B0C1B 0%, #17192C 100%); border-top: 1px solid var(--color-border-dark); }
-        .footer-link-hover { color: var(--color-text-secondary-light); transition: color 0.3s, text-shadow 0.3s; }
-        .dark .footer-link-hover { color: var(--color-text-secondary-dark); }
-        .footer-link-hover:hover { color: var(--color-accent-purple-light); }
-        .dark .footer-link-hover:hover { color: var(--color-accent-purple-dark); text-shadow: 0 0 5px var(--color-accent-purple-dark); }
-        #progress-bar { transition: width 0.5s ease-in-out; }
-        .question-block.invalid .flex.justify-between {
-            border: 2px solid var(--color-accent-red-light);
-            border-radius: 9999px;
-            padding: 0.5rem;
-        }
-        .dark .question-block.invalid .flex.justify-between { border-color: var(--color-accent-red-dark); }
-    </style>
 </head>
-<body class="font-sans bg-brand-cream text-brand-d-brown dark:bg-dark-primary dark:text-brand-cream flex flex-col min-h-screen">
+</head>
+
+<body>
+  <div id="top-glass"></div>
+
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="nav-wrap flex items-center gap-4 rounded-full p-2">
+        <a href="index.html" title="Halaman Utama" class="pl-2"><img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" /></a>
+        <nav class="flex items-center space-x-1">
+          <a href="lab-career.html" class="px-4 py-2.5 rounded-full text-white font-medium">Lab Career</a>
+          <a href="#" class="px-4 py-2.5 rounded-full text-white/90 hover:bg-white/10">Roadmap</a>
+          <a href="#" class="px-4 py-2.5 rounded-full text-white/90 hover:bg-white/10">About Us</a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2 ml-2">
+          <div class="h-8 w-px bg-white/20"></div>
+          <a href="#" class="p-3 rounded-full bg-[var(--purple)] text-white" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/10 text-white" aria-label="Toggle theme">
+            <svg id="sun" class="w-5 h-5 hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg id="moon" class="w-5 h-5 hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pt-32 pb-16 flex-1">
+    <section id="quiz-header" class="max-w-3xl mx-auto mb-6 sr">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-center grad-text">Kuis Skill Match</h1>
+      <p class="text-center text-muted mt-2">Pilih angka 1–5 untuk tiap pernyataan di bawah ini.</p>
+    </section>
     
-    <header class="fixed top-0 left-0 right-0 z-50 p-4">
-        <div class="container mx-auto flex justify-center">
-            <div
-                class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
-                style="background-color: #481057; border: 1px solid #481057; box-shadow: 0 0 24px #A259FF, 0 0 48px #A259FF66;">
-                <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
-                    <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
-                </a>
-                <nav class="flex items-center space-x-1">
-    <a href="lab-career.html" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
-    </a>
-    <a href="#" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
-    </a>
-    <a href="#" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
-        <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
-        <span class="hidden lg:inline font-semibold text-base">About Us</span>
-    </a>
-</nav>
-                <div class="flex items-center gap-2 pr-2">
-                    <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
-                    <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </a>
-                    <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
-                        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                        </svg>
-                        <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                    </button>
-                </div>
+    <section class="max-w-3xl mx-auto mb-6 sr p-4 sm:p-5 flex items-center justify-between gap-4 card-surface rounded-xl shadow-lg">
+      <div class="flex items-center gap-3">
+        <div class="relative"><svg id="mascot" width="44" height="44" viewBox="0 0 64 64"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#A259FF"/><stop offset="1" stop-color="#00FFFF"/></linearGradient></defs><circle cx="32" cy="32" r="28" fill="url(#g1)"/><circle cx="24" cy="26" r="4" fill="#fff"/><circle cx="40" cy="26" r="4" fill="#fff"/><rect id="mouth" x="24" y="36" width="16" height="6" rx="3" fill="#fff"/></svg></div>
+        <div><div class="text-sm text-muted">Poin</div><div id="ui-points" class="text-2xl font-extrabold">0</div></div>
+      </div>
+      <div class="flex-1">
+        <div class="progress"><div id="progress-bar" class="progress-fill"></div></div>
+        <div class="flex justify-between text-xs text-muted mt-1"><span id="ui-progress-label">0/0</span><span id="ui-badge" class="font-semibold">Starter</span></div>
+      </div>
+    </section>
+
+    <form id="quiz-form" novalidate class="max-w-3xl mx-auto">
+        <div id="questions" class="space-y-6">
             </div>
+        <div id="validation-message" class="text-center text-[var(--red)] font-semibold my-6 hidden"></div>
+        <div class="flex justify-center items-center gap-2 mt-8">
+            <button id="submit-btn" class="px-7 py-3 rounded-xl text-white font-semibold text-lg shadow-md hover:shadow-lg active:scale-[0.99] bg-gradient-to-r from-[var(--blue)] to-[var(--purple)]" type="submit">Cek Hasil</button>
         </div>
-    </header>
-
-    <main class="container mx-auto py-16 px-4 flex-grow pt-32">
-        <div class="max-w-3xl mx-auto rounded-xl shadow-lg p-8 ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-center ai-gradient-text">Kuis Skill Match</h1>
-            <p class="text-lg text-center text-brand-d-brown/70 dark:text-brand-cream/70 mt-2 mb-8">Jawab 12 pertanyaan singkat. Pilih angka 1–5 untuk tiap pernyataan.</p>
-
-            <div class="w-full h-2.5 rounded-full mb-8 bg-gray-200 dark:bg-gray-700">
-                <div id="progress-bar" class="h-2.5 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 dark:from-cyan-400 dark:to-fuchsia-500" style="width: 0%;"></div>
-            </div>
-
-            <form id="quiz-form" novalidate>
-                <div id="questions" class="space-y-8">
-                    <!-- Pertanyaan akan dirender oleh JavaScript -->
-                </div>
-                <div id="validation-message" class="text-center text-red-500 dark:text-red-400 font-semibold my-6 hidden">
-                    <!-- Pesan validasi akan muncul di sini -->
-                </div>
-                <div class="mt-12 flex justify-center">
-                    <button class="primary-btn" type="submit" aria-label="Lihat hasil">Cek Hasil</button>
-                </div>
-            </form>
-        </div>
-    </main>
-
-    <footer class="relative z-0" style="background-color: #481057;">
-        <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="col-span-2 md:col-span-2">
-                    <h3 class="text-3xl font-extrabold ai-gradient-text" style="color: #fff;">Arunika</h3>
-                    <p class="mt-4 max-w-xs text-lg leading-relaxed" style="color: #e2bff7;">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Perusahaan</h4>
-                    <ul class="space-y-3 text-lg">
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Tentang Kami</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Partner</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Press Kit</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4 text-xl" style="color: #fff;">Sosial Media</h4>
-                    <ul class="space-y-3 text-lg">
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Twitter</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Instagram</a></li>
-                        <li><a href="#" class="footer-link-hover" style="color: #e2bff7;">Threads</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-16 pt-8 border-t text-center text-sm" style="border-color: #e2bff7; color: #e2bff7;">
-                &copy; 2025 Arunika. All Rights Reserved.
-            </div>
-        </div>
+    </form>
+  </main>
+  
+  <footer class="mt-8 py-12">
     </footer>
 
-    <div id="result-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="result-title">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
-        <div class="relative w-full max-w-lg rounded-xl shadow-lg ai-card-border-glow bg-brand-ivory dark:bg-dark-secondary p-8 transform transition-transform duration-300 scale-95">
-            <button class="absolute top-4 right-4 text-2xl text-brand-d-brown/50 dark:text-brand-cream/50 hover:text-brand-d-brown dark:hover:text-brand-cream" aria-label="Tutup" onclick="closeModal()">✕</button>
-            <h2 id="result-title" class="text-2xl font-bold ai-gradient-text text-center">Rekomendasi Peran Untukmu</h2>
-            
-            <div id="result-body" class="mt-6 text-brand-d-brown/90 dark:text-brand-cream/90">
-                <div class="text-center">
-                    <span id="result-badge" class="py-1.5 px-4 rounded-full text-base font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300"></span>
-                    <div id="result-score" class="text-7xl font-extrabold my-2 text-brand-d-brown dark:text-brand-cream"></div>
-                    <p class="text-brand-d-brown/70 dark:text-brand-cream/70">Fit Score</p>
-                </div>
-                <div class="mt-8">
-                    <h3 class="font-semibold text-lg text-brand-d-brown dark:text-brand-cream">Kekuatan Utamamu:</h3>
-                    <div id="result-strengths" class="flex flex-wrap gap-3 mt-3"></div>
-                </div>
-                <div class="mt-6">
-                    <h3 class="font-semibold text-lg text-brand-d-brown dark:text-brand-cream">Saran Aksi:</h3>
-                    <ul id="result-actions" class="mt-2 space-y-2 text-brand-d-brown/80 dark:text-brand-cream/80"></ul>
-                </div>
-            </div>
-
-            <div class="mt-8 flex gap-4 justify-end">
-                <button class="ghost-btn" onclick="closeModal()">Ulangi</button>
-                <a class="primary-btn" href="lab-career.html">Ke Lab Career</a>
-            </div>
-        </div>
+  <div id="result-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none" role="dialog">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="result-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-xl shadow-lg card-surface p-8 transform transition-transform duration-300 scale-95">
+      <button class="absolute top-4 right-4 text-2xl opacity-70 hover:opacity-100" id="result-close" aria-label="Tutup">✕</button>
+      <h2 id="result-title" class="text-2xl font-bold grad-text text-center">Rekomendasi Peran Untukmu</h2>
+      <div id="result-body" class="mt-6">
+        <div class="text-center"><span id="result-badge" class="py-1.5 px-4 rounded-full text-base font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300"></span><div id="result-score" class="text-7xl font-extrabold my-2"></div><p class="text-muted">Fit Score</p></div>
+        <div class="mt-8"><h3 class="font-semibold text-lg">Kekuatan Utamamu:</h3><div id="result-strengths" class="flex flex-wrap gap-3 mt-3"></div></div>
+        <div class="mt-6"><h3 class="font-semibold text-lg">Saran Aksi:</h3><ul id="result-actions" class="mt-2 space-y-2 text-muted"></ul></div>
+      </div>
     </div>
+  </div>
 
-
+  <script src="./assets/js/quiz.js" defer></script>
 </body>
 </html>
-
