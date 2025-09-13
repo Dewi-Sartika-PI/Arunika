@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arunika - Roadmap</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Warna Adaptif (Light/Dark) ---------- */
+    :root{
+      --bg-page:#F0F4F8; --surface-1:#FFFFFF; --surface-2:#F8FAFC;
+      --text:#1A202C; --text-muted:#4A5568;
+      --accent-blue:#3182CE; --accent-purple:#A259FF; --accent-cyan:#00FFFF; --accent-fuchsia:#FF00FF; --accent-red:#E53E3E;
+      --border:#CBD5E0; --border-soft:#E2E8F0;
+      --glass-bg: rgba(255,255,255,0.18); --glass-border: rgba(0,0,0,0.06);
+    }
+    .dark{
+      --bg-page:#070812; --surface-1:#0E1020; --surface-2:#141833;
+      --text:#E6EAF2; --text-muted:#A5B1C2;
+      --accent-blue:#00FFFF; --accent-purple:#B57CFF; --accent-fuchsia:#FF55FF; --accent-red:#FF3366;
+      --border:#252B3B; --border-soft:#1C2233;
+      --glass-bg: rgba(7,8,18,0.22); --glass-border: rgba(255,255,255,0.08);
+    }
+
+    body{
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text);
+    }
+    body.dark{
+      background-image:
+        linear-gradient(rgba(23,25,44,0.6) 1px, transparent 1px),
+        linear-gradient(to right, rgba(23,25,44,0.6) 1px, var(--bg-page) 1px);
+      background-size:40px 40px;
+    }
+
+    /* Utilities */
+    .bg-brand-cream{background-color:var(--bg-page)} .bg-brand-ivory{background-color:var(--surface-1)}
+    .text-brand-d-brown{color:var(--text)} .text-muted{color:var(--text-muted)}
+    .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
+    .border-soft{border-color:var(--border-soft)} .border-strong{border-color:var(--border)}
+    /* Di sini ada perubahan */
+    .bg-brand-gold{
+      background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3);
+      background-size: 200% auto;
+      transition: all 0.5s ease-in-out;
+    }
+    .bg-brand-gold:hover{ background-position: right center; }
+    /* End of changes */
+    .border-brand-gold{border-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
+    .focus\:ring-brand-gold:focus{--tw-ring-color:var(--accent-blue)}
+    .bg-brand-red{background:var(--accent-red)} .border-brand-red{border-color:var(--accent-red)} .text-brand-red{color:var(--accent-red)}
+    .wave-fill{ fill:var(--bg-page) }
+
+    .ai-gradient-text{
+      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .dark .ai-gradient-text{
+      background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      animation:text-glow-dark 2s ease-in-out infinite alternate;
+    }
+    @keyframes text-glow-dark{
+      from{ text-shadow:0 0 6px var(--accent-cyan),0 0 10px var(--accent-purple) }
+      to{   text-shadow:0 0 10px var(--accent-purple),0 0 20px var(--accent-cyan) }
+    }
+
+    /* Navbar blur */
+    .navbar-blur{ background:rgba(255,255,255,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.25) }
+    .dark .navbar-blur{ background:rgba(10,12,28,.55); border:1px solid rgba(255,255,255,.08); box-shadow:0 0 24px #00FFFF22,0 0 48px #A259FF22 }
+    .nav-link{ color:var(--text-muted); transition:color .3s, background-color .3s }
+    .nav-link:hover{ color:var(--text); background-color:rgba(0,0,0,.05) }
+    .dark .nav-link:hover{ color:var(--text); text-shadow:0 0 8px var(--accent-cyan); background-color:rgba(255,255,255,.05) }
+
+    /* Top Glass (blur transparan saat scroll) */
+    #top-glass{
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      z-index: 40; pointer-events: none;
+      background: var(--glass-bg); border-bottom: 1px solid var(--glass-border);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      backdrop-filter: saturate(140%) blur(14px);
+      opacity: 0; transition: opacity .28s ease;
+    }
+    body.scrolled #top-glass{ opacity: 1; }
+
+/* Typewriter animation */
+    .typewriter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      white-space: nowrap; /* Prevent line breaks */
+    }
+
+    .typewriter-text {
+      overflow: hidden; /* Hide overflow to create typing effect */
+      border-right: .15em solid #7209b7; /* The typewriter cursor */
+      font-family: monospace; /* Monospaced font */
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #7209b7; }
+    }
+    /* Komponen lain */
+    .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
+    .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
+    .match-bar-bg{ background:#e2e8f0 } .dark .match-bar-bg{ background:#1f2937 }
+    .match-bar-fill{ background-image:linear-gradient(to right,#6366f1,#8b5cf6) } .dark .match-bar-fill{ background-image:linear-gradient(90deg,var(--accent-cyan),var(--accent-fuchsia)) }
+
+    /* Footer */
+    .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
+    .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
+    .dark .footer-cyber-bg::before{
+      content:''; position:absolute; inset:0;
+      background-image:linear-gradient(rgba(23,25,44,.8) 1px, transparent 1px),
+                       linear-gradient(to right, rgba(23,25,44,.8) 1px, var(--bg-page) 1px);
+      background-size:30px 30px; opacity:.1; z-index:0;
+    }
+    .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
+    /*footer dark light logo mode*/
+    body.light #footer-logo {
+    filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+}
+    /* -------- Scroll-Reveal (retriggerable) -------- */
+    @media (prefers-reduced-motion:no-preference){
+      .sr{
+        opacity:0; filter:blur(6px);
+        transform:translateY(28px);
+        will-change:transform,opacity,filter;
+        transition:
+          opacity .7s cubic-bezier(.21,.6,.2,1),
+          transform .7s cubic-bezier(.21,.6,.2,1),
+          filter .7s cubic-bezier(.21,.6,.2,1);
+        transition-delay: var(--sr-delay, 0ms);
+      }
+      .sr-in{ opacity:1; filter:blur(0); transform:none }
+      .sr-left{ transform:translateX(-28px) }
+      .sr-right{ transform:translateX(28px) }
+      .sr-zoom{ transform: translateY(12px) scale(.96) }
+      .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
+    }
+  
+    
+  </style>
+</head>
+
+<body class="bg-brand-cream text-brand-d-brown">
+  <div id="top-glass" aria-hidden="true"></div>
+
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
+           style="background-color:#481057; border:1px solid #481057; box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66;">
+        <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
+          <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
+        </a>
+        <nav class="flex items-center space-x-1">
+          <a href="lab-career.html" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+          </a>
+          <a href="road-map.html" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
+          </a>
+          <a href="about-us.html" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">About Us</span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2">
+          <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
+          <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
+            <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex items-center justify-center text-center min-h-screen">
+    <!-- DEVELOPE NOTICE -->
+    <div class="typewriter-container text-center">
+      <h1 id="typewriter-title" class="typewriter-text text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"></h1>
+      <p id="typewriter-subtitle" class="typewriter-text mt-4 text-lg text-muted leading-relaxed"></p>
+    </div>
+  </main>
+
+  <footer class="relative z-0 footer-cyber-bg">
+    <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-2">
+          <div class="inline-block [perspective:1000px] sr" data-sr>
+            <img id="footer-logo" src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto footer-tilt" />
+          </div>
+          <p class="mt-4 max-w-xs text-lg leading-relaxed text-muted sr" data-sr data-sr-delay="120">
+            Playlist karir personalmu untuk masa depan yang lebih cerah.
+          </p>
+        </div>
+        <div class="sr" data-sr>
+          <h4 class="font-bold mb-4 text-xl">Perusahaan</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Tentang Kami</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Partner</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Press Kit</a></li>
+          </ul>
+        </div>
+        <div class="sr" data-sr data-sr-delay="80">
+          <h4 class="font-bold mb-4 text-xl">Sosial Media</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Twitter</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Instagram</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Threads</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t text-center text-sm text-muted sr" data-sr data-sr-delay="140" style="border-color:var(--border);">
+        &copy; 2025 Arunika. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- NAVIGASI ---
+    function navigateTo(page){ window.location.href = page; }
+    document.getElementById('goToSkillMatch')?.addEventListener('click', () => navigateTo('skill-match.html'));
+
+    // --- THEME TOGGLE ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon  = document.getElementById('theme-toggle-dark-icon');
+
+    function setTheme(theme){
+      if(theme === 'dark'){
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark'); document.body.classList.remove('light');
+        darkIcon?.classList.remove('hidden'); lightIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','dark');
+      }else{
+        document.documentElement.classList.remove('dark');
+        document.body.classList.add('light'); document.body.classList.remove('dark');
+        lightIcon?.classList.remove('hidden'); darkIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','light');
+      }
+    }
+    const savedTheme = localStorage.getItem('color-theme');
+    if(savedTheme){ setTheme(savedTheme); }
+    else if(window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark'); }
+    else{ setTheme('light'); }
+    themeToggleBtn?.addEventListener('click', () => {
+      if(document.documentElement.classList.contains('dark')) setTheme('light'); else setTheme('dark');
+    });
+
+    // --- Body scrolled -> aktifkan top glass ---
+    (function(){
+      const onScroll = () => {
+        if ((window.scrollY || document.documentElement.scrollTop) > 4) {
+          document.body.classList.add('scrolled');
+        } else {
+          document.body.classList.remove('scrolled');
+        }
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, {passive:true});
+    })();
+
+    // --- Hero: Fireflies (particles) ---
+    (function(){
+      const canvas = document.getElementById('particles-bg'); if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const COUNT = reduce ? 16 : 36;
+      const particles = [];
+
+      function resize(){
+        canvas.width  = canvas.clientWidth  || window.innerWidth;
+        canvas.height = canvas.clientHeight || window.innerHeight;
+      }
+      resize(); window.addEventListener('resize', resize);
+
+      for(let i=0;i<COUNT;i++){
+        particles.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: 1.5 + Math.random()*2.5,
+          dx: -0.4 + Math.random()*0.8,
+          dy: -0.4 + Math.random()*0.8,
+          hue: 260 + Math.random()*60
+        });
+      }
+
+      function draw(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(const p of particles){
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, .28)`;
+          ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, .9)`;
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          p.x += p.dx; p.y += p.dy;
+          if(p.x<0||p.x>canvas.width)  p.dx*=-1;
+          if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // --- Typewriter animation ---
+    function setupTypewriter(elementId, text, speed, callback = null) {
+        const element = document.getElementById(elementId);
+        let i = 0;
+        element.style.animation = `typing ${text.length * speed}ms steps(${text.length}), blink-caret .75s step-end infinite`;
+        element.style.width = 'fit-content';
+
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        element.textContent = ''; // clear text before typing
+        setTimeout(type, 100); // give a small delay before starting
+    }
+
+    window.addEventListener('load', () => {
+        setupTypewriter('typewriter-title', 'HALAMAN INI SEDANG DALAM PROSES DEVELOP', 50, () => {
+            setupTypewriter('typewriter-subtitle', 'Silakan kembali lagi nanti untuk melihat pembaruan.', 35);
+        });
+    });
+    // --- Footer: tilt hover ---
+    (function(){
+      const logo = document.getElementById('footer-logo');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!logo || reduce) return;
+      const MAX=8;
+      logo.parentElement.addEventListener('mousemove', e=>{
+        const r = logo.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width, y=(e.clientY - r.top)/r.height;
+        logo.style.transform = `rotateX(${-(y-0.5)*MAX*2}deg) rotateY(${(x-0.5)*MAX*2}deg) translateZ(0)`;
+      });
+      logo.parentElement.addEventListener('mouseleave', ()=>{ logo.style.transform='rotateX(0) rotateY(0)'; });
+    })();
+
+    // --- Scroll-Reveal retriggerable (vanilla IO) ---
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = Array.from(document.querySelectorAll('[data-sr]'));
+
+      if (reduce) { items.forEach(el => el.classList.add('sr-in')); return; }
+
+      // set stagger untuk group
+      document.querySelectorAll('[data-sr-group]').forEach(group=>{
+        const stagger = parseInt(group.getAttribute('data-sr-stagger') || '120', 10);
+        const children = group.querySelectorAll('[data-sr-item]');
+        children.forEach((el, idx)=>{
+          el.style.setProperty('--sr-delay', `${idx * stagger}ms`);
+          el.classList.add('sr');
+        });
+      });
+
+      // init base class + delay
+      items.forEach(el=>{
+        if (!el.classList.contains('sr')) el.classList.add('sr');
+        const d = el.getAttribute('data-sr-delay');
+        if (d) el.style.setProperty('--sr-delay', `${parseInt(d, 10)}ms`);
+      });
+
+      // observer: retriggerable (keluar -> remove sr-in)
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const el = entry.target;
+          const once = el.hasAttribute('data-sr-once');
+          if (entry.isIntersecting) {
+            el.classList.add('sr-in');
+          } else {
+            if (!once) el.classList.remove('sr-in');
+          }
+        });
+      }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15 });
+
+      items.forEach(el => io.observe(el));
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arunika — Skill Match</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/css/skill-match.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+</head>
+</head>
+
+<body>
+  <div id="top-glass"></div>
+
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="nav-wrap flex items-center gap-4 rounded-full p-2">
+        <a href="index.html" title="Halaman Utama" class="pl-2"><img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" /></a>
+        <nav class="flex items-center space-x-1">
+          <a href="lab-career.html" class="px-4 py-2.5 rounded-full text-white font-medium">Lab Career</a>
+          <a href="#" class="px-4 py-2.5 rounded-full text-white/90 hover:bg-white/10">Roadmap</a>
+          <a href="#" class="px-4 py-2.5 rounded-full text-white/90 hover:bg-white/10">About Us</a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2 ml-2">
+          <div class="h-8 w-px bg-white/20"></div>
+          <a href="#" class="p-3 rounded-full bg-[var(--purple)] text-white" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/10 text-white" aria-label="Toggle theme">
+            <svg id="sun" class="w-5 h-5 hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg id="moon" class="w-5 h-5 hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pt-32 pb-16 flex-1">
+    <section id="quiz-header" class="max-w-3xl mx-auto mb-6 sr">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-center grad-text">Kuis Skill Match</h1>
+      <p class="text-center text-muted mt-2">Pilih angka 1–5 untuk tiap pernyataan di bawah ini.</p>
+    </section>
+    
+    <section class="max-w-3xl mx-auto mb-6 sr p-4 sm:p-5 flex items-center justify-between gap-4 card-surface rounded-xl shadow-lg">
+      <div class="flex items-center gap-3">
+        <div class="relative"><svg id="mascot" width="44" height="44" viewBox="0 0 64 64"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#A259FF"/><stop offset="1" stop-color="#00FFFF"/></linearGradient></defs><circle cx="32" cy="32" r="28" fill="url(#g1)"/><circle cx="24" cy="26" r="4" fill="#fff"/><circle cx="40" cy="26" r="4" fill="#fff"/><rect id="mouth" x="24" y="36" width="16" height="6" rx="3" fill="#fff"/></svg></div>
+        <div><div class="text-sm text-muted">Poin</div><div id="ui-points" class="text-2xl font-extrabold">0</div></div>
+      </div>
+      <div class="flex-1">
+        <div class="progress"><div id="progress-bar" class="progress-fill"></div></div>
+        <div class="flex justify-between text-xs text-muted mt-1"><span id="ui-progress-label">0/0</span><span id="ui-badge" class="font-semibold">Starter</span></div>
+      </div>
+    </section>
+
+    <form id="quiz-form" novalidate class="max-w-3xl mx-auto">
+        <div id="questions" class="space-y-6">
+            </div>
+        <div id="validation-message" class="text-center text-[var(--red)] font-semibold my-6 hidden"></div>
+        <div class="flex justify-center items-center gap-2 mt-8">
+            <button id="submit-btn" class="px-7 py-3 rounded-xl text-white font-semibold text-lg shadow-md hover:shadow-lg active:scale-[0.99] bg-gradient-to-r from-[var(--blue)] to-[var(--purple)]" type="submit">Cek Hasil</button>
+        </div>
+    </form>
+  </main>
+  
+  <footer class="mt-8 py-12">
+    </footer>
+
+  <div id="result-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none" role="dialog">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="result-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-xl shadow-lg card-surface p-8 transform transition-transform duration-300 scale-95">
+      <button class="absolute top-4 right-4 text-2xl opacity-70 hover:opacity-100" id="result-close" aria-label="Tutup">✕</button>
+      <h2 id="result-title" class="text-2xl font-bold grad-text text-center">Rekomendasi Peran Untukmu</h2>
+      <div id="result-body" class="mt-6">
+        <div class="text-center"><span id="result-badge" class="py-1.5 px-4 rounded-full text-base font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300"></span><div id="result-score" class="text-7xl font-extrabold my-2"></div><p class="text-muted">Fit Score</p></div>
+        <div class="mt-8"><h3 class="font-semibold text-lg">Kekuatan Utamamu:</h3><div id="result-strengths" class="flex flex-wrap gap-3 mt-3"></div></div>
+        <div class="mt-6"><h3 class="font-semibold text-lg">Saran Aksi:</h3><ul id="result-actions" class="mt-2 space-y-2 text-muted"></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/quiz.js" defer></script>
+</body>
+</html>
