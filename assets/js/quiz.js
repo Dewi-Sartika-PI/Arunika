@@ -58,16 +58,47 @@ function runQuizApp() {
     }
   }
 
+  // =================================================================
+  // !!! FUNGSI renderResults() YANG DIPERBARUI DENGAN TOMBOL !!!
+  // =================================================================
   function renderResults(result) {
     if (!result || !result.strengths || !result.actions) {
       console.error("Data hasil tidak valid:", result);
       alert("Gagal memuat hasil. Data yang diterima tidak lengkap.");
       return;
     }
-    document.getElementById('result-badge').textContent = result.recommendedRole;
-    document.getElementById('result-score').textContent = `${result.fitScore}%`;
-    document.getElementById('result-strengths').innerHTML = result.strengths.map(s => `<span class="py-1.5 px-3 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">${s}</span>`).join('');
-    document.getElementById('result-actions').innerHTML = result.actions.map(a => `<li class="flex items-start gap-3"><svg class="w-5 h-5 mt-1 text-[var(--purple)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>${a}</span></li>`).join('');
+
+    const resultBody = document.getElementById('result-body');
+    if (!resultBody) return;
+
+    // Membuat HTML untuk seluruh isi modal, termasuk tombol baru
+    resultBody.innerHTML = `
+      <div class="text-center">
+        <span id="result-badge" class="py-1.5 px-4 rounded-full text-base font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">${result.recommendedRole}</span>
+        <div id="result-score" class="text-7xl font-extrabold my-2">${result.fitScore}%</div>
+        <p class="text-muted">Fit Score</p>
+      </div>
+
+      <div class="mt-8">
+        <h3 class="font-semibold text-lg">Kekuatan Utamamu:</h3>
+        <div id="result-strengths" class="flex flex-wrap gap-3 mt-3">
+          ${result.strengths.map(s => `<span class="py-1.5 px-3 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">${s}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold text-lg">Saran Aksi:</h3>
+        <ul id="result-actions" class="mt-2 space-y-2 text-muted">
+          ${result.actions.map(a => `<li class="flex items-start gap-3"><svg class="w-5 h-5 mt-1 text-[var(--purple)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>${a}</span></li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="mt-8 border-t border-soft pt-6 text-center">
+        <a href="lab-career.html" class="inline-block rounded-lg px-6 py-3 font-semibold text-white bg-gradient-to-r from-[var(--blue)] to-[var(--purple)] shadow-md hover:shadow-lg transition active:scale-[0.98]">
+          Jelajahi Lab Career →
+        </a>
+      </div>
+    `;
   }
 
   function updateProgress() {
@@ -82,33 +113,21 @@ function runQuizApp() {
     if (badgeEl) badgeEl.textContent = answered >= total ? 'Finisher' : answered >= Math.ceil(total * 0.66) ? 'On Fire' : answered >= Math.ceil(total * 0.33) ? 'Warming Up' : 'Starter';
   }
 
-  // =================================================================
-  // !!! FUNGSI initTheme() YANG SUDAH DIPERBARUI !!!
-  // =================================================================
   function initTheme() {
     const btn = document.getElementById('theme-toggle'); 
     if (!btn) return;
-
-    // Menggunakan ID yang benar dari HTML Anda
     const lightIcon = document.getElementById('theme-toggle-light-icon');
     const darkIcon = document.getElementById('theme-toggle-dark-icon');
 
     function setTheme(mode) {
       const isDark = (mode === 'dark');
-      
-      // Terapkan tema ke elemen root (html)
       document.documentElement.classList.toggle('dark', isDark);
-      
-      // Tampilkan ikon yang sesuai
       if (lightIcon) lightIcon.classList.toggle('hidden', isDark);
       if (darkIcon) darkIcon.classList.toggle('hidden', !isDark);
-      
-      // Simpan preferensi tema
       localStorage.setItem('color-theme', mode);
       btn.setAttribute('aria-pressed', String(isDark));
     }
 
-    // Cek tema yang tersimpan atau preferensi sistem
     const savedTheme = localStorage.getItem('color-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
@@ -118,7 +137,6 @@ function runQuizApp() {
       setTheme(prefersDark ? 'dark' : 'light');
     }
 
-    // Tambahkan event listener ke tombol
     btn.addEventListener('click', () => {
       const isCurrentlyDark = document.documentElement.classList.contains('dark');
       setTheme(isCurrentlyDark ? 'light' : 'dark');
