@@ -1,22 +1,23 @@
+// assets/js/signup-page.js
 (function () {
-  const form = document.getElementById('signup-form');
+  const form    = document.getElementById('signup-form');
+  const nameEl  = document.getElementById('name');
   const emailEl = document.getElementById('email');
   const passEl  = document.getElementById('password');
-  const nameEl  = document.getElementById('name');
 
   const emailErr = document.getElementById('email-error');
   const passErr  = document.getElementById('pass-error');
   const toast    = document.getElementById('toast');
 
-  const btn     = document.getElementById('signupBtn');
-  const spinner = document.getElementById('spinner');
+  const btn     = document.getElementById('signupBtn'); // optional: kasih id di HTML
+  const spinner = document.getElementById('spinner');   // optional: kasih icon spinner di HTML
 
   const setLoading = (v) => {
-    btn.disabled = v;
-    spinner.classList.toggle('hidden', !v);
+    if (btn) btn.disabled = v;
+    if (spinner) spinner.classList.toggle('hidden', !v);
   };
 
-  // Inline validation ringan
+  // --- inline validation ringan ---
   emailEl.addEventListener('input', () => {
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
     emailErr.classList.toggle('hidden', ok || emailEl.value === '');
@@ -29,35 +30,35 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = nameEl.value.trim();
+    const name  = nameEl.value.trim();
     const email = emailEl.value.trim();
-    const pass = passEl.value;
+    const pass  = passEl.value;
 
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const passOk = (pass || '').length >= 8;
+    const passOk  = (pass || '').length >= 8;
 
     emailErr.classList.toggle('hidden', emailOk);
-    passErr.classList.toggle('hidden', passOk);
+    passErr.classList.toggle('hidden',  passOk);
     if (!emailOk || !passOk) return;
 
     setLoading(true);
     try {
-      // 1) Signup via MockAPI (ArunikaSession sudah handle cek duplikat)
+      // 1) Signup ke MockAPI (ArunikaSession sudah cek duplikat & saveSession)
       await ArunikaSession.signup({ name, email, password: pass });
 
-      // 2) Auto-login (ingat perangkat)
-      await ArunikaSession.login(email, pass, true);
-
-      // 3) Toast & redirect
-      toast.classList.remove('hidden');
-      setTimeout(() => (location.href = './lab-career.html'), 700);
+      // 2) Tampilkan toast (opsional) & redirect ke index
+      if (toast) {
+        toast.textContent = 'Akun berhasil dibuat. Mengalihkan…';
+        toast.classList.remove('hidden');
+      }
+      setTimeout(() => location.replace('./index.html'), 700);
     } catch (err) {
-      // Pesan khusus untuk email sudah ada
-      if (err && err.message === 'EMAIL_EXISTS') {
+      const msg = (err && err.message) ? String(err.message) : '';
+      if (msg.toLowerCase().includes('sudah terdaftar')) {
         emailErr.textContent = 'Email sudah terdaftar.';
         emailErr.classList.remove('hidden');
       } else {
-        alert('Gagal mendaftar. Coba lagi.');
+        alert(`Gagal mendaftar: ${msg || 'Coba lagi.'}`);
       }
     } finally {
       setLoading(false);

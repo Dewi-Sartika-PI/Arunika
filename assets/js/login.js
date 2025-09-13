@@ -31,59 +31,70 @@
 
 // ===== Login logic menggunakan ArunikaSession (session.js) =====
 (function(){
-  const form = document.getElementById('login-form');
-  const emailE = document.getElementById('email');
-  const passE  = document.getElementById('password');
-  const emailErr = document.getElementById('email-error');
-  const passErr  = document.getElementById('pass-error');
+  const form      = document.getElementById('login-form');
+  const emailE    = document.getElementById('email');
+  const passE     = document.getElementById('password');
+  const emailErr  = document.getElementById('email-error');
+  const passErr   = document.getElementById('pass-error');
   const submitBtn = document.getElementById('submitBtn');
-  const spinner = document.getElementById('spinner');
-  const toast = document.getElementById('toast');
+  const spinner   = document.getElementById('spinner');
+  const toast     = document.getElementById('toast');
   const toastText = document.getElementById('toastText');
   const googleBtn = document.getElementById('login-google');
 
+  if (!form) return; // kalau bukan halaman login
+
   function setLoading(v){
-    submitBtn.disabled = v;
-    if (spinner) spinner.classList.toggle('hidden', !v);
+    if (submitBtn) submitBtn.disabled = v;
+    if (spinner)   spinner.classList.toggle('hidden', !v);
   }
 
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    const email = (emailE.value || '').trim();
-    const pass  = passE.value || '';
+    const email = (emailE?.value || '').trim();
+    const pass  =  passE?.value || '';
 
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const passOk  = pass.length >= 8;
 
-    emailErr.classList.toggle('hidden', emailOk);
-    passErr.classList.toggle('hidden', passOk);
+    emailErr?.classList.toggle('hidden', emailOk);
+    passErr?.classList.toggle('hidden', passOk);
     if(!emailOk || !passOk) return;
 
     setLoading(true);
     try{
       await ArunikaSession.login(email, pass); // dari session.js
-      toastText.textContent = 'Berhasil masuk. Mengalihkan…';
-      toast.classList.remove('hidden');
-      // location.href = 'skill-match.html';
+      if (toastText) toastText.textContent = 'Berhasil masuk. Mengalihkan…';
+      toast?.classList.remove('hidden');
+
+      // ✅ Redirect ke index.html
+      setTimeout(() => {
+        // pakai replace supaya tombol Back tidak balik ke login
+        location.replace('./index.html');
+      }, 600);
     }catch(err){
-      toastText.textContent = err.message || 'Gagal masuk.';
-      toast.classList.remove('hidden');
-      toast.style.borderColor = 'rgba(255,100,100,.35)';
+      if (toastText) toastText.textContent = err?.message || 'Gagal masuk.';
+      if (toast) {
+        toast.classList.remove('hidden');
+        toast.style.borderColor = 'rgba(255,100,100,.35)';
+      }
     }finally{
       setLoading(false);
     }
   });
 
-  googleBtn.addEventListener('click', async ()=>{
+  googleBtn?.addEventListener('click', async ()=>{
     setLoading(true);
     try{
       await ArunikaSession.loginWithGoogle(); // dummy akun
-      toastText.textContent='Masuk via Google (dummy).';
-      toast.classList.remove('hidden');
-      // location.href='skill-match.html';
+      if (toastText) toastText.textContent='Masuk via Google (dummy).';
+      toast?.classList.remove('hidden');
+
+      // ✅ Redirect juga ke index.html
+      setTimeout(() => location.replace('./index.html'), 600);
     }catch(err){
-      toastText.textContent= err.message || 'Gagal login Google.';
-      toast.classList.remove('hidden');
+      if (toastText) toastText.textContent = err?.message || 'Gagal login Google.';
+      toast?.classList.remove('hidden');
     }finally{
       setLoading(false);
     }

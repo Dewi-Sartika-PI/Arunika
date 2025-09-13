@@ -1,19 +1,14 @@
 // assets/js/config.js
 (function (w) {
-  // GANTI dengan base MockAPI kamu, contoh:
-  // const BASE = 'https://65f7c9e9d1f1dc9.mockapi.io';
-  const BASE = 'https://<SUBDOMAIN>.mockapi.io';
+  // GANTI ini dengan domain project kamu (tanpa /api/v1, tanpa /users di belakang)
+  const BASE   = 'https://68c52bd4a712aaca2b680abe.mockapi.io';
+  // Kalau di MockAPI resource kamu berada di /api/v1, isi sesuai (huruf kecil semua)
+  const PREFIX = '/api/v1';   // kalau projectmu tanpa prefix, jadikan ''.
 
-  // Jika di MockAPI kamu pakai prefix (mis. /api/v1). Kalau tidak, jadikan ''.
-  const PREFIX = '/api/v1';
-
-  const join = (path) => `${BASE}${PREFIX}${path}`;
+  const join = (path) => `${BASE}${PREFIX}$users`;
 
   w.API = {
     users: () => join('/users'),
     user:  (id) => join(`/users/${id}`),
-    // Tambah resource lain di sini bila perlu:
-    // jobs: () => join('/jobs'),
-    // job:  (id) => join(`/jobs/${id}`),
   };
 })(window);
