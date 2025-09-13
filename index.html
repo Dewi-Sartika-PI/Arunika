@@ -227,7 +227,10 @@
       .sr-zoom{ transform: translateY(12px) scale(.96) }
       .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
     }
-  
+  /*footer dark light mode*/
+  body.light #footer-logo {
+  filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+}
     
   </style>
 </head>
@@ -249,7 +252,7 @@
             <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
             <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
           </a>
-          <a href="#" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+          <a href="road-map.html" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
             <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
             <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
           </a>
