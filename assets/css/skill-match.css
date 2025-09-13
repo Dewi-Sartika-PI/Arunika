@@ -80,7 +80,7 @@
     @keyframes bounce{ 0%{transform:translateY(0)} 50%{transform:translateY(-4px)} 100%{transform:none} }
 
     /* Scroll reveal */
-    .sr{ opacity: 0 ; transform:translateY(16px) scale(.98); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.8,.28,1) }
+    .sr{ opacity: 1 ; transform:translateY(16px) scale(.98); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.8,.28,1) }
     .sr.sr-in{ opacity:1; transform:none }
 
     /* Swipe helper */
@@ -123,4 +123,11 @@ input[type="radio"]:checked + .quiz-option {
     color: white;
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(162, 89, 255, 0.4);
+}
+#result-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 10, 20, 0.7); /* Warna gelap dengan 70% opacity */
+  backdrop-filter: blur(8px); /* Efek blur untuk latar belakang */
+  -webkit-backdrop-filter: blur(8px);
 }
