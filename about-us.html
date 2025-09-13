@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arunika - Playlist Karir Personalmu</title>
-
-  <!-- Tailwind (CSS framework OK) -->
+  <title>Tentang Kami - Arunika</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
   <style>
     /* ---------- Warna Adaptif (Light/Dark) ---------- */
     :root{
@@ -27,7 +24,6 @@
       --border:#252B3B; --border-soft:#1C2233;
       --glass-bg: rgba(7,8,18,0.22); --glass-border: rgba(255,255,255,0.08);
     }
-
     body{
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text);
@@ -38,7 +34,6 @@
         linear-gradient(to right, rgba(23,25,44,0.6) 1px, var(--bg-page) 1px);
       background-size:40px 40px;
     }
-
     /* Utilities */
     .bg-brand-cream{background-color:var(--bg-page)} .bg-brand-ivory{background-color:var(--surface-1)}
     .text-brand-d-brown{color:var(--text)} .text-muted{color:var(--text-muted)}
@@ -48,7 +43,6 @@
     .focus\:ring-brand-gold:focus{--tw-ring-color:var(--accent-blue)}
     .bg-brand-red{background:var(--accent-red)} .border-brand-red{border-color:var(--accent-red)} .text-brand-red{color:var(--accent-red)}
     .wave-fill{ fill:var(--bg-page) }
-
     .ai-gradient-text{
       background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
@@ -62,14 +56,12 @@
       from{ text-shadow:0 0 6px var(--accent-cyan),0 0 10px var(--accent-purple) }
       to{   text-shadow:0 0 10px var(--accent-purple),0 0 20px var(--accent-cyan) }
     }
-
     /* Navbar blur */
     .navbar-blur{ background:rgba(255,255,255,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.25) }
     .dark .navbar-blur{ background:rgba(10,12,28,.55); border:1px solid rgba(255,255,255,.08); box-shadow:0 0 24px #00FFFF22,0 0 48px #A259FF22 }
     .nav-link{ color:var(--text-muted); transition:color .3s, background-color .3s }
     .nav-link:hover{ color:var(--text); background-color:rgba(0,0,0,.05) }
     .dark .nav-link:hover{ color:var(--text); text-shadow:0 0 8px var(--accent-cyan); background-color:rgba(255,255,255,.05) }
-
     /* Top Glass (blur transparan saat scroll) */
     #top-glass{
       position: fixed; top: 0; left: 0; right: 0; height: 64px;
@@ -80,7 +72,6 @@
       opacity: 0; transition: opacity .28s ease;
     }
     body.scrolled #top-glass{ opacity: 1; }
-
     /* Hero */
     .hero-btn{
       font-size:1.125rem; padding:.875rem 2.5rem; border-radius:9999px;
@@ -89,27 +80,25 @@
     }
     .hero-btn:hover{ transform:scale(1.05) translateY(-2px); box-shadow:0 10px 20px -5px rgba(107,70,193,.4) }
     .dark .hero-btn:hover{ box-shadow:0 0 25px var(--accent-cyan),0 0 15px var(--accent-purple) }
-
     .hero-bg, .hero-gradient, #particles-bg, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
-.animated-gradient-text {
-  background: linear-gradient(
-    -45deg,
-    #A259FF,
-    #00FFFF,
-    #FF00FF,
-    #3182CE
-  );
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientFlow 6s ease infinite;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    .animated-gradient-text {
+      background: linear-gradient(
+        -45deg,
+        #A259FF,
+        #00FFFF,
+        #FF00FF,
+        #3182CE
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 6s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     /* Epic cards + dekor sudut */
     .epic-card{
       transition:box-shadow .4s cubic-bezier(.34,1.56,.64,1);
@@ -133,71 +122,67 @@
     .dark .epic-title{ color:var(--accent-cyan); text-shadow:0 2px 8px #A259FF }
     .epic-desc{ color:var(--text-muted) } .dark .epic-desc{ color:var(--text) }
     .epic-badge{ position:absolute; top:1.25rem; right:1.25rem; background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan)); color:#fff; font-size:.75rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; letter-spacing:.05em; box-shadow:0 2px 8px #A259FF33; }
-
-/* Intelligent Lab Career Dashboard */
-.neon-border {
-  border: 2px solid transparent;
-  position: relative;
-  border-radius: 12px;
-  background: var(--surface-1);
-  overflow: hidden;
-}
-.neon-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  animation: neon-pulse 5s infinite linear;
-}
-@keyframes neon-pulse {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Pricing Card */
-.pricing-card {
-  position: relative;
-  transition: all 0.3s ease;
-}
-.pricing-card:hover {
-  box-shadow: 0 0 25px #A259FF, 0 0 50px #00FFFF;
-  transform: scale(1.05);
-}
-.pricing-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 1rem;
-  padding: 2px;
-  background: linear-gradient(45deg, #A259FF, #00FFFF, #FF00FF);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.pricing-card:hover::before {
-  opacity: 1;
-}
-
+    /* Intelligent Lab Career Dashboard */
+    .neon-border {
+      border: 2px solid transparent;
+      position: relative;
+      border-radius: 12px;
+      background: var(--surface-1);
+      overflow: hidden;
+    }
+    .neon-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
+      animation: neon-pulse 5s infinite linear;
+    }
+    @keyframes neon-pulse {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Pricing Card */
+    .pricing-card {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .pricing-card:hover {
+      box-shadow: 0 0 25px #A259FF, 0 0 50px #00FFFF;
+      transform: scale(1.05);
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      padding: 2px;
+      background: linear-gradient(45deg, #A259FF, #00FFFF, #FF00FF);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
     /* Komponen lain */
     .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
     .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
     .match-bar-bg{ background:#e2e8f0 } .dark .match-bar-bg{ background:#1f2937 }
     .match-bar-fill{ background-image:linear-gradient(to right,#6366f1,#8b5cf6) } .dark .match-bar-fill{ background-image:linear-gradient(90deg,var(--accent-cyan),var(--accent-fuchsia)) }
-
     /* Footer */
     .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
     .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
@@ -208,7 +193,6 @@
       background-size:30px 30px; opacity:.1; z-index:0;
     }
     .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
-
     /* -------- Scroll-Reveal (retriggerable) -------- */
     @media (prefers-reduced-motion:no-preference){
       .sr{
@@ -227,14 +211,71 @@
       .sr-zoom{ transform: translateY(12px) scale(.96) }
       .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
     }
-  /*footer dark light mode*/
-  body.light #footer-logo {
-  filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
-}
-    
+    /*footer dark light mode*/
+    body.light #footer-logo {
+      filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+    }
+    /* Pop Up */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+    }
+    .modal-content {
+      background: var(--surface-1);
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      width: 85%;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(162, 89, 255, 0.2);
+      border: 1px solid var(--border-soft);
+      animation: modal-fade-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    .dark .modal-content {
+      box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
+    }
+    @keyframes modal-fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .close-btn {
+      color: var(--text-muted);
+      float: right;
+      font-size: 2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .close-btn:hover, .close-btn:focus {
+      color: var(--accent-red);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Team Card */
+    .team-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .team-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(162, 89, 255, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .team-card img {
+      transition: filter 0.3s ease;
+    }
+    .team-card:hover img {
+      filter: saturate(1.2) brightness(1.1);
+    }
   </style>
 </head>
-
 <body class="bg-brand-cream text-brand-d-brown">
   <!-- Top Glass Blur -->
   <div id="top-glass" aria-hidden="true"></div>
@@ -256,7 +297,7 @@
             <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
             <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
           </a>
-          <a href="about-us.html" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+          <a href="about-us.html" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white" style="background:rgba(255,255,255,.12); color:white;">
             <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
             <span class="hidden lg:inline font-semibold text-base">About Us</span>
           </a>
@@ -287,27 +328,20 @@
     <section class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
       <!-- BG -->
       <div id="hero-bg" class="hero-bg absolute inset-0 z-0"
-           style="background-image:url('./assets/img/imgg.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
+           style="background-image:url('./assets/img/team.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
       <!-- Gradient -->
       <div id="hero-grad" class="hero-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30 z-10"></div>
       <!-- Particles -->
       <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
       <!-- Content -->
-      <div id="hero-content" class="relative z-30">
+      <div id="hero-content" class="relative z-30 pt-32 pb-16 max-w-4xl mx-auto">
         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
-          Jika Karir Adalah Musik,<br class="hidden md:block">Apa <span class="animated-gradient-text">Playlist-mu?</span>
+          Kenali <span class="animated-gradient-text">Arunika</span> Lebih Dalam
         </h1>
         <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
-          Berhenti menebak-nebak. Melalui analisis AI yang mendalam,
-          Arunika membantumu menemukan "genre" karir yang paling sesuai dengan kepribadian dan kekuatanmu.
+          Kami adalah tim di balik Arunika, berdedikasi untuk membantu setiap individu
+          menemukan irama karir mereka yang paling otentik.
         </p>
-        <button id="goToSkillMatch" class="mt-10 hero-btn group">
-          <span>Temukan Playlist Karirmu</span>
-          <svg class="ml-3 w-5 h-5 transition-transform duration-300 -rotate-45 group-hover:rotate-0 group-hover:translate-x-1.5"
-               viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
       </div>
       <!-- Wave -->
       <svg id="hero-wave" class="absolute bottom-0 left-0 w-full translate-y-px z-40" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
@@ -315,166 +349,128 @@
       </svg>
     </section>
 
-    <!-- Epic Cards (Scroll-Reveal) -->
+    <!-- Team Section -->
     <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-brand-cream -mt-px">
       <div class="container mx-auto max-w-7xl">
         <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Bukan Sekadar Tes, Tapi Strategi Karir Personalmu</h2>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Tim di Balik Layar</h2>
           <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="120">
-            Arunika dirancang untuk memberikan kejelasan, bukan keraguan. Inilah cara kami membantumu mencapai tujuan.
+            Kami adalah perpaduan dari kecerdasan buatan dan sentuhan manusia,
+            menciptakan alat yang lebih dari sekadar teknologi.
           </p>
         </div>
-
-        <div class="mt-16 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-10 sr-stagger" data-sr-group data-sr-stagger="120">
-          <!-- Card 1 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bxs-brain.svg" alt="Personalized AI" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Personalized AI</div>
-            <div class="epic-desc">Dapatkan analisis mendalam yang unik untukmu, bukan hasil generik. Lakukan asesmen dan temukan jalur karir yang selaras denganmu.</div>
-            <span class="epic-badge">AI Powered</span>
-          </div>
-          <!-- Card 2 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bx-map-alt.svg" alt="Career Readiness" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Career Readiness</div>
-            <div class="epic-desc">Ketahui kekuatan, area pengembangan, hingga jalur karir yang sesuai untukmu. Dapatkan rekomendasi pengembangan diri yang praktis.</div>
-            <span class="epic-badge">Roadmap</span>
-          </div>
-          <!-- Card 3 -->
-          <div class="epic-card p-8 shadow-xl border-0 sr sr-zoom" data-sr data-sr-item>
-            <div class="epic-shape shape-1"></div>
-            <div class="epic-shape shape-2"></div>
-            <div class="epic-icon"><img src="./assets/img/bxs-briefcase.svg" alt="Career Connector" class="w-14 h-14 object-contain drop-shadow-xl" /></div>
-            <div class="epic-title">Career Connector</div>
-            <div class="epic-desc">Hubungkan dirimu dengan mentor dan industri impianmu. Dapatkan wawasan langsung dari para profesional berpengalaman.</div>
-            <span class="epic-badge">Networking</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Intelligent Lab Career Dashboard -->
-    <section class="py-24 md:py-12 px-4 sm:px-6 lg:px-8 surface-1">
-      <div class="container mx-auto max-w-7xl">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Intelligent Lab Career Dashboard</h2>
-          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">Dapatkan Informasi Detail Mengenai Rekomendasi Pengembangan Karirmu.</p>
-        </div>
-
-        <div class="card neon-border mt-8 sr" data-sr data-sr-delay="150">
-          <div class="p-2 md:p-6">
-            <!-- Ringkasan Diri -->
-            <div>
-              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Ringkasan Diri</h2>
-              <p class="mt-1 text-sm section-subtitle sr sr-left" data-sr data-sr-delay="80">Rekomendasi berdasarkan Skill Match terakhirmu.</p>
-
-              <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sr-stagger" data-sr-group data-sr-stagger="100">
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Role Utama</span>
-                  <p class="mt-2 text-xl font-semibold">The Innovator</p>
-                </div>
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Base Fit Score</span>
-                  <p class="mt-2 text-xl font-semibold">88%</p>
-                </div>
-                <div class="p-3 surface-2 border border-strong rounded-xl sr sr-zoom" data-sr data-sr-item>
-                  <span class="text-sm text-muted">Kekuatan Utama</span>
-                  <div class="mt-2 flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Analitis</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Kreatif</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background:rgba(99,102,241,.12); color:#6366f1;">Problem Solving</span>
-                  </div>
-                </div>
-              </div>
+        <div class="mt-16 grid lg:grid-cols-3 gap-12 justify-center sr-stagger" data-sr-group data-sr-stagger="150">
+          <!-- Team Member 1 -->
+          <div class="team-card surface-1 rounded-3xl p-6 text-center shadow-xl border-2 border-brand-soft sr sr-zoom" data-sr data-sr-item data-id="1">
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
-
-            <hr class="my-8 border border-soft sr" data-sr data-sr-delay="80">
-
-            <!-- Job Match -->
-            <div>
-              <h2 class="text-2xl font-bold section-title sr sr-left" data-sr>Job Match</h2>
-
-              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-soft pb-6 sr sr-right" data-sr data-sr-delay="100">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold">Product Manager</h3>
-                  <p class="mt-1 text-sm text-muted">Tech Startup "Inovasi Digital" - Jakarta</p>
-                </div>
-                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:92%;"></div>
-                  </div>
-                  <p class="mt-1 text-right text-xs text-muted">Match Score: 92%</p>
-                </div>
-                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
-              </div>
-
-              <div class="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6 sr sr-right" data-sr data-sr-delay="160">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold">UI/UX Researcher</h3>
-                  <p class="mt-1 text-sm text-muted">Creative Agency "Visuara" - Bandung</p>
-                </div>
-                <div class="flex-1 w-full md:w-auto mt-2 md:mt-0">
-                  <div class="match-bar-bg h-2.5 rounded-full relative overflow-hidden">
-                    <div class="match-bar-fill absolute top-0 left-0 h-full rounded-full" style="width:85%;"></div>
-                  </div>
-                  <p class="mt-1 text-right text-xs text-muted">Match Score: 85%</p>
-                </div>
-                <button class="mt-4 md:mt-0 px-6 py-2 bg-brand-gold text-white font-medium rounded-lg hover:opacity-90 transition w-full md:w-auto">Lihat Detail</button>
-              </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Sylva</h3>
+            <p class="text-muted mt-2">Co-Founder</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+              </a>
             </div>
           </div>
-        </div> <!-- /card -->
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="py-12 md:py-32 px-4 sm:px-6 lg:px-8 surface-1">
-      <div class="container mx-auto max-w-7xl">
-        <div class="rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 surface-2"
-             style="box-shadow:0 0 32px #A259FF22, 0 0 64px #00FFFF22; border:2px solid var(--accent-purple);">
-          <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="max-w-md">
-              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Buka Level Baru Dalam Karirmu</h2>
-              <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="100">
-                Pilih rencana yang mendukung petualangan karirmu. Kamu punya peta jalan yang tepat untukmu.
-              </p>
+          
+          <!-- Team Member 3 -->
+          <div class="team-card surface-1 rounded-3xl p-6 text-center shadow-xl border-2 border-brand-soft sr sr-zoom" data-sr data-sr-item data-id="3">
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/can.png" alt="Candra" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
-            <div class="grid sm:grid-cols-2 gap-6 sr-stagger" data-sr-group data-sr-stagger="140">
-              <!-- Free -->
-              <div class="pricing-card relative rounded-2xl p-6 flex flex-col surface-1 transition-all duration-300 border-2 border-brand-gold shadow-xl group sr sr-zoom" data-sr data-sr-item>
-                <h3 class="text-lg font-semibold text-muted">Free</h3>
-                <p class="text-4xl font-bold mt-2">Rp 0</p>
-                <p class="text-sm text-muted mt-1">Selamanya</p>
-                <ul class="mt-6 space-y-3 flex-grow text-sm">
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Skill Connector</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Road Map Dasar</span></li>
-                </ul>
-                <button class="mt-8 w-full font-semibold py-3 rounded-lg border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300">Pilih Paket</button>
-              </div>
-              <!-- Tahunan -->
-              <div class="pricing-card relative rounded-2xl p-6 flex flex-col border-2 sr sr-zoom" data-sr data-sr-item
-                   style="border-color: var(--accent-cyan); background: var(--surface-1);">
-                <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-full">PALING POPULER</span>
-                <h3 class="text-lg font-semibold text-brand-red">Tahunan</h3>
-                <p class="text-4xl font-bold mt-2">Rp 150rb</p>
-                <p class="text-sm text-muted mt-1">/ tahun</p>
-                <ul class="mt-6 space-y-3 flex-grow text-sm">
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span><b>Semua fitur paket Free</b></span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Deep Skill Connector</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Readiness Career Report</span></li>
-                  <li class="flex items-start"><svg class="w-5 h-5 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Chatbot AI Eksklusif</span></li>
-                </ul>
-                <button class="mt-8 w-full font-semibold py-3 rounded-lg bg-brand-red text-white transition-all duration-300 hover:opacity-90">Pilih Paket</button>
-              </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Candra</h3>
+            <p class="text-muted mt-2">Co-Founder & Chief AI Scientist</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+              </a>
+            </div>
+          </div>
+          <!-- Team Member 2 -->
+          <div class="team-card surface-1 rounded-3xl p-6 text-center shadow-xl border-2 border-brand-soft sr sr-zoom" data-sr data-sr-item data-id="2">
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Zulfa</h3>
+            <p class="text-muted mt-2">Co-Founder</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Pop Up Modals (One for each member) -->
+    <div id="modal-1" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn">&times;</span>
+        <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Naufal Azka</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">
+          Sylva adalah .........
+           <div class="mt-6 flex justify-center space-x-4">
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="modal-2" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn">&times;</span>
+        <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Zulfa</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">
+          Zulfa adalah .....
+           <div class="mt-6 flex justify-center space-x-4">
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="modal-3" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn">&times;</span>
+        <img src="./assets/img/can.png" alt="Foto Candra" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Candra</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">
+          Candra adalah .....  </p>
+        <div class="mt-6 flex justify-center space-x-4">
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" class="text-muted hover:text-brand-gold transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.09 17c-1.6 0-2.812-.871-2.812-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.212 2.186-2.95 2.186zm6.388 0c-1.637 0-2.85-.871-2.85-2.186 0-1.378 1.157-2.185 2.912-2.185 1.638 0 2.85.807 2.85 2.185 0 1.315-1.213 2.186-2.912 2.186zm-6.388-5c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872zm6.388 0c-.443 0-.812-.349-.812-.872 0-.522.369-.871.812-.871s.812.349.812.871c0 .523-.37.872-.812.872z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -515,13 +511,11 @@
   <script>
     // --- NAVIGASI ---
     function navigateTo(page){ window.location.href = page; }
-    document.getElementById('goToSkillMatch')?.addEventListener('click', () => navigateTo('skill-match.html'));
 
     // --- THEME TOGGLE ---
     const themeToggleBtn = document.getElementById('theme-toggle');
     const lightIcon = document.getElementById('theme-toggle-light-icon');
     const darkIcon  = document.getElementById('theme-toggle-dark-icon');
-
     function setTheme(theme){
       if(theme === 'dark'){
         document.documentElement.classList.add('dark');
@@ -556,49 +550,6 @@
       window.addEventListener('scroll', onScroll, {passive:true});
     })();
 
-    // --- Hero: Fireflies (particles) ---
-    (function(){
-      const canvas = document.getElementById('particles-bg'); if(!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const COUNT = reduce ? 16 : 36;
-      const particles = [];
-
-      function resize(){
-        canvas.width  = canvas.clientWidth  || window.innerWidth;
-        canvas.height = canvas.clientHeight || window.innerHeight;
-      }
-      resize(); window.addEventListener('resize', resize);
-
-      for(let i=0;i<COUNT;i++){
-        particles.push({
-          x: Math.random()*canvas.width,
-          y: Math.random()*canvas.height,
-          r: 1.5 + Math.random()*2.5,
-          dx: -0.4 + Math.random()*0.8,
-          dy: -0.4 + Math.random()*0.8,
-          hue: 260 + Math.random()*60
-        });
-      }
-
-      function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for(const p of particles){
-          ctx.beginPath();
-          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle = `hsla(${p.hue}, 80%, 70%, .28)`;
-          ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, .9)`;
-          ctx.shadowBlur = 10;
-          ctx.fill();
-          p.x += p.dx; p.y += p.dy;
-          if(p.x<0||p.x>canvas.width)  p.dx*=-1;
-          if(p.y<0||p.y>canvas.height) p.dy*=-1;
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
     // --- Hero: Micro Parallax (mouse) ---
     (function(){
       const bg = document.getElementById('hero-bg');
@@ -606,22 +557,18 @@
       const content = document.getElementById('hero-content');
       const wave = document.getElementById('hero-wave');
       if(!bg || !grad || !content || !wave) return;
-
       let mx=0,my=0, smx=0,smy=0;
       const lerp = (a,b,t)=> a+(b-a)*t;
-
       window.addEventListener('mousemove',(e)=>{
         const cx = window.innerWidth/2, cy = window.innerHeight/2;
-        mx = (e.clientX - cx)/cx;   // -1..1
+        mx = (e.clientX - cx)/cx;
         my = (e.clientY - cy)/cy;
       }, {passive:true});
-
       function frame(){
         smx = lerp(smx,mx,0.08); smy = lerp(smy,my,0.08);
         bg.style.transform     = `translate3d(${smx*15}px, ${smy*10}px,0) scale(1.08)`;
         grad.style.transform   = `translate3d(${smx*8}px, ${smy*6}px,0)`;
         content.style.transform= `translate3d(${-smx*10}px, ${-smy*6}px,0)`;
-        // subtle bob untuk wave agar seam tak terlihat
         const sy = window.scrollY||0;
         wave.style.transform = `translateY(${1 + (sy%200)*0.05}px)`;
         requestAnimationFrame(frame);
@@ -647,10 +594,7 @@
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const items = Array.from(document.querySelectorAll('[data-sr]'));
-
       if (reduce) { items.forEach(el => el.classList.add('sr-in')); return; }
-
-      // set stagger untuk group
       document.querySelectorAll('[data-sr-group]').forEach(group=>{
         const stagger = parseInt(group.getAttribute('data-sr-stagger') || '120', 10);
         const children = group.querySelectorAll('[data-sr-item]');
@@ -659,15 +603,11 @@
           el.classList.add('sr');
         });
       });
-
-      // init base class + delay
       items.forEach(el=>{
         if (!el.classList.contains('sr')) el.classList.add('sr');
         const d = el.getAttribute('data-sr-delay');
         if (d) el.style.setProperty('--sr-delay', `${parseInt(d, 10)}ms`);
       });
-
-      // observer: retriggerable (keluar -> remove sr-in)
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
           const el = entry.target;
@@ -679,9 +619,45 @@
           }
         });
       }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15 });
-
       items.forEach(el => io.observe(el));
     })();
+    
+    // --- Pop Up Modal Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const teamCards = document.querySelectorAll('.team-card');
+      const modals = document.querySelectorAll('.modal');
+      const closeButtons = document.querySelectorAll('.close-btn');
+      
+      teamCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const memberId = card.getAttribute('data-id');
+          const modal = document.getElementById('modal-' + memberId);
+          if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Disable scrolling
+          }
+        });
+      });
+
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const modal = btn.closest('.modal');
+          if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // Re-enable scrolling
+          }
+        });
+      });
+
+      window.addEventListener('click', (event) => {
+        modals.forEach(modal => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
