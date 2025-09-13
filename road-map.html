@@ -95,13 +95,14 @@
       align-items: center;
       flex-direction: column;
       text-align: center;
-      white-space: nowrap; /* Prevent line breaks */
+      white-space: normal; 
+      word-break: break-word; 
     }
 
     .typewriter-text {
-      overflow: hidden; /* Hide overflow to create typing effect */
-      border-right: .15em solid #7209b7; /* The typewriter cursor */
-      font-family: monospace; /* Monospaced font */
+      overflow: hidden; 
+      border-right: .15em solid #7209b7; 
+      font-family: monospace; 
     }
 
     @keyframes typing {
@@ -201,13 +202,20 @@
     </div>
   </header>
 
-  <main class="flex items-center justify-center text-center min-h-screen">
+  <main class="flex items-center justify-center min-h-screen px-4">
     <!-- DEVELOPE NOTICE -->
-    <div class="typewriter-container text-center">
-      <h1 id="typewriter-title" class="typewriter-text text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"></h1>
-      <p id="typewriter-subtitle" class="typewriter-text mt-4 text-lg text-muted leading-relaxed"></p>
-    </div>
-  </main>
+    <div class="typewriter-container max-w-3xl w-full text-center">
+    <h1 id="typewriter-title"
+        class="typewriter-text font-bold tracking-tight 
+               text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
+               leading-snug sm:leading-tight">
+    </h1>
+    <p id="typewriter-subtitle"
+       class="typewriter-text mt-4 text-base sm:text-lg md:text-xl 
+              text-muted leading-relaxed px-2 sm:px-6">
+    </p>
+  </div>
+</main>
 
   <footer class="relative z-0 footer-cyber-bg">
     <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
