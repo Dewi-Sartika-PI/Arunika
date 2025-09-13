@@ -151,6 +151,9 @@
 </head>
 
 <body>
+  <script src="./assets/js/session.js"></script>
+  <script>window.ArunikaSession.guard();</script>
+
   <!-- top glass -->
   <div id="top-glass" aria-hidden="true"></div>
 
@@ -185,7 +188,6 @@
               <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
             </svg>
           </a>
-          <!-- SAME ICONS AS INDEX -->
           <button id="theme-toggle" class="p-3 rounded-full bg-black/10" aria-label="Toggle theme" aria-pressed="false">
             <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -264,22 +266,23 @@
       <div class="container mx-auto max-w-6xl">
         <div class="rounded-2xl p-5 md:p-6" style="background:var(--surface); border:2px solid var(--accent-purple); box-shadow:0 0 24px #A259FF22, 0 0 48px #00FFFF22;">
           <div class="grid md:grid-cols-5 gap-4">
-            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+            <select id="f-role" class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option value="">Semua Role</option>
               <option>Product Manager</option><option>UI/UX Researcher</option><option>Frontend Developer</option><option>Data Scientist</option>
             </select>
-            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
-              <option>Entry-Level</option><option>Mid-Level</option><option>Senior</option>
+            <select id="f-level" class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+              <option value="">Semua Level</option><option>Entry</option><option>Mid</option><option>Senior</option>
             </select>
-            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+            <select id="f-loc" class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
               <option value="ID">Seluruh Indonesia</option><option>Jakarta</option><option>Bandung</option><option>Surabaya</option><option>Medan</option>
             </select>
-            <select class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
+            <select id="f-salary" class="w-full rounded-xl px-3 py-2 border" style="border-color:var(--border-strong); background:var(--surface); color:var(--ink)">
               <option value="0">Gaji: Semua</option>
               <option value="9000000">≥ Rp 9 jt</option>
               <option value="12000000">≥ Rp 12 jt</option>
               <option value="15000000">≥ Rp 15 jt</option>
             </select>
-            <button class="w-full rounded-full py-2.5 font-bold btn-primary">Terapkan</button>
+            <button id="apply-filters" class="w-full rounded-full py-2.5 font-bold btn-primary">Terapkan</button>
           </div>
         </div>
       </div>
@@ -289,67 +292,8 @@
     <section class="py-12">
       <div class="container mx-auto max-w-6xl">
         <h2 class="text-2xl sm:text-3xl font-bold grad-text reveal reveal-up">Job Match</h2>
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
-          <!-- Card 1 -->
-          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 class="font-extrabold text-lg" style="color:var(--ink)">Product Manager</h3>
-                <p class="text-sm" style="color:var(--muted)">Inovasi Digital • Jakarta</p>
-              </div>
-              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
-            </div>
-            <div class="mt-4">
-              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>92%</span></div>
-              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:92%"></div></div>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2 text-xs">
-              <span class="chip px-2.5 py-1 rounded-full">Leadership</span>
-              <span class="chip px-2.5 py-1 rounded-full">Stakeholder</span>
-              <span class="chip px-2.5 py-1 rounded-full">Roadmap</span>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 class="font-extrabold text-lg" style="color:var(--ink)">UI/UX Researcher</h3>
-                <p class="text-sm" style="color:var(--muted)">Visuara • Bandung</p>
-              </div>
-              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
-            </div>
-            <div class="mt-4">
-              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>85%</span></div>
-              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:85%"></div></div>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2 text-xs">
-              <span class="chip px-2.5 py-1 rounded-full">Interview</span>
-              <span class="chip px-2.5 py-1 rounded-full">Usability</span>
-              <span class="chip px-2.5 py-1 rounded-full">Synthesis</span>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 class="font-extrabold text-lg" style="color:var(--ink)">Frontend Developer</h3>
-                <p class="text-sm" style="color:var(--muted)">Tech Labs • Surabaya</p>
-              </div>
-              <a href="#" class="px-3 py-1.5 rounded-full text-white text-sm btn-primary">Detail</a>
-            </div>
-            <div class="mt-4">
-              <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>81%</span></div>
-              <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:81%"></div></div>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2 text-xs">
-              <span class="chip px-2.5 py-1 rounded-full">React</span>
-              <span class="chip px-2.5 py-1 rounded-full">UI Patterns</span>
-              <span class="chip px-2.5 py-1 rounded-full">Performance</span>
-            </div>
-          </article>
-        </div>
+        <!-- grid akan diisi via JS, desain sama -->
+        <div id="job-list" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"></div>
       </div>
     </section>
 
@@ -361,24 +305,24 @@
             <h3 class="text-xl md:text-2xl font-bold" style="color:var(--ink)">Salary Transparency — Indonesia</h3>
             <p class="text-sm" style="color:var(--muted)">Angka perkiraan: median & kuartil.</p>
           </div>
-          <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="grid md:grid-cols-3 gap-4 mt-5" id="salary-grid">
             <div class="rounded-xl p-4" style="background:var(--surface2)">
               <h4 class="font-semibold">Product Manager</h4>
-              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 10jt • Median 13jt • P75 17jt</p>
-              <p class="text-sm" style="color:var(--muted)">Mid: P25 14jt • Median 18jt • P75 24jt</p>
-              <p class="text-sm" style="color:var(--muted)">Senior: P25 22jt • Median 28jt • P75 36jt</p>
+              <p class="text-sm mt-1" style="color:var(--muted)" id="sal-pm-1">Entry: P25 10jt • Median 13jt • P75 17jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-pm-2">Mid: P25 14jt • Median 18jt • P75 24jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-pm-3">Senior: P25 22jt • Median 28jt • P75 36jt</p>
             </div>
             <div class="rounded-xl p-4" style="background:var(--surface2)">
               <h4 class="font-semibold">UI/UX Researcher</h4>
-              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 7jt • Median 9jt • P75 12jt</p>
-              <p class="text-sm" style="color:var(--muted)">Mid: P25 10jt • Median 13jt • P75 17jt</p>
-              <p class="text-sm" style="color:var(--muted)">Senior: P25 16jt • Median 21jt • P75 28jt</p>
+              <p class="text-sm mt-1" style="color:var(--muted)" id="sal-ux-1">Entry: P25 7jt • Median 9jt • P75 12jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-ux-2">Mid: P25 10jt • Median 13jt • P75 17jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-ux-3">Senior: P25 16jt • Median 21jt • P75 28jt</p>
             </div>
             <div class="rounded-xl p-4" style="background:var(--surface2)">
               <h4 class="font-semibold">Frontend Developer</h4>
-              <p class="text-sm mt-1" style="color:var(--muted)">Entry: P25 8jt • Median 11jt • P75 14jt</p>
-              <p class="text-sm" style="color:var(--muted)">Mid: P25 12jt • Median 16jt • P75 22jt</p>
-              <p class="text-sm" style="color:var(--muted)">Senior: P25 20jt • Median 26jt • P75 34jt</p>
+              <p class="text-sm mt-1" style="color:var(--muted)" id="sal-fe-1">Entry: P25 8jt • Median 11jt • P75 14jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-fe-2">Mid: P25 12jt • Median 16jt • P75 22jt</p>
+              <p class="text-sm" style="color:var(--muted)" id="sal-fe-3">Senior: P25 20jt • Median 26jt • P75 34jt</p>
             </div>
           </div>
         </div>
@@ -437,7 +381,7 @@
   </footer>
 
   <script>
-    // Theme toggle (same as index)
+    /* ========= THEME (match index) ========= */
     (function(){
       const btn=document.getElementById('theme-toggle');
       if(!btn) return;
@@ -459,26 +403,35 @@
       btn.addEventListener('click',()=>setTheme(document.documentElement.classList.contains('dark')?'light':'dark'));
     })();
 
-    // Body scrolled => show top glass
+    /* ========= top glass show on scroll ========= */
     (function(){
       const onScroll=()=>document.body.classList.toggle('scrolled',(window.scrollY||document.documentElement.scrollTop)>4);
       onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
     })();
 
-    // Scroll Reveal (single observer, retrigger on leave)
+    /* ========= Scroll Reveal (supports dynamic content) ========= */
     (function(){
       const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const items=[...document.querySelectorAll('.reveal,[data-sr]')];
-      // Back-compat: legacy data-sr -> reveal
-      items.forEach(el=>{ if(el.hasAttribute('data-sr')) el.classList.add('reveal','reveal-up'); });
-      if(reduce){ items.forEach(el=>el.classList.add('in')); return; }
-      const io=new IntersectionObserver((entries)=>{
-        entries.forEach(e=> e.target.classList.toggle('in', e.isIntersecting));
-      }, {root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15});
-      items.forEach(el=> io.observe(el));
+      let io=null;
+      function ensureIO(){
+        if(io) return io;
+        io=new IntersectionObserver((entries)=>{
+          entries.forEach(e=> e.target.classList.toggle('in', e.isIntersecting));
+        }, {root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15});
+        return io;
+      }
+      function scan(){
+        const items=[...document.querySelectorAll('.reveal,[data-sr]')];
+        items.forEach(el=>{
+          if(el.hasAttribute('data-sr')) el.classList.add('reveal','reveal-up');
+          if(!reduce) ensureIO().observe(el); else el.classList.add('in');
+        });
+      }
+      window.RevealRefresh = scan;
+      scan();
     })();
 
-    // Parallax (rAF, gentle, mobile-aware)
+    /* ========= Parallax (gentle) ========= */
     (function(){
       const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const mobile =()=> window.matchMedia('(max-width: 767px)').matches;
@@ -510,7 +463,7 @@
       window.addEventListener('resize', ()=>{ update(); }, {passive:true});
     })();
 
-    // Set cyber cover height to bottom of Ringkasan Diri
+    /* ========= Cyber cover height to Ringkasan Diri ========= */
     (function(){
       const section=document.getElementById('ringkasan-diri');
       const update=()=>{
@@ -523,6 +476,162 @@
       window.addEventListener('DOMContentLoaded', update);
       window.addEventListener('resize', update, {passive:true});
       window.addEventListener('load', update);
+    })();
+
+    /* ========= LAB-CAREER DYNAMIC: Jobs + Ranking + Tracking ========= */
+    (function(){
+      const JOBS_URL = './assets/data/jobs.json';
+      const jobGrid  = document.getElementById('job-list');
+      const btnApply = document.getElementById('apply-filters');
+      const fRole    = document.getElementById('f-role');
+      const fLevel   = document.getElementById('f-level');
+      const fLoc     = document.getElementById('f-loc');
+      const fSalary  = document.getElementById('f-salary');
+
+      const FALLBACK_JOBS = [
+        { id:'job_pm_01', title:'Product Manager', company:'Inovasi Digital', location:'Jakarta', level:'Mid', role_key:'product_manager', tags:['leadership','stakeholder','roadmap'], verified:true, base_fit_score:92, min_salary:12000000, apply_url:'https://jobs.example.com/pm?id=01' },
+        { id:'job_ux_01', title:'UI/UX Researcher', company:'Visuara', location:'Bandung', level:'Entry', role_key:'ux_researcher', tags:['interview','usability','synthesis'], verified:true, base_fit_score:85, min_salary:9000000, apply_url:'https://jobs.example.com/ux?id=01' },
+        { id:'job_fe_01', title:'Frontend Developer', company:'Tech Labs', location:'Surabaya', level:'Mid', role_key:'frontend_developer', tags:['react','ui patterns','performance'], verified:true, base_fit_score:81, min_salary:11000000, apply_url:'https://jobs.example.com/fe?id=01' }
+      ];
+
+      function getQuizFit(){
+        return {
+          fit: Number(localStorage.getItem('arunika.fit')||0),
+          role: (localStorage.getItem('arunika.role')||'').toLowerCase()
+        };
+      }
+
+      function computeFinalScore(job, quiz){
+        const roleMatch = quiz.role && (job.role_key||'').toLowerCase().includes(quiz.role);
+        const roleBonus = roleMatch ? quiz.fit : Math.max(quiz.fit-10,0);
+        const score = 0.7*(job.base_fit_score||0) + 0.3*roleBonus;
+        return Math.round(Math.min(100, score));
+      }
+
+      function trackApply(job){
+        try{
+          const url = new URL(job.apply_url);
+          url.searchParams.set('utm_source','arunika');
+          url.searchParams.set('utm_campaign','job_connector');
+          window.open(url.toString(), '_blank', 'noopener');
+        }catch{
+          if(job.apply_url) window.open(job.apply_url, '_blank', 'noopener');
+        }
+        const key='arunika.applyClicks';
+        const map=JSON.parse(localStorage.getItem(key)||'{}');
+        map[job.id]=(map[job.id]||0)+1;
+        localStorage.setItem(key, JSON.stringify(map));
+      }
+
+      function cardHTML(job){
+        const chips=(job.tags||[]).slice(0,3).map(t=>`<span class="chip px-2.5 py-1 rounded-full">${t}</span>`).join('');
+        const score=job.final_score||0;
+        return `
+        <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-extrabold text-lg" style="color:var(--ink)">${job.title}</h3>
+              <p class="text-sm" style="color:var(--muted)">${job.company} • ${job.location}${job.level ? ' • '+job.level : ''}</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-full text-white text-sm btn-primary apply-btn" data-id="${job.id}">Detail</button>
+          </div>
+          <div class="mt-4">
+            <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>${score}%</span></div>
+            <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:${score}%"></div></div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">${chips}</div>
+        </article>`;
+      }
+
+      function renderEmpty(){
+        jobGrid.innerHTML = `
+          <div class="col-span-full text-center rounded-2xl p-10 border" style="border-color:#E5E7EB;background:var(--surface)">
+            <h3 class="text-xl font-bold">Tidak ada hasil 🚫</h3>
+            <p class="mt-1" style="color:var(--muted)">Coba ubah filter atau reset ke default.</p>
+            <button class="mt-4 rounded-full px-5 py-2.5 font-bold btn-primary" id="resetFilters">Reset Filter</button>
+          </div>`;
+        document.getElementById('resetFilters')?.addEventListener('click', ()=>{
+          fRole.value=''; fLevel.value=''; fLoc.value='ID'; fSalary.value='0'; apply();
+        });
+      }
+
+      let JOBS = [];
+      function apply(){
+        const quiz=getQuizFit();
+        const roleVal=(fRole.value||'').toLowerCase();
+        const levelVal=(fLevel.value||'').toLowerCase();
+        const locVal=(fLoc.value||'').toLowerCase();
+        const minSalary= Number(fSalary.value||0);
+
+        let list = JOBS.filter(j=>{
+          const okRole  = !roleVal || j.title.toLowerCase().includes(roleVal) || (j.role_key||'').toLowerCase().includes(roleVal);
+          const okLevel = !levelVal || (j.level||'').toLowerCase().includes(levelVal);
+          const okLoc   = !locVal || locVal==='id' || (j.location||'').toLowerCase().includes(locVal);
+          const okPay   = !minSalary || (j.min_salary||0) >= minSalary;
+          return okRole && okLevel && okLoc && okPay;
+        });
+
+        list.forEach(j=> j.final_score = computeFinalScore(j, quiz));
+        list.sort((a,b)=> b.final_score - a.final_score);
+
+        if(!list.length){ renderEmpty(); window.RevealRefresh?.(); return; }
+
+        jobGrid.innerHTML = list.map(cardHTML).join('');
+        // attach apply handlers
+        jobGrid.querySelectorAll('.apply-btn').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            const job = list.find(j=> j.id===btn.dataset.id);
+            if(!job || !job.apply_url){ alert('Link apply tidak tersedia.'); return; }
+            trackApply(job);
+          });
+        });
+        window.RevealRefresh?.();
+      }
+
+      async function loadJobs(){
+        try{
+          const r = await fetch(JOBS_URL, {cache:'no-store'});
+          if(!r.ok) throw new Error('HTTP '+r.status);
+          const data = await r.json();
+          if(Array.isArray(data) && data.length) { JOBS = data; } else { JOBS = FALLBACK_JOBS; }
+        }catch(e){
+          console.warn('Gagal memuat jobs.json, gunakan fallback.', e);
+          JOBS = FALLBACK_JOBS;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', async ()=>{
+        await loadJobs();
+        apply();
+        btnApply?.addEventListener('click', apply);
+      });
+    })();
+
+    /* ========= SALARY: isi dari salary.json (opsional, desain tetap) ========= */
+    (function(){
+      const SAL_URL='./assets/data/salary.json';
+      function fmt(n){ return (n/1000000).toFixed(0)+'jt'; }
+      function setLine(el, obj){
+        if(!el || !obj) return;
+        el.textContent = `P25 ${fmt(obj.p25)} • Median ${fmt(obj.median)} • P75 ${fmt(obj.p75)}`;
+      }
+      async function hydrate(){
+        try{
+          const r = await fetch(SAL_URL, {cache:'no-store'});
+          if(!r.ok) return; // biarkan teks default
+          const s = await r.json();
+          setLine(document.getElementById('sal-pm-1'), s.product_manager?.Entry?.Indonesia);
+          setLine(document.getElementById('sal-pm-2'), s.product_manager?.Mid?.Indonesia);
+          setLine(document.getElementById('sal-pm-3'), s.product_manager?.Senior?.Indonesia);
+          setLine(document.getElementById('sal-ux-1'), s.ux_researcher?.Entry?.Indonesia);
+          setLine(document.getElementById('sal-ux-2'), s.ux_researcher?.Mid?.Indonesia);
+          setLine(document.getElementById('sal-ux-3'), s.ux_researcher?.Senior?.Indonesia);
+          setLine(document.getElementById('sal-fe-1'), s.frontend_developer?.Entry?.Indonesia);
+          setLine(document.getElementById('sal-fe-2'), s.frontend_developer?.Mid?.Indonesia);
+          setLine(document.getElementById('sal-fe-3'), s.frontend_developer?.Senior?.Indonesia);
+        }catch(e){ /* biarkan default */ }
+      }
+      document.addEventListener('DOMContentLoaded', hydrate);
     })();
   </script>
 </body>
