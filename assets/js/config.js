@@ -5,6 +5,7 @@
   
   // PREFIX ini harus dikosongkan karena tidak ada di URL Anda
   const PREFIX = '';
+  
 
 
 

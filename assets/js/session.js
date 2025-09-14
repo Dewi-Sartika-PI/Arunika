@@ -1,7 +1,7 @@
 /**
  * Session & Auth ringan untuk MockAPI
  * - Simpan session di localStorage / sessionStorage (tergantung "remember").
- * - Validasi unik email via ?email=...
+ * - Validasi unik email via filter ?email=...
  * - ⚠️ Prototipe: password disimpan plaintext di MockAPI (JANGAN untuk produksi).
  */
 (function (w) {
@@ -9,12 +9,10 @@
   const SS_KEY = 'arunika.session.tmp'; // sessionStorage (remember=false)
 
   async function request(url, options = {}) {
-    console.log('🔍 Requesting:', url); // Debug URL
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
       ...options,
     });
-    console.log('📡 Response status:', res.status); // Debug response
     if (!res.ok) {
       let msg = res.statusText;
       try { msg = await res.text(); } catch (_) {}
@@ -22,7 +20,9 @@
       err.status = res.status;
       throw err;
     }
-    // MockAPI selalu kembalikan JSON untuk 2xx
+    if (res.status === 204 || res.headers.get('content-length') === '0') {
+      return null;
+    }
     return res.json();
   }
 
@@ -57,11 +57,17 @@
     };
   }
 
+  /**
+   * Cari pengguna berdasarkan email (case-insensitive).
+   * Menggunakan filter di MockAPI agar efisien.
+   */
   async function findUserByEmail(email) {
-    // Filter & batasi 1 item
-    const url = `${API.users()}?email=${encodeURIComponent(email)}&page=1&limit=1`;
-    const arr = await request(url);
-    return Array.isArray(arr) && arr.length ? arr[0] : null;
+    if (!email) return null;
+    const url = API.users() + `?email=${encodeURIComponent(email)}&limit=1`;
+    const users = await request(url);
+    if (!Array.isArray(users)) return null;
+    // Cari yang benar-benar cocok (case-insensitive)
+    return users.find(user => user && typeof user.email === 'string' && user.email.toLowerCase() === email.toLowerCase()) || null;
   }
 
   w.ArunikaSession = {
@@ -71,25 +77,20 @@
      * @returns {Promise<object>} user
      */
     async signup(payload) {
-      const { name, email, password, avatar = '' } = payload || {};
+      const { name, email, password } = payload || {};
       if (!name || !email || !password) {
         const err = new Error('Data tidak lengkap.');
         err.code = 'INVALID_INPUT';
         throw err;
       }
 
-      /*
-      // ==================================================================
-      // BAGIAN INI DINONAKTIFKAN UNTUK MENGATASI ERROR 404 DARI MOCKAPI
-      // MockAPI tidak mendukung filter by email, sehingga pengecekan ini gagal.
-      // ==================================================================
+      // Cek apakah email sudah ada
       const existing = await findUserByEmail(email);
       if (existing) {
         const err = new Error('Email sudah terdaftar.');
         err.code = 'EMAIL_EXISTS';
         throw err;
       }
-      */
 
       const user = await request(API.users(), {
         method: 'POST',
@@ -128,7 +129,6 @@
         err.code = 'WRONG_PASSWORD';
         throw err;
       }
-
       saveSessionObj(toSessionPayload(user), !!remember);
       return user;
     },
