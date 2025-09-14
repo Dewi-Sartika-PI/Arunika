@@ -5,7 +5,7 @@
   // Kalau di MockAPI resource kamu berada di /api/v1, isi sesuai (huruf kecil semua)
   const PREFIX = '/api/v1';   // kalau projectmu tanpa prefix, jadikan ''.
 
-  const join = (path) => `${BASE}${PREFIX}$users`;
+  const join = (path) => `${BASE}${PREFIX}${path}`;
 
   w.API = {
     users: () => join('/users'),
