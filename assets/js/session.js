@@ -9,10 +9,12 @@
   const SS_KEY = 'arunika.session.tmp'; // sessionStorage (remember=false)
 
   async function request(url, options = {}) {
+    console.log('🔍 Requesting:', url); // Debug URL
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
       ...options,
     });
+    console.log('📡 Response status:', res.status); // Debug response
     if (!res.ok) {
       let msg = res.statusText;
       try { msg = await res.text(); } catch (_) {}
@@ -52,8 +54,6 @@
       userId: user.id,
       email: user.email,
       name: user.name || '',
-      avatar: user.avatar || '',
-      createdAt: user.createdAt || new Date().toISOString(),
     };
   }
 
@@ -78,12 +78,18 @@
         throw err;
       }
 
+      /*
+      // ==================================================================
+      // BAGIAN INI DINONAKTIFKAN UNTUK MENGATASI ERROR 404 DARI MOCKAPI
+      // MockAPI tidak mendukung filter by email, sehingga pengecekan ini gagal.
+      // ==================================================================
       const existing = await findUserByEmail(email);
       if (existing) {
         const err = new Error('Email sudah terdaftar.');
         err.code = 'EMAIL_EXISTS';
         throw err;
       }
+      */
 
       const user = await request(API.users(), {
         method: 'POST',
@@ -91,8 +97,6 @@
           name,
           email,
           password, // ⚠️ plaintext hanya untuk demo
-          avatar,
-          createdAt: new Date().toISOString(),
         }),
       });
 
@@ -142,8 +146,6 @@
             name: mockName || 'Google User',
             email,
             password: 'google-oauth', // dummy
-            avatar: '',
-            createdAt: new Date().toISOString(),
           }),
         });
       }
@@ -154,5 +156,11 @@
     logout() { clearSession(); },
 
     current() { return getSession(); },
+    
+    guard() {
+      if (!this.current()) {
+        location.replace('./login.html');
+      }
+    }
   };
 })(window);
