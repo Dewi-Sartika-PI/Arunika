@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# File log dan dependensi (jika Anda menggunakan Node.js nanti)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
