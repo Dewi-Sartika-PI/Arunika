@@ -25,6 +25,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/auth.css">
+
 
   <style>
     /* ---------- Warna Adaptif (Light/Dark) ---------- */
@@ -277,7 +279,7 @@
             <span class="hidden lg:inline font-semibold text-base">About Us</span>
           </a>
         </nav>
-        <div class="flex items-center gap-2 pr-2">
+        <div class="flex items-center gap-2 pr-2" id="auth-area"></div>
           <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
           <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -531,6 +533,8 @@
   <!-- sebelum script lain yang butuh session -->
 <script src="./assets/js/config.js"></script>
 <script src="./assets/js/session.js"></script>
+<script src="./assets/js/auth-ui.js"></script>
+<script src="./assets/js/guards.js"></script>
 
   <script>
     // --- NAVIGASI ---

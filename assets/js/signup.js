@@ -51,7 +51,7 @@
         toast.textContent = 'Akun berhasil dibuat. Mengalihkan…';
         toast.classList.remove('hidden');
       }
-      setTimeout(() => location.replace('./index.html'), 700);
+      setTimeout(() => location.replace('../index.html'), 700);
     } catch (err) {
       const msg = (err && err.message) ? String(err.message) : '';
       if (msg.toLowerCase().includes('sudah terdaftar')) {

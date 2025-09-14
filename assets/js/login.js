@@ -63,14 +63,13 @@
 
     setLoading(true);
     try{
-      await ArunikaSession.login(email, pass); // dari session.js
+      // ✅ remember=true → simpan di localStorage agar terbaca di halaman lain
+      await ArunikaSession.login(email, pass, true);
       if (toastText) toastText.textContent = 'Berhasil masuk. Mengalihkan…';
       toast?.classList.remove('hidden');
 
-      // ✅ Diubah: Redirect ke lab-career.html
-      setTimeout(() => {
-        location.replace('./lab-career.html');
-      }, 600);
+      // Redirect ke halaman protected
+      location.replace('./lab-career.html');
     }catch(err){
       if (toastText) toastText.textContent = err?.message || 'Gagal masuk.';
       if (toast) {
@@ -82,19 +81,17 @@
     }
   });
 
-  googleBtn?.addEventListener('click', async ()=>{
+  googleBtn?.addEventListener('click', async () => {
     setLoading(true);
-    try{
-      await ArunikaSession.loginWithGoogle(); // dummy akun
-      if (toastText) toastText.textContent='Masuk via Google (dummy).';
+    try {
+      await ArunikaSession.loginWithGoogle(); // dummy akun (auto remember)
+      if (toastText) toastText.textContent = 'Berhasil masuk. Mengalihkan…';
       toast?.classList.remove('hidden');
-
-      // ✅ Diubah: Redirect juga ke lab-career.html
-      setTimeout(() => location.replace('./lab-career.html'), 600);
-    }catch(err){
+      location.assign('./lab-career.html'); // tanpa delay
+    } catch (err) {
       if (toastText) toastText.textContent = err?.message || 'Gagal login Google.';
       toast?.classList.remove('hidden');
-    }finally{
+    } finally {
       setLoading(false);
     }
   });
