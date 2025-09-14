@@ -1,0 +1,45 @@
+<!-- NAVBAR PARTIAL -->
+<header class="fixed top-0 left-0 right-0 z-50 p-4">
+  <div class="container mx-auto flex justify-center">
+    <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
+         style="background-color:#481057; border:1px solid #481057; box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66;">
+
+      <!-- Logo -->
+      <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
+        <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
+      </a>
+
+      <!-- Menu -->
+      <nav class="flex items-center space-x-1">
+        <a href="lab-career.html" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+          <img src="./assets/img/lab_career.svg" class="w-6 h-6" alt="">
+          <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+        </a>
+        <a href="road-map.html" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+          <img src="./assets/img/roadmap.svg" class="w-6 h-6" alt="">
+          <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
+        </a>
+        <a href="about-us.html" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+          <img src="./assets/img/about_us.svg" class="w-6 h-6" alt="">
+          <span class="hidden lg:inline font-semibold text-base">About Us</span>
+        </a>
+      </nav>
+
+      <!-- Auth area diisi oleh auth-ui.js -->
+      <div id="auth-area" class="flex items-center gap-2 pr-2"></div>
+
+      <div class="h-8 w-px bg-gray-300 dark:bg-white/20"></div>
+
+      <!-- Theme toggle -->
+      <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10" aria-label="Toggle theme" aria-pressed="false">
+        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z"/>
+        </svg>
+        <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
