@@ -6,7 +6,10 @@
   // PREFIX ini harus dikosongkan karena tidak ada di URL Anda
   const PREFIX = '';
 
+
+
   // Fungsi ini tidak perlu diubah
+
   const join = (path) => `${BASE}${PREFIX}${path}`;
 
   w.API = {
