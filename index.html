@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arunika - Playlist Karir Personalmu</title>
+  <!-- Guard: require login -->
+<!-- <script>
+(function () {
+  // cek session di localStorage (nama key dari session.js)
+  var KEY = 'arunika.session';
+  try {
+    var s = localStorage.getItem(KEY);
+    if (!s) location.replace('./login.html'); // belum login -> kirim ke login
+  } catch (e) {
+    location.replace('./login.html');
+  }
+})();
+</script> -->
+
 
   <!-- Tailwind (CSS framework OK) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/auth.css">
+
 
   <style>
     /* ---------- Warna Adaptif (Light/Dark) ---------- */
@@ -240,12 +257,14 @@
 }
     
   </style>
+
 </head>
 
 <body class="bg-brand-cream text-brand-d-brown">
   <!-- Top Glass Blur -->
   <div id="top-glass" aria-hidden="true"></div>
   <div id="navbar-root"></div>
+
 
   <main>
     <!-- Hero -->
@@ -476,6 +495,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- sebelum script lain yang butuh session -->
+<script src="./assets/js/config.js"></script>
+<script src="./assets/js/session.js"></script>
+<script src="./assets/js/auth-ui.js"></script>
+<script src="./assets/js/guards.js"></script>
 
   <script>
     // --- NAVIGASI ---

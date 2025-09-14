@@ -1,0 +1,133 @@
+    /* ---------- Design Tokens ---------- */
+    :root{
+      --bg:#F0F4F8; --surface:#FFFFFF; --surface2:#F8FAFC;
+      --text:#111827; --muted:#6B7280;
+      --border:#E5E7EB; --border2:#D1D5DB;
+      --blue:#3182CE; --purple:#A259FF; --cyan:#00FFFF; --fuchsia:#FF00FF; --red:#EF4444;
+      --glass: rgba(255,255,255,.18); --glassB: rgba(0,0,0,.06);
+    }
+    .dark{
+      --bg:#070812; --surface:#0E1020; --surface2:#141833;
+      --text:#E5E7EB; --muted:#A5B1C2;
+      --border:#1F2937; --border2:#253049;
+      --blue:#00FFFF; --purple:#B57CFF; --cyan:#00FFFF; --fuchsia:#FF55FF; --red:#FF3366;
+      --glass: rgba(7,8,18,.22); --glassB: rgba(255,255,255,.08);
+    }
+    html,body{height:100%}
+    body{background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+
+    /* Top glass blur */
+    #top-glass{
+      position:fixed; inset:0 auto auto 0; height:64px; width:100%;
+      background:var(--glass); border-bottom:1px solid var(--glassB);
+      -webkit-backdrop-filter:saturate(140%) blur(14px); backdrop-filter:saturate(140%) blur(14px);
+      opacity:0; transition:opacity .25s ease; z-index:40; pointer-events:none;
+    }
+    body.scrolled #top-glass{opacity:1}
+
+    /* Navbar capsule */
+    .nav-wrap{ background:#481057; border:1px solid #481057; box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66 }
+
+    /* Gradient text */
+    .grad-text{ background:linear-gradient(90deg,var(--blue),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent }
+    .dark .grad-text{ background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent }
+
+    /* Progress bar */
+    .progress{ height:10px; background:rgba(148,163,184,.25); border-radius:9999px; overflow:hidden }
+    .progress-fill{ height:100%; width:0%; background-image:linear-gradient(90deg,var(--blue),var(--purple)); transition:width .5s cubic-bezier(.22,.8,.28,1) }
+    .dark .progress-fill{ background-image:linear-gradient(90deg,var(--cyan),var(--fuchsia)) }
+
+    /* Question card (neon corners) */
+    .qcard{
+      position:relative; background:var(--surface); border:1px solid var(--border);
+      border-radius:18px; padding:1rem; transition:transform .25s ease, box-shadow .25s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+    .qcard:hover{ transform:translateY(-2px); box-shadow:0 16px 48px 0 #A259FF33 }
+    .qcard::before, .qcard::after{
+      content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+      background:
+        conic-gradient(from 180deg at 0% 0%, var(--purple), transparent 25%) top left/40% 40% no-repeat,
+        conic-gradient(from 0deg at 100% 0%, var(--cyan), transparent 25%) top right/40% 40% no-repeat,
+        conic-gradient(from 180deg at 0% 100%, var(--blue), transparent 25%) bottom left/40% 40% no-repeat,
+        conic-gradient(from 0deg at 100% 100%, var(--fuchsia), transparent 25%) bottom right/40% 40% no-repeat;
+      opacity:.18; filter: blur(0.5px);
+    }
+
+    /* Slider (enhances radio 1–5) */
+    .range{ -webkit-appearance:none; appearance:none; width:100%; height:14px; background:transparent; outline:none }
+    .range::-webkit-slider-runnable-track{ height:6px; background:linear-gradient(90deg,rgba(99,102,241,.35),rgba(168,85,247,.35)); border-radius:9999px; border:1px solid var(--border2) }
+    .range::-moz-range-track{ height:6px; background:linear-gradient(90deg,rgba(99,102,241,.35),rgba(168,85,247,.35)); border-radius:9999px; border:1px solid var(--border2) }
+    .range::-webkit-slider-thumb{
+      -webkit-appearance:none; width:28px; height:28px; border-radius:9999px;
+      background: radial-gradient(closest-side,#fff 60%, transparent 61%), linear-gradient(90deg,var(--blue),var(--purple));
+      border:2px solid #fff; margin-top:-11px; box-shadow:0 0 0 0 rgba(162,89,255,.5);
+      transition: transform .12s ease, box-shadow .3s ease;
+    }
+    .dark .range::-webkit-slider-thumb{ border-color:var(--surface); background: radial-gradient(closest-side,var(--surface) 60%, transparent 61%), linear-gradient(90deg,var(--cyan),var(--fuchsia)) }
+    .range:hover::-webkit-slider-thumb{ transform:scale(1.05) }
+    .range:active::-webkit-slider-thumb{ transform:scale(0.98); box-shadow:0 0 0 10px rgba(162,89,255,.15) }
+    .bubble{
+      position:absolute; top:-40px; translate:-50% 0; padding:.25rem .5rem; border-radius:.5rem;
+      font-weight:700; font-size:.9rem; background:var(--surface2); border:1px solid var(--border); color:var(--text);
+      box-shadow:0 6px 14px rgba(0,0,0,.06); pointer-events:none;
+    }
+
+    /* Micro interactions */
+    .pulse{ animation:pulse .6s ease }
+    @keyframes pulse{ 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:none} }
+    .bounce{ animation:bounce .35s ease }
+    @keyframes bounce{ 0%{transform:translateY(0)} 50%{transform:translateY(-4px)} 100%{transform:none} }
+
+    /* Scroll reveal */
+    .sr{ opacity: 1 ; transform:translateY(16px) scale(.98); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.8,.28,1) }
+    .sr.sr-in{ opacity:1; transform:none }
+
+    /* Swipe helper */
+    .swipe-area{ touch-action: pan-y; }
+
+    /* Footer tilt */
+    .footer-tilt{ transition:transform .15s ease-out; transform-style:preserve-3d }
+
+    @media (prefers-reduced-motion:reduce){
+      .sr, .qcard{ transition:none !important } /*.sr disii*/
+      .progress-fill{ transition:none !important }
+      .pulse,.bounce{ animation:none !important }
+    }
+    /* --- STYLE UNTUK TOMBOL ANGKA INTERAKTIF --- */
+
+/* Tampilan awal tombol angka */
+.quiz-option {
+    display: grid;
+    place-content: center;
+    width: 2.5rem; /* 40px */
+    height: 2.5rem; /* 40px */
+    border-radius: 9999px;
+    border: 2px solid var(--border2);
+    color: var(--muted);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* EFEK HOVER: Saat mouse berada di atas angka */
+.quiz-option:hover {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+/* EFEK TERPILIH: Saat angka diklik */
+input[type="radio"]:checked + .quiz-option {
+    background-color: var(--purple);
+    border-color: var(--purple);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(162, 89, 255, 0.4);
+}
+#result-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 10, 20, 0.7); /* Warna gelap dengan 70% opacity */
+  backdrop-filter: blur(8px); /* Efek blur untuk latar belakang */
+  -webkit-backdrop-filter: blur(8px);
+}

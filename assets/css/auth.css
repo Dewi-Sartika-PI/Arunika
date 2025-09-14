@@ -1,0 +1,19 @@
+.auth-chip{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.5rem .75rem; border-radius:9999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;
+}
+.dark .auth-chip{ background:rgba(255,255,255,.08) }
+
+.auth-menu{
+  position:absolute; right:0; top:120%; min-width:180px;
+  background:var(--surface-1); border:1px solid var(--border);
+  border-radius:.75rem; padding:.5rem; box-shadow:0 10px 24px rgba(0,0,0,.18);
+  z-index: 50;
+}
+.auth-menu a, .auth-menu button{
+  display:block; width:100%; text-align:left; padding:.5rem .75rem; border-radius:.5rem;
+}
+.auth-menu a:hover, .auth-menu button:hover{ background:var(--surface-2) }
