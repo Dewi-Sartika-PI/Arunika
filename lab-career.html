@@ -4,385 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Arunika – Lab Career</title>
-    <!-- Guard: require login -->
-    <!-- <script>
-      (function () {
-        // cek session di localStorage (nama key dari session.js)
-        var KEY = "arunika.session";
-        try {
-          var s = localStorage.getItem(KEY);
-          if (!s) location.replace("./login.html"); // belum login -> kirim ke login
-        } catch (e) {
-          location.replace("./login.html");
-        }
-      })();
-    </script> -->
-
-    <!-- pastikan config & session sudah ada di halaman ini -->
-    <script src="./assets/js/config.js"></script>
-    <script src="./assets/js/session.js"></script>
-    <script src="./assets/js/guards.js"></script>
-    <script>
-      // wajib login untuk akses halaman ini
-      Guard.requireLoginOrRedirect("./login.html");
-    </script>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-    <style>
-      /* ===== Design Tokens (Light/Dark) ===== */
-      :root {
-        --bg: #f0f4f8;
-        --surface: #ffffff;
-        --surface2: #f8fafc;
-        --ink: #1a202c;
-        --muted: #4a5568;
-        --accent-blue: #3182ce;
-        --accent-purple: #a259ff;
-        --accent-cyan: #00ffff;
-        --accent-fuchsia: #ff00ff;
-        --accent-red: #e53e3e;
-        --border: #e5e7eb;
-        --border-strong: #cbd5e0;
-        --nav: #481057;
-        --glass-bg: rgba(255, 255, 255, 0.18);
-        --glass-border: rgba(0, 0, 0, 0.08);
-        --cover-h: 900px;
-      }
-      .dark {
-        --bg: #070812;
-        --surface: #0e1020;
-        --surface2: #141833;
-        --ink: #e6eaf2;
-        --muted: #a5b1c2;
-        --accent-blue: #00ffff;
-        --accent-purple: #b57cff;
-        --accent-cyan: #00ffff;
-        --accent-fuchsia: #ff55ff;
-        --accent-red: #ff3366;
-        --border: #1f2937;
-        --border-strong: #253049;
-        --glass-bg: rgba(7, 8, 18, 0.22);
-        --glass-border: rgba(255, 255, 255, 0.08);
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        background: var(--bg);
-        color: var(--ink);
-        font-family: "Inter", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      /* ===== Top Glass (on scroll) ===== */
-      #top-glass {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 64px;
-        z-index: 40;
-        pointer-events: none;
-        background: var(--glass-bg);
-        border-bottom: 1px solid var(--glass-border);
-        backdrop-filter: saturate(140%) blur(14px);
-        -webkit-backdrop-filter: saturate(140%) blur(14px);
-        opacity: 0;
-        transition: opacity 0.28s ease;
-      }
-      body.scrolled #top-glass {
-        opacity: 1;
-      }
-
-      /* ===== Navbar capsule glass (fill) ===== */
-      .navbar-glass {
-        position: relative;
-        isolation: isolate;
-      }
-      .navbar-glass::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        border-radius: 9999px;
-        background: var(--glass-bg);
-        border: 1px solid var(--nav);
-        backdrop-filter: blur(16px) saturate(140%);
-        -webkit-backdrop-filter: blur(16px) saturate(140%);
-        box-shadow: 0 0 24px #a259ff, 0 0 48px #a259ff66;
-      }
-      .dark .navbar-glass::before {
-        border-color: rgba(255, 255, 255, 0.08);
-      }
-      .nav-link {
-        color: #fff;
-        transition: background-color 0.2s ease-in-out;
-      }
-      .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      /* ===== Utilities ===== */
-      .grad-text {
-        background: linear-gradient(
-          90deg,
-          var(--accent-blue),
-          var(--accent-purple)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .dark .grad-text {
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-purple)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .btn-primary {
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-purple)
-        );
-        color: #fff;
-      }
-      .chip {
-        border: 1px solid var(--accent-purple);
-        color: var(--accent-purple);
-      }
-
-      /* ===== Reveal (clean & subtle) ===== */
-      .reveal {
-        opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 0.5s ease,
-          transform 0.6s cubic-bezier(0.22, 0.8, 0.28, 1);
-        will-change: transform, opacity;
-      }
-      .reveal.in {
-        opacity: 1;
-        transform: none;
-      }
-      .reveal-up {
-        transform: translateY(16px);
-      }
-      .reveal-fade {
-        transform: none;
-      }
-      .reveal-scale {
-        transform: translateY(8px) scale(0.98);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .reveal {
-          transition: none !important;
-        }
-      }
-
-      /* ===== Parallax (low-jank) ===== */
-      [data-parallax] {
-        will-change: transform;
-        transform: translate3d(0, 0, 0);
-      }
-
-      /* ===== Cyber Cover (bg up to Ringkasan Diri) ===== */
-      .top-cyber-cover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: var(--cover-h);
-        z-index: 0;
-        pointer-events: none;
-        background: radial-gradient(
-            1100px 700px at 0% -10%,
-            rgba(162, 89, 255, 0.28),
-            transparent 60%
-          ),
-          radial-gradient(
-            800px 600px at 100% 0%,
-            rgba(0, 255, 255, 0.22),
-            transparent 60%
-          ),
-          linear-gradient(180deg, #120b20 0%, #0b0c1b 60%, #0b0c1b 100%);
-        overflow: hidden;
-      }
-      .top-cyber-cover::before {
-        content: "";
-        position: absolute;
-        inset: -40% -10% auto -10%;
-        height: 80%;
-        background: conic-gradient(
-          from 220deg,
-          rgba(0, 255, 255, 0.35),
-          rgba(162, 89, 255, 0.25),
-          rgba(255, 0, 255, 0.25),
-          transparent 70%
-        );
-        filter: blur(40px);
-        opacity: 0.26;
-        animation: aurora 16s linear infinite;
-      }
-      .top-cyber-cover::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(
-            rgba(255, 255, 255, 0.1) 1px,
-            transparent 1px
-          ),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-        background-size: 56px 56px;
-        opacity: 0.1;
-        mix-blend-mode: overlay;
-      }
-      @keyframes aurora {
-        to {
-          transform: translateX(10%) rotate(360deg);
-        }
-      }
-
-      /* ===== Summary (Ringkasan Diri) ===== */
-      .summary-title {
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        line-height: 0.95;
-        font-size: clamp(40px, 7vw, 70px);
-        color: #e2e8f0;
-      }
-      .summary-lead {
-        color: #cdd6ea;
-        font-size: clamp(14px, 2.2vw, 16px);
-      }
-      .summary-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      @media (min-width: 768px) {
-        .summary-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-        }
-      }
-
-      .neo-card {
-        background: linear-gradient(180deg, #1c1d3a 0%, #15162b 60%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 16px;
-        padding: 1.25rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        color: #e2e8f0;
-        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
-        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.25s, border-color 0.25s;
-      }
-      .neo-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6),
-          0 0 30px rgba(162, 89, 255, 0.35), 0 0 24px rgba(0, 255, 255, 0.25);
-        border-color: rgba(0, 255, 255, 0.35);
-      }
-      .card-title {
-        font-size: 18px;
-        font-weight: 800;
-      }
-      .card-text {
-        font-size: 14px;
-        color: #a0aec0;
-      }
-      .card-list {
-        margin-top: 0.75rem;
-        font-size: 15px;
-        font-weight: 600;
-        display: grid;
-        gap: 0.5rem;
-      }
-      .bullet {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        margin-right: 0.5rem;
-        display: inline-block;
-        background: radial-gradient(
-          circle at 30% 30%,
-          #fff 0%,
-          var(--accent-cyan) 50%,
-          var(--accent-purple) 100%
-        );
-        box-shadow: 0 0 8px var(--accent-cyan);
-      }
-      .bar {
-        width: 100%;
-        height: 8px;
-        border-radius: 9999px;
-        background: #2d3748;
-        margin-top: 0.5rem;
-      }
-      .bar > span {
-        display: block;
-        height: 8px;
-        border-radius: 9999px;
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-purple)
-        );
-      }
-
-      /* ===== Match bar ===== */
-      .match-track {
-        background: #e5e7eb;
-      }
-      .match-fill {
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-purple)
-        );
-      }
-
-      /* ===== Footer fixes for dark ===== */
-      .footer-cyber {
-        background: radial-gradient(
-            900px 600px at 100% 0%,
-            rgba(0, 255, 255, 0.18),
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 600px at 0% 0%,
-            rgba(162, 89, 255, 0.2),
-            transparent 60%
-          ),
-          linear-gradient(180deg, #0b0c1b 0%, #17192c 100%);
-        color: #e2bff7;
-      }
-      .dark .bg-white {
-        background-color: var(--surface) !important;
-      }
-      .dark .text-gray-600 {
-        color: var(--muted) !important;
-      }
-      .dark .border {
-        border-color: var(--border) !important;
-      }
-    </style>
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="./assets/css/lab-career.css" />
   </head>
 
   <body>
@@ -392,131 +22,23 @@
     <!-- cyber cover (with parallax) -->
     <div class="top-cyber-cover" aria-hidden="true" data-parallax="0.06"></div>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (by component) -->
     <header class="fixed top-0 left-0 right-0 z-50 p-4">
       <div class="container mx-auto flex justify-center">
-        <div
-          class="navbar-glass flex items-center gap-4 rounded-full px-2 py-2"
-        >
-          <a href="index.html" class="pl-2" title="Halaman Utama Arunika">
-            <img
-              src="./assets/img/logo.png"
-              alt="Arunika"
-              class="h-12 w-auto"
-            />
-          </a>
-          <nav class="flex items-center space-x-1" aria-label="Primary">
-            <a
-              href="lab-career.html"
-              class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full"
-            >
-              <img src="./assets/img/lab_career.svg" class="w-6 h-6" alt="" />
-              <span class="hidden lg:inline font-semibold text-base"
-                >Lab Career</span
-              >
-            </a>
-            <a
-              href="skill-match.html"
-              class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full"
-            >
-              <img src="./assets/img/roadmap.svg" class="w-6 h-6" alt="" />
-              <span class="hidden lg:inline font-semibold text-base"
-                >Skill Match</span
-              >
-            </a>
-            <a
-              href="#"
-              class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full"
-            >
-              <img src="./assets/img/about_us.svg" class="w-6 h-6" alt="" />
-              <span class="hidden lg:inline font-semibold text-base"
-                >About Us</span
-              >
-            </a>
-          </nav>
-          <div class="flex items-center gap-2 pr-2">
-            <div class="h-8 w-px bg-white/30"></div>
-            <a
-              href="login.html"
-              class="p-3 rounded-full btn-primary"
-              title="Account"
-              aria-label="Account"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </a>
-            <button
-              id="theme-toggle"
-              class="p-3 rounded-full bg-black/10"
-              aria-label="Toggle theme"
-              aria-pressed="false"
-            >
-              <svg
-                id="theme-toggle-light-icon"
-                class="w-6 h-6 hidden text-brand-d-brown"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-              >
-                <path
-                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-              <svg
-                id="theme-toggle-dark-icon"
-                class="w-6 h-6 hidden text-brand-cream"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-              >
-                <path
-                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+        <!-- navbar.js akan render isi ke dalam root ini -->
+        <div id="navbar-root" class="w-full"></div>
       </div>
     </header>
 
     <main class="pt-28 px-4 sm:px-6 lg:px-8">
       <!-- HERO (with gentle parallax) -->
-      <section
-        id="hero"
-        class="py-16 md:py-20 text-center reveal reveal-up"
-        data-parallax="0.12"
-      >
+      <section id="hero" class="py-16 md:py-20 text-center reveal reveal-up" data-parallax="0.12">
         <div class="container mx-auto max-w-4xl">
-          <h1
-            class="text-4xl md:text-6xl font-extrabold tracking-tight grad-text"
-          >
-            Selamat Datang di Lab Karir
-          </h1>
-          <p
-            class="mt-6 text-lg md:text-xl max-w-3xl mx-auto"
-            style="color: var(--muted)"
-          >
-            Ini adalah pusat kendali karirmu. Analisis hasil asesmen, temukan
-            lowongan yang paling cocok, dan lihat proyeksi gajimu di sini.
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight grad-text">Selamat Datang di Lab Karir</h1>
+          <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-muted">
+            Ini adalah pusat kendali karirmu. Analisis hasil asesmen, temukan lowongan yang paling cocok, dan lihat proyeksi gajimu di sini.
           </p>
-          <a
-            href="#ringkasan-diri"
-            class="mt-10 inline-block rounded-full px-8 py-4 font-bold text-lg btn-primary shadow-lg shadow-purple-500/20 transition hover:scale-105 transform hover:-translate-y-1"
-          >
+          <a href="#ringkasan-diri" class="mt-10 inline-block rounded-full px-8 py-4 font-bold text-lg btn-primary shadow-lg shadow-purple-500/20 transition hover:scale-105 transform hover:-translate-y-1">
             Lihat Hasil Analisis
           </a>
         </div>
@@ -527,8 +49,7 @@
         <div class="container mx-auto max-w-7xl text-center">
           <h2 class="summary-title">Grow your career with clarity</h2>
           <p class="summary-lead mt-3">
-            Ringkasan personal dari Skill Match: kekuatan utama, role &
-            karakter, serta skill gap prioritas.
+            Ringkasan personal dari Skill Match: kekuatan utama, role & karakter, serta skill gap prioritas.
           </p>
 
           <div class="summary-grid mt-10">
@@ -539,17 +60,13 @@
               <ul id="strengthList" class="card-list">
                 <li><span class="bullet"></span><span>Analitis</span></li>
                 <li><span class="bullet"></span><span>Kreatif</span></li>
-                <li>
-                  <span class="bullet"></span><span>Problem Solving</span>
-                </li>
+                <li><span class="bullet"></span><span>Problem Solving</span></li>
               </ul>
               <div class="w-full mt-3">
                 <div class="flex justify-between text-[12px] text-white/70">
                   <span>Base Fit</span><span id="fitPct">88%</span>
                 </div>
-                <div class="bar">
-                  <span id="fitBar" style="width: 88%"></span>
-                </div>
+                <div class="bar"><span id="fitBar" style="width: 88%"></span></div>
               </div>
             </article>
 
@@ -559,9 +76,7 @@
               <p id="roleName" class="mt-1 text-[17px] font-extrabold">—</p>
               <p class="card-text mt-2 max-w-xs mx-auto">
                 <span class="font-semibold">Karakter:</span>
-                <span id="roleTraits"
-                  >Eksploratif, ideatif, orkestrasi lintas fungsi.</span
-                >
+                <span id="roleTraits">Eksploratif, ideatif, orkestrasi lintas fungsi.</span>
               </p>
             </article>
 
@@ -569,22 +84,11 @@
             <article class="neo-card reveal reveal-scale">
               <h3 class="card-title text-white">Skill Gaps (90 hari)</h3>
               <ul id="gapList" class="card-list">
-                <li>
-                  <span class="bullet"></span><span>Stakeholder mapping</span>
-                </li>
-                <li>
-                  <span class="bullet"></span><span>Delivery cadence</span>
-                </li>
-                <li>
-                  <span class="bullet"></span
-                  ><span>Leadership communication</span>
-                </li>
+                <li><span class="bullet"></span><span>Stakeholder mapping</span></li>
+                <li><span class="bullet"></span><span>Delivery cadence</span></li>
+                <li><span class="bullet"></span><span>Leadership communication</span></li>
               </ul>
-              <a
-                href="skill-match.html"
-                class="mt-4 inline-block rounded-full px-4 py-2 font-semibold btn-primary shadow"
-                >Perbarui asesmen →</a
-              >
+              <a href="skill-match.html" class="mt-4 inline-block rounded-full px-4 py-2 font-semibold btn-primary shadow">Perbarui asesmen →</a>
             </article>
           </div>
         </div>
@@ -593,79 +97,35 @@
       <!-- FILTERS -->
       <section id="filters" class="py-10 reveal reveal-up">
         <div class="container mx-auto max-w-6xl">
-          <div
-            class="rounded-2xl p-5 md:p-6"
-            style="
-              background: var(--surface);
-              border: 2px solid var(--accent-purple);
-              box-shadow: 0 0 24px #a259ff22, 0 0 48px #00ffff22;
-            "
-          >
+          <div class="rounded-2xl p-5 md:p-6 surface-1 framed">
             <div class="grid md:grid-cols-5 gap-4">
-              <select
-                id="f-role"
-                class="w-full rounded-xl px-3 py-2 border"
-                style="
-                  border-color: var(--border-strong);
-                  background: var(--surface);
-                  color: var(--ink);
-                "
-              >
+              <select id="f-role" class="w-full rounded-xl px-3 py-2 border select">
                 <option value="">Semua Role</option>
                 <option>Product Manager</option>
                 <option>UI/UX Researcher</option>
                 <option>Frontend Developer</option>
                 <option>Data Scientist</option>
               </select>
-              <select
-                id="f-level"
-                class="w-full rounded-xl px-3 py-2 border"
-                style="
-                  border-color: var(--border-strong);
-                  background: var(--surface);
-                  color: var(--ink);
-                "
-              >
+              <select id="f-level" class="w-full rounded-xl px-3 py-2 border select">
                 <option value="">Semua Level</option>
                 <option>Entry</option>
                 <option>Mid</option>
                 <option>Senior</option>
               </select>
-              <select
-                id="f-loc"
-                class="w-full rounded-xl px-3 py-2 border"
-                style="
-                  border-color: var(--border-strong);
-                  background: var(--surface);
-                  color: var(--ink);
-                "
-              >
+              <select id="f-loc" class="w-full rounded-xl px-3 py-2 border select">
                 <option value="ID">Seluruh Indonesia</option>
                 <option>Jakarta</option>
                 <option>Bandung</option>
                 <option>Surabaya</option>
                 <option>Medan</option>
               </select>
-              <select
-                id="f-salary"
-                class="w-full rounded-xl px-3 py-2 border"
-                style="
-                  border-color: var(--border-strong);
-                  background: var(--surface);
-                  color: var(--ink);
-                "
-              >
+              <select id="f-salary" class="w-full rounded-xl px-3 py-2 border select">
                 <option value="0">Gaji: Semua</option>
                 <option value="9000000">≥ Rp 9 jt</option>
                 <option value="12000000">≥ Rp 12 jt</option>
                 <option value="15000000">≥ Rp 15 jt</option>
               </select>
-              <button
-                id="apply-filters"
-                class="w-full rounded-full py-2.5 font-bold btn-primary"
-              >
-                Terapkan
-              </button>
+              <button id="apply-filters" class="w-full rounded-full py-2.5 font-bold btn-primary">Terapkan</button>
             </div>
           </div>
         </div>
@@ -674,87 +134,37 @@
       <!-- JOB MATCH -->
       <section class="py-12">
         <div class="container mx-auto max-w-6xl">
-          <h2 class="text-2xl sm:text-3xl font-bold grad-text reveal reveal-up">
-            Job Match
-          </h2>
-          <!-- grid akan diisi via JS, desain sama -->
-          <div
-            id="job-list"
-            class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"
-          ></div>
+          <h2 class="text-2xl sm:text-3xl font-bold grad-text reveal reveal-up">Job Match</h2>
+          <div id="job-list" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"></div>
         </div>
       </section>
 
       <!-- SALARY -->
       <section class="py-10 reveal reveal-up">
         <div class="container mx-auto max-w-6xl">
-          <div
-            class="rounded-2xl p-6"
-            style="
-              background: var(--surface);
-              border: 2px solid var(--accent-purple);
-              box-shadow: 0 0 24px #a259ff22, 0 0 48px #00ffff22;
-            "
-          >
+          <div class="rounded-2xl p-6 surface-1 framed">
             <div class="flex items-center justify-between flex-wrap gap-3">
-              <h3
-                class="text-xl md:text-2xl font-bold"
-                style="color: var(--ink)"
-              >
-                Salary Transparency — Indonesia
-              </h3>
-              <p class="text-sm" style="color: var(--muted)">
-                Angka perkiraan: median & kuartil.
-              </p>
+              <h3 class="text-xl md:text-2xl font-bold ink">Salary Transparency — Indonesia</h3>
+              <p class="text-sm muted">Angka perkiraan: median & kuartil.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-4 mt-5" id="salary-grid">
-              <div class="rounded-xl p-4" style="background: var(--surface2)">
-                <h4 class="font-semibold">Product Manager</h4>
-                <p
-                  class="text-sm mt-1"
-                  style="color: var(--muted)"
-                  id="sal-pm-1"
-                >
-                  Entry: P25 10jt • Median 13jt • P75 17jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-pm-2">
-                  Mid: P25 14jt • Median 18jt • P75 24jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-pm-3">
-                  Senior: P25 22jt • Median 28jt • P75 36jt
-                </p>
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">Product Manager</h4>
+                <p class="text-sm mt-1 muted" id="sal-pm-1">Entry: P25 10jt • Median 13jt • P75 17jt</p>
+                <p class="text-sm muted" id="sal-pm-2">Mid: P25 14jt • Median 18jt • P75 24jt</p>
+                <p class="text-sm muted" id="sal-pm-3">Senior: P25 22jt • Median 28jt • P75 36jt</p>
               </div>
-              <div class="rounded-xl p-4" style="background: var(--surface2)">
-                <h4 class="font-semibold">UI/UX Researcher</h4>
-                <p
-                  class="text-sm mt-1"
-                  style="color: var(--muted)"
-                  id="sal-ux-1"
-                >
-                  Entry: P25 7jt • Median 9jt • P75 12jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-ux-2">
-                  Mid: P25 10jt • Median 13jt • P75 17jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-ux-3">
-                  Senior: P25 16jt • Median 21jt • P75 28jt
-                </p>
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">UI/UX Researcher</h4>
+                <p class="text-sm mt-1 muted" id="sal-ux-1">Entry: P25 7jt • Median 9jt • P75 12jt</p>
+                <p class="text-sm muted" id="sal-ux-2">Mid: P25 10jt • Median 13jt • P75 17jt</p>
+                <p class="text-sm muted" id="sal-ux-3">Senior: P25 16jt • Median 21jt • P75 28jt</p>
               </div>
-              <div class="rounded-xl p-4" style="background: var(--surface2)">
-                <h4 class="font-semibold">Frontend Developer</h4>
-                <p
-                  class="text-sm mt-1"
-                  style="color: var(--muted)"
-                  id="sal-fe-1"
-                >
-                  Entry: P25 8jt • Median 11jt • P75 14jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-fe-2">
-                  Mid: P25 12jt • Median 16jt • P75 22jt
-                </p>
-                <p class="text-sm" style="color: var(--muted)" id="sal-fe-3">
-                  Senior: P25 20jt • Median 26jt • P75 34jt
-                </p>
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">Frontend Developer</h4>
+                <p class="text-sm mt-1 muted" id="sal-fe-1">Entry: P25 8jt • Median 11jt • P75 14jt</p>
+                <p class="text-sm muted" id="sal-fe-2">Mid: P25 12jt • Median 16jt • P75 22jt</p>
+                <p class="text-sm muted" id="sal-fe-3">Senior: P25 20jt • Median 26jt • P75 34jt</p>
               </div>
             </div>
           </div>
@@ -764,41 +174,15 @@
       <!-- CTA -->
       <section class="py-12 reveal reveal-up">
         <div class="container mx-auto max-w-6xl">
-          <div
-            class="rounded-2xl p-8"
-            style="
-              background: var(--surface);
-              border: 2px solid var(--accent-purple);
-              box-shadow: 0 0 24px #a259ff22, 0 0 48px #00ffff22;
-            "
-          >
-            <div
-              class="flex flex-col md:flex-row items-center justify-between gap-6"
-            >
+          <div class="rounded-2xl p-8 surface-1 framed">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
-                <h3 class="text-2xl font-bold" style="color: var(--ink)">
-                  Siap lanjutkan perjalanan?
-                </h3>
-                <p class="mt-2" style="color: var(--muted)">
-                  Simpan preferensi, terima rekomendasi mingguan, dan hubungkan
-                  ke mentor.
-                </p>
+                <h3 class="text-2xl font-bold ink">Siap lanjutkan perjalanan?</h3>
+                <p class="mt-2 muted">Simpan preferensi, terima rekomendasi mingguan, dan hubungkan ke mentor.</p>
               </div>
               <div class="flex gap-3">
-                <a
-                  href="skill-match.html"
-                  class="px-6 py-3 rounded-full font-bold btn-primary"
-                  >Lanjutkan Skill Match</a
-                >
-                <a
-                  href="index.html#pricing"
-                  class="px-6 py-3 rounded-full border-2 font-semibold"
-                  style="
-                    border-color: var(--accent-cyan);
-                    color: var(--accent-cyan);
-                  "
-                  >Upgrade Pro</a
-                >
+                <a href="skill-match.html" class="px-6 py-3 rounded-full font-bold btn-primary">Lanjutkan Skill Match</a>
+                <a href="index.html#pricing" class="px-6 py-3 rounded-full border-2 font-semibold accent-outline">Upgrade Pro</a>
               </div>
             </div>
           </div>
@@ -811,442 +195,41 @@
       <div class="container mx-auto max-w-7xl py-14 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-start">
           <div class="col-span-2">
-            <img
-              src="./assets/img/logo.png"
-              alt="Arunika"
-              class="h-12 w-auto"
-            />
-            <p class="mt-4 max-w-xs text-lg leading-relaxed">
-              Playlist karir personalmu untuk masa depan yang lebih cerah.
-            </p>
+            <img src="./assets/img/logo.png" alt="Arunika" class="h-12 w-auto" />
+            <p class="mt-4 max-w-xs text-lg leading-relaxed">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
           </div>
           <nav aria-label="Perusahaan">
             <h4 class="font-bold mb-4 text-xl text-white">Perusahaan</h4>
             <ul class="space-y-3 text-lg">
-              <li>
-                <a href="about.html" style="color: #e2bff7">Tentang Kami</a>
-              </li>
-              <li><a href="#" style="color: #e2bff7">Partner</a></li>
-              <li><a href="#" style="color: #e2bff7">Press Kit</a></li>
+              <li><a href="about.html" class="footer-link">Tentang Kami</a></li>
+              <li><a href="#" class="footer-link">Partner</a></li>
+              <li><a href="#" class="footer-link">Press Kit</a></li>
             </ul>
           </nav>
           <nav aria-label="Sosial Media">
             <h4 class="font-bold mb-4 text-xl text-white">Sosial Media</h4>
             <ul class="space-y-3 text-lg">
-              <li><a href="#" style="color: #e2bff7">Twitter</a></li>
-              <li><a href="#" style="color: #e2bff7">Instagram</a></li>
-              <li><a href="#" style="color: #e2bff7">Threads</a></li>
+              <li><a href="#" class="footer-link">Twitter</a></li>
+              <li><a href="#" class="footer-link">Instagram</a></li>
+              <li><a href="#" class="footer-link">Threads</a></li>
             </ul>
           </nav>
         </div>
-        <div
-          class="mt-12 pt-6 border-t text-center text-sm"
-          style="border-color: #6b4ea5; color: #cdbaf0"
-        >
+        <div class="mt-12 pt-6 border-t text-center text-sm border-purple-800/50 text-purple-200">
           &copy; 2025 Arunika. All Rights Reserved.
         </div>
       </div>
     </footer>
 
-    <script>
-      /* ========= THEME (match index) ========= */
-      (function () {
-        const btn = document.getElementById("theme-toggle");
-        if (!btn) return;
-        const light = document.getElementById("theme-toggle-light-icon");
-        const dark = document.getElementById("theme-toggle-dark-icon");
-        function setTheme(mode) {
-          const isDark = mode === "dark";
-          document.documentElement.classList.toggle("dark", isDark);
-          document.body.classList.toggle("dark", isDark);
-          document.body.classList.toggle("light", !isDark);
-          dark?.classList.toggle("hidden", !isDark);
-          light?.classList.toggle("hidden", isDark);
-          localStorage.setItem("color-theme", isDark ? "dark" : "light");
-          btn.setAttribute("aria-pressed", String(isDark));
-        }
-        const saved = localStorage.getItem("color-theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        setTheme(saved ? saved : prefersDark ? "dark" : "light");
-        btn.addEventListener("click", () =>
-          setTheme(
-            document.documentElement.classList.contains("dark")
-              ? "light"
-              : "dark"
-          )
-        );
-      })();
+    <!-- Scripts (ORDER penting) -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/session.js"></script>
+    <script src="./assets/js/guards.js"></script>
 
-      /* ========= top glass show on scroll ========= */
-      (function () {
-        const onScroll = () =>
-          document.body.classList.toggle(
-            "scrolled",
-            (window.scrollY || document.documentElement.scrollTop) > 4
-          );
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-      })();
+    <!-- Navbar component (harus sudah ada file-nya) -->
+    <script src="./assets/js/navbar.js"></script>
 
-      /* ========= Scroll Reveal (supports dynamic content) ========= */
-      (function () {
-        const reduce = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-        let io = null;
-        function ensureIO() {
-          if (io) return io;
-          io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) =>
-                e.target.classList.toggle("in", e.isIntersecting)
-              );
-            },
-            { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
-          );
-          return io;
-        }
-        function scan() {
-          const items = [...document.querySelectorAll(".reveal,[data-sr]")];
-          items.forEach((el) => {
-            if (el.hasAttribute("data-sr"))
-              el.classList.add("reveal", "reveal-up");
-            if (!reduce) ensureIO().observe(el);
-            else el.classList.add("in");
-          });
-        }
-        window.RevealRefresh = scan;
-        scan();
-      })();
-
-      /* ========= Parallax (gentle) ========= */
-      (function () {
-        const reduce = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-        const mobile = () => window.matchMedia("(max-width: 767px)").matches;
-        const els = [...document.querySelectorAll("[data-parallax]")];
-        if (!els.length) return;
-        let ticking = false,
-          lastY = 0,
-          enabled = !(reduce || mobile());
-        function apply(y) {
-          els.forEach((el) => {
-            const f = parseFloat(el.getAttribute("data-parallax") || "0.1");
-            const ty = Math.round(y * f);
-            el.style.transform = `translate3d(0, ${ty}px, 0)`;
-          });
-        }
-        function onScroll() {
-          if (!enabled) return;
-          lastY = window.scrollY || document.documentElement.scrollTop;
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              apply(lastY);
-              ticking = false;
-            });
-            ticking = true;
-          }
-        }
-        function update() {
-          enabled = !(reduce || mobile());
-          if (!enabled) {
-            els.forEach((el) => (el.style.transform = ""));
-          } else {
-            onScroll();
-          }
-        }
-        update();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener(
-          "resize",
-          () => {
-            update();
-          },
-          { passive: true }
-        );
-      })();
-
-      /* ========= Cyber cover height to Ringkasan Diri ========= */
-      (function () {
-        const section = document.getElementById("ringkasan-diri");
-        const update = () => {
-          if (!section) return;
-          const r = section.getBoundingClientRect();
-          const top = window.scrollY + r.top;
-          const bottom = top + r.height;
-          document.documentElement.style.setProperty(
-            "--cover-h",
-            bottom + "px"
-          );
-        };
-        window.addEventListener("DOMContentLoaded", update);
-        window.addEventListener("resize", update, { passive: true });
-        window.addEventListener("load", update);
-      })();
-
-      /* ========= LAB-CAREER DYNAMIC: Jobs + Ranking + Tracking ========= */
-      (function () {
-        const JOBS_URL = "./assets/data/jobs.json";
-        const jobGrid = document.getElementById("job-list");
-        const btnApply = document.getElementById("apply-filters");
-        const fRole = document.getElementById("f-role");
-        const fLevel = document.getElementById("f-level");
-        const fLoc = document.getElementById("f-loc");
-        const fSalary = document.getElementById("f-salary");
-
-        const FALLBACK_JOBS = [
-          {
-            id: "job_pm_01",
-            title: "Product Manager",
-            company: "Inovasi Digital",
-            location: "Jakarta",
-            level: "Mid",
-            role_key: "product_manager",
-            tags: ["leadership", "stakeholder", "roadmap"],
-            verified: true,
-            base_fit_score: 92,
-            min_salary: 12000000,
-            apply_url: "https://jobs.example.com/pm?id=01",
-          },
-          {
-            id: "job_ux_01",
-            title: "UI/UX Researcher",
-            company: "Visuara",
-            location: "Bandung",
-            level: "Entry",
-            role_key: "ux_researcher",
-            tags: ["interview", "usability", "synthesis"],
-            verified: true,
-            base_fit_score: 85,
-            min_salary: 9000000,
-            apply_url: "https://jobs.example.com/ux?id=01",
-          },
-          {
-            id: "job_fe_01",
-            title: "Frontend Developer",
-            company: "Tech Labs",
-            location: "Surabaya",
-            level: "Mid",
-            role_key: "frontend_developer",
-            tags: ["react", "ui patterns", "performance"],
-            verified: true,
-            base_fit_score: 81,
-            min_salary: 11000000,
-            apply_url: "https://jobs.example.com/fe?id=01",
-          },
-        ];
-
-        function getQuizFit() {
-          return {
-            fit: Number(localStorage.getItem("arunika.fit") || 0),
-            role: (localStorage.getItem("arunika.role") || "").toLowerCase(),
-          };
-        }
-
-        function computeFinalScore(job, quiz) {
-          const roleMatch =
-            quiz.role && (job.role_key || "").toLowerCase().includes(quiz.role);
-          const roleBonus = roleMatch ? quiz.fit : Math.max(quiz.fit - 10, 0);
-          const score = 0.7 * (job.base_fit_score || 0) + 0.3 * roleBonus;
-          return Math.round(Math.min(100, score));
-        }
-
-        function trackApply(job) {
-          try {
-            const url = new URL(job.apply_url);
-            url.searchParams.set("utm_source", "arunika");
-            url.searchParams.set("utm_campaign", "job_connector");
-            window.open(url.toString(), "_blank", "noopener");
-          } catch {
-            if (job.apply_url) window.open(job.apply_url, "_blank", "noopener");
-          }
-          const key = "arunika.applyClicks";
-          const map = JSON.parse(localStorage.getItem(key) || "{}");
-          map[job.id] = (map[job.id] || 0) + 1;
-          localStorage.setItem(key, JSON.stringify(map));
-        }
-
-        function cardHTML(job) {
-          const chips = (job.tags || [])
-            .slice(0, 3)
-            .map(
-              (t) => `<span class="chip px-2.5 py-1 rounded-full">${t}</span>`
-            )
-            .join("");
-          const score = job.final_score || 0;
-          return `
-        <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition" style="background:var(--surface); border-color:var(--border)">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="font-extrabold text-lg" style="color:var(--ink)">${
-                job.title
-              }</h3>
-              <p class="text-sm" style="color:var(--muted)">${job.company} • ${
-            job.location
-          }${job.level ? " • " + job.level : ""}</p>
-            </div>
-            <button class="px-3 py-1.5 rounded-full text-white text-sm btn-primary apply-btn" data-id="${
-              job.id
-            }">Detail</button>
-          </div>
-          <div class="mt-4">
-            <div class="flex items-center justify-between text-sm mb-2"><span class="font-semibold">Match</span><span>${score}%</span></div>
-            <div class="h-2 w-full rounded-full match-track"><div class="h-2 rounded-full match-fill" style="width:${score}%"></div></div>
-          </div>
-          <div class="mt-4 flex flex-wrap gap-2 text-xs">${chips}</div>
-        </article>`;
-        }
-
-        function renderEmpty() {
-          jobGrid.innerHTML = `
-          <div class="col-span-full text-center rounded-2xl p-10 border" style="border-color:#E5E7EB;background:var(--surface)">
-            <h3 class="text-xl font-bold">Tidak ada hasil 🚫</h3>
-            <p class="mt-1" style="color:var(--muted)">Coba ubah filter atau reset ke default.</p>
-            <button class="mt-4 rounded-full px-5 py-2.5 font-bold btn-primary" id="resetFilters">Reset Filter</button>
-          </div>`;
-          document
-            .getElementById("resetFilters")
-            ?.addEventListener("click", () => {
-              fRole.value = "";
-              fLevel.value = "";
-              fLoc.value = "ID";
-              fSalary.value = "0";
-              apply();
-            });
-        }
-
-        let JOBS = [];
-        function apply() {
-          const quiz = getQuizFit();
-          const roleVal = (fRole.value || "").toLowerCase();
-          const levelVal = (fLevel.value || "").toLowerCase();
-          const locVal = (fLoc.value || "").toLowerCase();
-          const minSalary = Number(fSalary.value || 0);
-
-          let list = JOBS.filter((j) => {
-            const okRole =
-              !roleVal ||
-              j.title.toLowerCase().includes(roleVal) ||
-              (j.role_key || "").toLowerCase().includes(roleVal);
-            const okLevel =
-              !levelVal || (j.level || "").toLowerCase().includes(levelVal);
-            const okLoc =
-              !locVal ||
-              locVal === "id" ||
-              (j.location || "").toLowerCase().includes(locVal);
-            const okPay = !minSalary || (j.min_salary || 0) >= minSalary;
-            return okRole && okLevel && okLoc && okPay;
-          });
-
-          list.forEach((j) => (j.final_score = computeFinalScore(j, quiz)));
-          list.sort((a, b) => b.final_score - a.final_score);
-
-          if (!list.length) {
-            renderEmpty();
-            window.RevealRefresh?.();
-            return;
-          }
-
-          jobGrid.innerHTML = list.map(cardHTML).join("");
-          // attach apply handlers
-          jobGrid.querySelectorAll(".apply-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const job = list.find((j) => j.id === btn.dataset.id);
-              if (!job || !job.apply_url) {
-                alert("Link apply tidak tersedia.");
-                return;
-              }
-              trackApply(job);
-            });
-          });
-          window.RevealRefresh?.();
-        }
-
-        async function loadJobs() {
-          try {
-            const r = await fetch(JOBS_URL, { cache: "no-store" });
-            if (!r.ok) throw new Error("HTTP " + r.status);
-            const data = await r.json();
-            if (Array.isArray(data) && data.length) {
-              JOBS = data;
-            } else {
-              JOBS = FALLBACK_JOBS;
-            }
-          } catch (e) {
-            console.warn("Gagal memuat jobs.json, gunakan fallback.", e);
-            JOBS = FALLBACK_JOBS;
-          }
-        }
-
-        document.addEventListener("DOMContentLoaded", async () => {
-          await loadJobs();
-          apply();
-          btnApply?.addEventListener("click", apply);
-        });
-      })();
-
-      /* ========= SALARY: isi dari salary.json (opsional, desain tetap) ========= */
-      (function () {
-        const SAL_URL = "./assets/data/salary.json";
-        function fmt(n) {
-          return (n / 1000000).toFixed(0) + "jt";
-        }
-        function setLine(el, obj) {
-          if (!el || !obj) return;
-          el.textContent = `P25 ${fmt(obj.p25)} • Median ${fmt(
-            obj.median
-          )} • P75 ${fmt(obj.p75)}`;
-        }
-        async function hydrate() {
-          try {
-            const r = await fetch(SAL_URL, { cache: "no-store" });
-            if (!r.ok) return; // biarkan teks default
-            const s = await r.json();
-            setLine(
-              document.getElementById("sal-pm-1"),
-              s.product_manager?.Entry?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-pm-2"),
-              s.product_manager?.Mid?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-pm-3"),
-              s.product_manager?.Senior?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-ux-1"),
-              s.ux_researcher?.Entry?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-ux-2"),
-              s.ux_researcher?.Mid?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-ux-3"),
-              s.ux_researcher?.Senior?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-fe-1"),
-              s.frontend_developer?.Entry?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-fe-2"),
-              s.frontend_developer?.Mid?.Indonesia
-            );
-            setLine(
-              document.getElementById("sal-fe-3"),
-              s.frontend_developer?.Senior?.Indonesia
-            );
-          } catch (e) {
-            /* biarkan default */
-          }
-        }
-        document.addEventListener("DOMContentLoaded", hydrate);
-      })();
-    </script>
+    <!-- Page JS -->
+    <script src="./assets/js/lab-career.js"></script>
   </body>
 </html>
