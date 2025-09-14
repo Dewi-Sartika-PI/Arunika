@@ -1,9 +1,14 @@
 // assets/js/config.js
 (function (w) {
-  // GANTI ini dengan domain project kamu (tanpa /api/v1, tanpa /users di belakang)
-  const BASE   = 'https://68c52bd4a712aaca2b680abe.mockapi.io';
-  // Kalau di MockAPI resource kamu berada di /api/v1, isi sesuai (huruf kecil semua)
-  const PREFIX = '/api/v1';   // kalau projectmu tanpa prefix, jadikan ''.
+  // BASE URL Anda sudah benar
+  const BASE   = 'https://68c5526da712aaca2b6872b6.mockapi.io';
+  
+  // PREFIX ini harus dikosongkan karena tidak ada di URL Anda
+  const PREFIX = '';
+
+
+
+  // Fungsi ini tidak perlu diubah
 
   const join = (path) => `${BASE}${PREFIX}${path}`;
 
