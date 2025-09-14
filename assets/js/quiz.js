@@ -8,8 +8,8 @@ if (document.readyState === 'loading') {
 function runQuizApp() {
   const quizForm = document.getElementById('quiz-form');
   const questionsContainer = document.getElementById('questions');
-  const API_URL = 'https://68c5526da712aaca2b6872b6.mockapi.io/api/v1/quiz-results';
-
+  const API_URL = 'https://68c5526da712aaca2b6872b6.mockapi.io/quiz-results';
+  
   const quizQuestions = [
       { text: "Saya suka memecahkan masalah kompleks dan mencari solusi inovatif." },
       { text: "Saya menikmati bekerja dalam tim dan berkolaborasi dengan orang lain." },

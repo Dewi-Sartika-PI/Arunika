@@ -67,10 +67,9 @@
       if (toastText) toastText.textContent = 'Berhasil masuk. Mengalihkan…';
       toast?.classList.remove('hidden');
 
-      // ✅ Redirect ke index.html
+      // ✅ Diubah: Redirect ke lab-career.html
       setTimeout(() => {
-        // pakai replace supaya tombol Back tidak balik ke login
-        location.replace('./index.html');
+        location.replace('./lab-career.html');
       }, 600);
     }catch(err){
       if (toastText) toastText.textContent = err?.message || 'Gagal masuk.';
@@ -90,8 +89,8 @@
       if (toastText) toastText.textContent='Masuk via Google (dummy).';
       toast?.classList.remove('hidden');
 
-      // ✅ Redirect juga ke index.html
-      setTimeout(() => location.replace('./index.html'), 600);
+      // ✅ Diubah: Redirect juga ke lab-career.html
+      setTimeout(() => location.replace('./lab-career.html'), 600);
     }catch(err){
       if (toastText) toastText.textContent = err?.message || 'Gagal login Google.';
       toast?.classList.remove('hidden');
