@@ -111,9 +111,10 @@
       box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
     }
 
-/* Footer & misc */
-.card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
-.footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
+>>>>>>> 071264683ef8eb56161b02e5c9a5c518ae5f3b0c
+    /* Footer & misc */
+    .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
+    .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
     .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
     .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
     @media (prefers-reduced-motion:no-preference){
@@ -352,6 +353,16 @@
     themeToggleBtn?.addEventListener('click', () => {
       if(document.documentElement.classList.contains('dark')) setTheme('light'); else setTheme('dark');
     });
+  <!-- Dependencies untuk session & navbar -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/auth-ui.js"></script>
+  <script src="./assets/js/navbar.js"></script>
+
+
+   
+  <!-- Halaman-specific scripts (parallax, reveal, modal) -->
+  <script>
 
     (function(){
       const onScroll = () => {
@@ -452,9 +463,5 @@
   </script>
     <script src="./assets/js/navbar.js" defer></script>
     <script src="./assets/js/auth-ui.js" defer></script>
-</body>
-</html>
-    });
-  </script>
 </body>
 </html>
