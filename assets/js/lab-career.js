@@ -1,6 +1,5 @@
 /* ========= GUARDS (wajib login) ========= */
 try {
-  // pastikan guards.js sudah ter-load sebelum file ini
   Guard?.requireLoginOrRedirect("./login.html");
 } catch (e) {
   console.warn("guards.js belum tersedia atau Guard undefined.", e);
@@ -32,10 +31,7 @@ try {
   );
 })();
 
-/* ========= Navbar Component Mount =========
-   Asumsi: navbar.js otomatis render ke #navbar-root,
-   atau expose Navbar.mount(selector, { active: 'Lab Career' })
-*/
+/* ========= Navbar Component Mount ========= */
 (function () {
   if (window.Navbar?.mount) {
     Navbar.mount("#navbar-root", { active: "Lab Career" });
@@ -53,7 +49,7 @@ try {
   window.addEventListener("scroll", onScroll, { passive: true });
 })();
 
-/* ========= Scroll Reveal (supports dynamic content) ========= */
+/* ========= Scroll Reveal ========= */
 (function () {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let io = null;
@@ -79,7 +75,7 @@ try {
   scan();
 })();
 
-/* ========= Parallax (gentle) ========= */
+/* ========= Parallax ========= */
 (function () {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const mobile = () => window.matchMedia("(max-width: 767px)").matches;
@@ -111,7 +107,7 @@ try {
   window.addEventListener("resize", update, { passive: true });
 })();
 
-/* ========= Cyber cover height to Ringkasan Diri ========= */
+/* ========= Cyber cover height ========= */
 (function () {
   const section = document.getElementById("ringkasan-diri");
   const update = () => {
@@ -126,7 +122,7 @@ try {
   window.addEventListener("load", update);
 })();
 
-/* ========= LAB-CAREER DYNAMIC: Jobs + Ranking + Tracking ========= */
+/* ========= LAB-CAREER DYNAMIC ========= */
 (function () {
   const JOBS_URL = "./assets/data/jobs.json";
   const jobGrid = document.getElementById("job-list");
@@ -137,53 +133,42 @@ try {
   const fSalary = document.getElementById("f-salary");
 
   const FALLBACK_JOBS = [
-    {
-      id: "job_pm_01",
-      title: "Product Manager",
-      company: "Inovasi Digital",
-      location: "Jakarta",
-      level: "Mid",
-      role_key: "product_manager",
-      tags: ["leadership", "stakeholder", "roadmap"],
-      verified: true,
-      base_fit_score: 92,
-      min_salary: 12000000,
-      apply_url: "https://jobs.example.com/pm?id=01",
-    },
-    {
-      id: "job_ux_01",
-      title: "UI/UX Researcher",
-      company: "Visuara",
-      location: "Bandung",
-      level: "Entry",
-      role_key: "ux_researcher",
-      tags: ["interview", "usability", "synthesis"],
-      verified: true,
-      base_fit_score: 85,
-      min_salary: 9000000,
-      apply_url: "https://jobs.example.com/ux?id=01",
-    },
-    {
-      id: "job_fe_01",
-      title: "Frontend Developer",
-      company: "Tech Labs",
-      location: "Surabaya",
-      level: "Mid",
-      role_key: "frontend_developer",
-      tags: ["react", "ui patterns", "performance"],
-      verified: true,
-      base_fit_score: 81,
-      min_salary: 11000000,
-      apply_url: "https://jobs.example.com/fe?id=01",
-    },
+    { id: "job_pm_01", title: "Product Manager", company: "Inovasi Digital", location: "Jakarta", level: "Mid", role_key: "product_manager", tags: ["leadership","stakeholder","roadmap"], verified: true, base_fit_score: 92, min_salary: 12000000, apply_url: "https://jobs.example.com/pm?id=01" },
+    { id: "job_ux_01", title: "UI/UX Researcher", company: "Visuara", location: "Bandung", level: "Entry", role_key: "ux_researcher", tags: ["interview","usability","synthesis"], verified: true, base_fit_score: 85, min_salary: 9000000, apply_url: "https://jobs.example.com/ux?id=01" },
+    { id: "job_fe_01", title: "Frontend Developer", company: "Tech Labs", location: "Surabaya", level: "Mid", role_key: "frontend_developer", tags: ["react","ui patterns","performance"], verified: true, base_fit_score: 81, min_salary: 11000000, apply_url: "https://jobs.example.com/fe?id=01" },
   ];
 
+  // ======== REPLACE getQuizFit() DENGAN INI ========
   function getQuizFit() {
+    const d = window.UserData.loadSkillMatchForCurrentUser();
     return {
-      fit: Number(localStorage.getItem("arunika.fit") || 0),
-      role: (localStorage.getItem("arunika.role") || "").toLowerCase(),
+      fit: Number(d.fit || 0),
+      role: String(d.role || '').toLowerCase(),
+      strengths: d.strengths || [],
+      when: d.updatedAt || null,
     };
   }
+
+  // ---------- Hydrate ringkasan diri ----------
+  function hydrateSummary(quiz) {            // << ADDED
+    const pct = document.getElementById('fitPct');         // << ADDED
+    const bar = document.getElementById('fitBar');         // << ADDED
+    const roleName = document.getElementById('roleName');  // << ADDED
+    const strengthList = document.getElementById('strengthList'); // << ADDED
+    if (pct) pct.textContent = `${quiz.fit}%`;             // << ADDED
+    if (bar) bar.style.width = `${quiz.fit}%`;             // << ADDED
+    if (roleName) {                                        // << ADDED
+      const nice = quiz.role
+        ? quiz.role.replaceAll('_',' ').replace(/\b\w/g, c => c.toUpperCase())
+        : '—';
+      roleName.textContent = nice;
+    }
+    if (strengthList && quiz.strengths?.length) {
+      strengthList.innerHTML = quiz.strengths.slice(0,3).map(s =>
+        `<li><span class="bullet"></span><span>${s}</span></li>`
+      ).join('');
+    }
+  }                                                         // << ADDED
 
   function computeFinalScore(job, quiz) {
     const roleMatch = quiz.role && (job.role_key || "").toLowerCase().includes(quiz.role);
@@ -208,10 +193,7 @@ try {
   }
 
   function cardHTML(job) {
-    const chips = (job.tags || [])
-      .slice(0, 3)
-      .map((t) => `<span class="chip px-2.5 py-1 rounded-full">${t}</span>`)
-      .join("");
+    const chips = (job.tags || []).slice(0, 3).map((t) => `<span class="chip px-2.5 py-1 rounded-full">${t}</span>`).join("");
     const score = job.final_score || 0;
     return `
       <article class="reveal reveal-scale rounded-2xl p-6 border shadow-md hover:shadow-xl transition surface-1" style="border-color:var(--border)">
@@ -301,13 +283,15 @@ try {
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
+    try { window.UserData.migrateLegacySkillMatchToUserScope?.(); } catch {} // << ADDED
+    hydrateSummary(getQuizFit());                                          // << ADDED
     await loadJobs();
     apply();
     btnApply?.addEventListener("click", apply);
   });
 })();
 
-/* ========= SALARY: isi dari salary.json (opsional, desain tetap) ========= */
+/* ========= SALARY (opsional) ========= */
 (function () {
   const SAL_URL = "./assets/data/salary.json";
   const fmt = (n) => (n / 1_000_000).toFixed(0) + "jt";
@@ -329,9 +313,7 @@ try {
       setLine(document.getElementById("sal-fe-1"), s.frontend_developer?.Entry?.Indonesia);
       setLine(document.getElementById("sal-fe-2"), s.frontend_developer?.Mid?.Indonesia);
       setLine(document.getElementById("sal-fe-3"), s.frontend_developer?.Senior?.Indonesia);
-    } catch (e) {
-      /* keep default text */
-    }
+    } catch (e) { /* keep default text */ }
   }
   document.addEventListener("DOMContentLoaded", hydrate);
 })();
