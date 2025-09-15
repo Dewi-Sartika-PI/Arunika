@@ -57,10 +57,22 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: gradientFlow 6s ease infinite;
     }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* Neon cards */
+    .epic-card{ background:var(--surface-1); position:relative; overflow:hidden; transition: transform .4s ease, box-shadow .4s ease; }
+    .epic-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple); }
+    .neon-border{
+      border:2px solid transparent;
+      background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+                  linear-gradient(120deg, var(--accent-cyan), var(--accent-purple), var(--accent-fuchsia)) border-box;
+      border-radius:1.5rem; animation: neon-flow 5s linear infinite;
+    }
+    @keyframes neon-flow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    .epic-badge{
+      position:absolute; top:12px; right:16px; background:linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+      color:#fff; padding:2px 8px; border-radius:9999px; font-size:.75rem; font-weight:600; text-transform:uppercase;
+      box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
     }
     .bg-brand-gold {
   background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3);
@@ -77,7 +89,6 @@
   overflow: hidden;
   transition: transform .4s ease, box-shadow .4s ease;
 }
-
 .epic-card:hover {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple);
@@ -100,6 +111,7 @@
       box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
     }
 
+>>>>>>> 071264683ef8eb56161b02e5c9a5c518ae5f3b0c
     /* Footer & misc */
     .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
     .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
@@ -137,9 +149,12 @@
   <!-- Top Glass & NAVBAR (reusable) -->
   <div id="top-glass" aria-hidden="true"></div>
 
+
   <!-- Navbar placeholder -->
   <div id="navbar-root"></div>
 
+=======
+  <div id="navbar-root"></div>
 
 
   <main>
@@ -304,7 +319,15 @@
     </div>
   </footer>
 
+  <!-- Dependencies untuk session & navbar -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/auth-ui.js"></script>
+  <script src="./assets/js/navbar.js"></script>
+
+  <!-- Halaman-specific scripts (parallax, reveal, modal) -->
   <script>
+<<<<<<< HEAD
     
     // --- NAVIGASI ---
     function navigateTo(page){ window.location.href = page; }
@@ -339,9 +362,16 @@
   <script src="./assets/js/auth-ui.js"></script>
   <script src="./assets/js/navbar.js"></script>
 
+<<<<<<< HEAD
+    // --- Body scrolled -> aktifkan top glass ---
+=======
+    // body scrolled -> top glass
+>>>>>>> dev
+=======
   <!-- Halaman-specific scripts (parallax, reveal, modal) -->
   <script>
     // body scrolled -> top glass
+>>>>>>> 071264683ef8eb56161b02e5c9a5c518ae5f3b0c
     (function(){
       const onScroll = () => {
         document.body.classList.toggle('scrolled', (window.scrollY || document.documentElement.scrollTop) > 4);
