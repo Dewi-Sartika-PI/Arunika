@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Arunika – Lab Career</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="./assets/css/lab-career.css" />
+  </head>
+
+  <body>
+    <!-- top glass -->
+    <div id="top-glass" aria-hidden="true"></div>
+
+    <!-- cyber cover (with parallax) -->
+    <div class="top-cyber-cover" aria-hidden="true" data-parallax="0.06"></div>
+
+    <!-- NAVBAR (by component) -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4">
+      <div class="container mx-auto flex justify-center">
+        <!-- navbar.js akan render isi ke dalam root ini -->
+        <div id="navbar-root" class="w-full"></div>
+      </div>
+    </header>
+
+    <main class="pt-28 px-4 sm:px-6 lg:px-8">
+      <!-- HERO (with gentle parallax) -->
+      <section id="hero" class="py-16 md:py-20 text-center reveal reveal-up" data-parallax="0.12">
+        <div class="container mx-auto max-w-4xl">
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight grad-text">Selamat Datang di Lab Karir</h1>
+          <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-muted">
+            Ini adalah pusat kendali karirmu. Analisis hasil asesmen, temukan lowongan yang paling cocok, dan lihat proyeksi gajimu di sini.
+          </p>
+          <a href="#ringkasan-diri" class="mt-10 inline-block rounded-full px-8 py-4 font-bold text-lg btn-primary shadow-lg shadow-purple-500/20 transition hover:scale-105 transform hover:-translate-y-1">
+            Lihat Hasil Analisis
+          </a>
+        </div>
+      </section>
+
+      <!-- RINGKASAN DIRI -->
+      <section id="ringkasan-diri" class="py-14 reveal reveal-up">
+        <div class="container mx-auto max-w-7xl text-center">
+          <h2 class="summary-title">Grow your career with clarity</h2>
+          <p class="summary-lead mt-3">
+            Ringkasan personal dari Skill Match: kekuatan utama, role & karakter, serta skill gap prioritas.
+          </p>
+
+          <div class="summary-grid mt-10">
+            <!-- Strengths -->
+            <article class="neo-card reveal reveal-scale">
+              <h3 class="card-title text-white">Top Strengths</h3>
+              <p class="card-text mt-1">Berdasarkan asesmen terkini</p>
+              <ul id="strengthList" class="card-list">
+                <li><span class="bullet"></span><span>Analitis</span></li>
+                <li><span class="bullet"></span><span>Kreatif</span></li>
+                <li><span class="bullet"></span><span>Problem Solving</span></li>
+              </ul>
+              <div class="w-full mt-3">
+                <div class="flex justify-between text-[12px] text-white/70">
+                  <span>Base Fit</span><span id="fitPct">88%</span>
+                </div>
+                <div class="bar"><span id="fitBar" style="width: 88%"></span></div>
+              </div>
+            </article>
+
+            <!-- Role -->
+            <article class="neo-card reveal reveal-scale">
+              <h3 class="card-title text-white">Your Role</h3>
+              <p id="roleName" class="mt-1 text-[17px] font-extrabold">—</p>
+              <p class="card-text mt-2 max-w-xs mx-auto">
+                <span class="font-semibold">Karakter:</span>
+                <span id="roleTraits">Eksploratif, ideatif, orkestrasi lintas fungsi.</span>
+              </p>
+            </article>
+
+            <!-- Gaps -->
+            <article class="neo-card reveal reveal-scale">
+              <h3 class="card-title text-white">Skill Gaps (90 hari)</h3>
+              <ul id="gapList" class="card-list">
+                <li><span class="bullet"></span><span>Stakeholder mapping</span></li>
+                <li><span class="bullet"></span><span>Delivery cadence</span></li>
+                <li><span class="bullet"></span><span>Leadership communication</span></li>
+              </ul>
+              <a href="skill-match.html" class="mt-4 inline-block rounded-full px-4 py-2 font-semibold btn-primary shadow">Perbarui asesmen →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FILTERS -->
+      <section id="filters" class="py-10 reveal reveal-up">
+        <div class="container mx-auto max-w-6xl">
+          <div class="rounded-2xl p-5 md:p-6 surface-1 framed">
+            <div class="grid md:grid-cols-5 gap-4">
+              <select id="f-role" class="w-full rounded-xl px-3 py-2 border select">
+                <option value="">Semua Role</option>
+                <option>Product Manager</option>
+                <option>UI/UX Researcher</option>
+                <option>Frontend Developer</option>
+                <option>Data Scientist</option>
+              </select>
+              <select id="f-level" class="w-full rounded-xl px-3 py-2 border select">
+                <option value="">Semua Level</option>
+                <option>Entry</option>
+                <option>Mid</option>
+                <option>Senior</option>
+              </select>
+              <select id="f-loc" class="w-full rounded-xl px-3 py-2 border select">
+                <option value="ID">Seluruh Indonesia</option>
+                <option>Jakarta</option>
+                <option>Bandung</option>
+                <option>Surabaya</option>
+                <option>Medan</option>
+              </select>
+              <select id="f-salary" class="w-full rounded-xl px-3 py-2 border select">
+                <option value="0">Gaji: Semua</option>
+                <option value="9000000">≥ Rp 9 jt</option>
+                <option value="12000000">≥ Rp 12 jt</option>
+                <option value="15000000">≥ Rp 15 jt</option>
+              </select>
+              <button id="apply-filters" class="w-full rounded-full py-2.5 font-bold btn-primary">Terapkan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOB MATCH -->
+      <section class="py-12">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="text-2xl sm:text-3xl font-bold grad-text reveal reveal-up">Job Match</h2>
+          <div id="job-list" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"></div>
+        </div>
+      </section>
+
+      <!-- SALARY -->
+      <section class="py-10 reveal reveal-up">
+        <div class="container mx-auto max-w-6xl">
+          <div class="rounded-2xl p-6 surface-1 framed">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <h3 class="text-xl md:text-2xl font-bold ink">Salary Transparency — Indonesia</h3>
+              <p class="text-sm muted">Angka perkiraan: median & kuartil.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 mt-5" id="salary-grid">
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">Product Manager</h4>
+                <p class="text-sm mt-1 muted" id="sal-pm-1">Entry: P25 10jt • Median 13jt • P75 17jt</p>
+                <p class="text-sm muted" id="sal-pm-2">Mid: P25 14jt • Median 18jt • P75 24jt</p>
+                <p class="text-sm muted" id="sal-pm-3">Senior: P25 22jt • Median 28jt • P75 36jt</p>
+              </div>
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">UI/UX Researcher</h4>
+                <p class="text-sm mt-1 muted" id="sal-ux-1">Entry: P25 7jt • Median 9jt • P75 12jt</p>
+                <p class="text-sm muted" id="sal-ux-2">Mid: P25 10jt • Median 13jt • P75 17jt</p>
+                <p class="text-sm muted" id="sal-ux-3">Senior: P25 16jt • Median 21jt • P75 28jt</p>
+              </div>
+              <div class="rounded-xl p-4 surface-2">
+                <h4 class="font-semibold ink">Frontend Developer</h4>
+                <p class="text-sm mt-1 muted" id="sal-fe-1">Entry: P25 8jt • Median 11jt • P75 14jt</p>
+                <p class="text-sm muted" id="sal-fe-2">Mid: P25 12jt • Median 16jt • P75 22jt</p>
+                <p class="text-sm muted" id="sal-fe-3">Senior: P25 20jt • Median 26jt • P75 34jt</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="py-12 reveal reveal-up">
+        <div class="container mx-auto max-w-6xl">
+          <div class="rounded-2xl p-8 surface-1 framed">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 class="text-2xl font-bold ink">Siap lanjutkan perjalanan?</h3>
+                <p class="mt-2 muted">Simpan preferensi, terima rekomendasi mingguan, dan hubungkan ke mentor.</p>
+              </div>
+              <div class="flex gap-3">
+                <a href="skill-match.html" class="px-6 py-3 rounded-full font-bold btn-primary">Lanjutkan Skill Match</a>
+                <a href="index.html#pricing" class="px-6 py-3 rounded-full border-2 font-semibold accent-outline">Upgrade Pro</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-cyber relative z-0">
+      <div class="container mx-auto max-w-7xl py-14 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-start">
+          <div class="col-span-2">
+            <img src="./assets/img/logo.png" alt="Arunika" class="h-12 w-auto" />
+            <p class="mt-4 max-w-xs text-lg leading-relaxed">Playlist karir personalmu untuk masa depan yang lebih cerah.</p>
+          </div>
+          <nav aria-label="Perusahaan">
+            <h4 class="font-bold mb-4 text-xl text-white">Perusahaan</h4>
+            <ul class="space-y-3 text-lg">
+              <li><a href="about.html" class="footer-link">Tentang Kami</a></li>
+              <li><a href="#" class="footer-link">Partner</a></li>
+              <li><a href="#" class="footer-link">Press Kit</a></li>
+            </ul>
+          </nav>
+          <nav aria-label="Sosial Media">
+            <h4 class="font-bold mb-4 text-xl text-white">Sosial Media</h4>
+            <ul class="space-y-3 text-lg">
+              <li><a href="#" class="footer-link">Twitter</a></li>
+              <li><a href="#" class="footer-link">Instagram</a></li>
+              <li><a href="#" class="footer-link">Threads</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="mt-12 pt-6 border-t text-center text-sm border-purple-800/50 text-purple-200">
+          &copy; 2025 Arunika. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts (ORDER penting) -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/session.js"></script>
+    <script src="./assets/js/guards.js"></script>
+
+    <!-- Navbar component (harus sudah ada file-nya) -->
+    <script src="./assets/js/navbar.js"></script>
+
+    <!-- Page JS -->
+     <script src="./assets/js/user-data.js"></script>
+    <script src="./assets/js/lab-career.js"></script>
+  </body>
+</html>

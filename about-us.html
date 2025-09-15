@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang Kami - Arunika</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Warna Adaptif (Light/Dark) ---------- */
+    :root{
+      --bg-page:#F0F4F8; --surface-1:#FFFFFF; --surface-2:#F8FAFC;
+      --text:#1A202C; --text-muted:#4A5568;
+      --accent-blue:#3182CE; --accent-purple:#A259FF; --accent-cyan:#00FFFF; --accent-fuchsia:#FF00FF; --accent-red:#E53E3E;
+      --border:#CBD5E0; --border-soft:#E2E8F0;
+      --glass-bg: rgba(255,255,255,0.18); --glass-border: rgba(0,0,0,0.06);
+    }
+    .dark{
+      --bg-page:#070812; --surface-1:#0E1020; --surface-2:#141833;
+      --text:#E6EAF2; --text-muted:#A5B1C2;
+      --accent-blue:#00FFFF; --accent-purple:#B57CFF; --accent-fuchsia:#FF55FF; --accent-red:#FF3366;
+      --border:#252B3B; --border-soft:#1C2233;
+      --glass-bg: rgba(7,8,18,0.22); --glass-border: rgba(255,255,255,0.08);
+    }
+    body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text); }
+    body.dark{
+      background-image:
+        linear-gradient(rgba(23,25,44,0.6) 1px, transparent 1px),
+        linear-gradient(to right, rgba(23,25,44,0.6) 1px, var(--bg-page) 1px);
+      background-size:40px 40px;
+    }
+    /* Utilities & navbar styles reused */
+    .bg-brand-cream{background-color:var(--bg-page)} .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
+    .text-muted{color:var(--text-muted)} .bg-brand-gold{background-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
+    .navbar-blur{ background:rgba(255,255,255,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.25) }
+    .dark .navbar-blur{ background:rgba(10,12,28,.55); border:1px solid rgba(255,255,255,.08); box-shadow:0 0 24px #00FFFF22,0 0 48px #A259FF22 }
+    .nav-link{ color:var(--text-muted); transition:color .3s, background-color .3s }
+    .nav-link:hover{ color:var(--text); background-color:rgba(0,0,0,.05) }
+    .dark .nav-link:hover{ color:var(--text); text-shadow:0 0 8px var(--accent-cyan); background-color:rgba(255,255,255,.05) }
+
+    /* Top Glass */
+    #top-glass{
+      position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 40; pointer-events: none;
+      background: var(--glass-bg); border-bottom: 1px solid var(--glass-border);
+      -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+      opacity: 0; transition: opacity .28s ease;
+    }
+    body.scrolled #top-glass{ opacity: 1; }
+
+    /* Hero */
+    .hero-bg, .hero-gradient, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
+    .animated-gradient-text {
+      background: linear-gradient(-45deg,#A259FF,#00FFFF,#FF00FF,#3182CE);
+      background-size: 300% 300%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: gradientFlow 6s ease infinite;
+    }
+    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* Neon cards */
+    .epic-card{ background:var(--surface-1); position:relative; overflow:hidden; transition: transform .4s ease, box-shadow .4s ease; }
+    .epic-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple); }
+    .neon-border{
+      border:2px solid transparent;
+      background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+                  linear-gradient(120deg, var(--accent-cyan), var(--accent-purple), var(--accent-fuchsia)) border-box;
+      border-radius:1.5rem; animation: neon-flow 5s linear infinite;
+    }
+    @keyframes neon-flow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    .epic-badge{
+      position:absolute; top:12px; right:16px; background:linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+      color:#fff; padding:2px 8px; border-radius:9999px; font-size:.75rem; font-weight:600; text-transform:uppercase;
+      box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
+    }
+    .bg-brand-gold {
+  background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3);
+  background-size: 200% auto;
+  transition: all 0.5s ease-in-out;
+}
+.bg-brand-gold:hover { background-position: right center; }
+
+
+  /* --- Neon Card Styling --- */
+.epic-card {
+  background: var(--surface-1);
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.epic-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple);
+}
+
+
+    /* Neon cards */
+    .epic-card{ background:var(--surface-1); position:relative; overflow:hidden; transition: transform .4s ease, box-shadow .4s ease; }
+    .epic-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple); }
+    .neon-border{
+      border:2px solid transparent;
+      background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+                  linear-gradient(120deg, var(--accent-cyan), var(--accent-purple), var(--accent-fuchsia)) border-box;
+      border-radius:1.5rem; animation: neon-flow 5s linear infinite;
+    }
+    @keyframes neon-flow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    .epic-badge{
+      position:absolute; top:12px; right:16px; background:linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+      color:#fff; padding:2px 8px; border-radius:9999px; font-size:.75rem; font-weight:600; text-transform:uppercase;
+      box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
+    }
+
+>>>>>>> 071264683ef8eb56161b02e5c9a5c518ae5f3b0c
+    /* Footer & misc */
+    .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
+    .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
+    .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
+    .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
+    @media (prefers-reduced-motion:no-preference){
+      .sr{ opacity:0; filter:blur(6px); transform:translateY(28px);
+        will-change:transform,opacity,filter;
+        transition: opacity .7s cubic-bezier(.21,.6,.2,1), transform .7s cubic-bezier(.21,.6,.2,1), filter .7s cubic-bezier(.21,.6,.2,1);
+        transition-delay: var(--sr-delay, 0ms);
+      }
+      .sr-in{ opacity:1; filter:blur(0); transform:none }
+      .sr-left{ transform:translateX(-28px) } .sr-right{ transform:translateX(28px) } .sr-zoom{ transform: translateY(12px) scale(.96) }
+      .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms) }
+    }
+    body.light #footer-logo { filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
+
+    /* Modal */
+    .modal{ display:none; position:fixed; z-index:100; inset:0; background:rgba(0,0,0,.8); backdrop-filter:blur(8px) }
+    .modal-content{
+      background:var(--surface-1); margin:10% auto; padding:2rem; border-radius:1.5rem; width:85%; max-width:600px;
+      box-shadow:0 8px 32px rgba(162, 89, 255, .2); border:1px solid var(--border-soft); animation:modal-fade-in .3s cubic-bezier(.25,.46,.45,.94) forwards;
+    }
+    .dark .modal-content{ box-shadow:0 8px 32px rgba(0,255,255,.2) }
+    @keyframes modal-fade-in{ from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+    .close-btn{ color:var(--text-muted); float:right; font-size:2rem; font-weight:700; transition:color .3s }
+    .close-btn:hover, .close-btn:focus{ color:var(--accent-red); cursor:pointer }
+
+    .team-card{ transition: transform .3s, box-shadow .3s; cursor:pointer; position:relative }
+    .team-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 10px 20px rgba(162,89,255,.2), 0 4px 10px rgba(0,0,0,.1) }
+    .team-card img{ transition: filter .3s } .team-card:hover img{ filter:saturate(1.2) brightness(1.1) }
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-d-brown">
+  <!-- Top Glass & NAVBAR (reusable) -->
+  <div id="top-glass" aria-hidden="true"></div>
+
+
+  <!-- Navbar placeholder -->
+  <div id="navbar-root"></div>
+  <div id="navbar-root"></div>
+
+
+  <main>
+    <!-- Hero -->
+    <section class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div id="hero-bg" class="hero-bg absolute inset-0 z-0"
+           style="background-image:url('./assets/img/team.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
+      <div id="hero-grad" class="hero-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30 z-10"></div>
+      <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
+
+      <div id="hero-content" class="relative z-30 pt-72 pb-16 max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
+          Kenali <span class="animated-gradient-text">Arunika</span> Lebih Dalam
+        </h1>
+        <p class="mt-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-200 leading-relaxed">
+          Kami adalah tim di balik Arunika, berdedikasi untuk membantu setiap individu
+          menemukan irama karir mereka yang paling otentik.
+        </p>
+      </div>
+
+      <svg id="hero-wave" class="absolute bottom-0 left-0 w-full translate-y-px z-40" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+        <path class="wave-fill" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
+      </svg>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-brand-cream -mt-px">
+      <div class="container mx-auto max-w-7xl">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight sr" data-sr>Tim di Balik Layar</h2>
+          <p class="mt-6 text-lg text-muted leading-relaxed sr" data-sr data-sr-delay="120">
+            Kami adalah perpaduan dari kecerdasan buatan dan sentuhan manusia,
+            menciptakan alat yang lebih dari sekadar teknologi.
+          </p>
+        </div>
+
+        <div class="mt-16 grid lg:grid-cols-3 gap-12 justify-center sr-stagger" data-sr-group data-sr-stagger="150">
+          <!-- 1 -->
+          <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="1">
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+            </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Sylva</h3>
+            <p class="text-muted mt-2">Co-Founder</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="www.linkedin.com/in/sylva-zilyasri" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Sylva">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/zilyasri" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Sylva">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="2">
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/can.png" alt="Candra" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+            </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Candra</h3>
+            <p class="text-muted mt-2">Co-Founder & Chief AI Scientist</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="https://www.linkedin.com/in/candralorensia/" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Candra">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/clorensia" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Candra">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="3">
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+                 style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
+              <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+            </div>
+            <h3 class="mt-6 text-2xl font-bold text-brand-gold">Zulfa</h3>
+            <p class="text-muted mt-2">Co-Founder</p>
+            <div class="mt-4 flex justify-center space-x-4">
+              <a href="https://www.linkedin.com/in/zulfanikmah/" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Zulfa">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/zulfa-nkmh" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Zulfa">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal-1" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn" aria-label="Close">&times;</span>
+        <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Sylva</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">"Always think about what it is you're doing what is my end goal instead of just starting to code"</p>
+      </div>
+    </div>
+
+    <div id="modal-2" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn" aria-label="Close">&times;</span>
+        <img src="./assets/img/can.png" alt="Foto Candra" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Candra</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">"Clarity of purpose matters more than the speed of starting" </p>
+      </div>
+    </div>
+
+    <div id="modal-3" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn" aria-label="Close">&times;</span>
+        <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Zulfa</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">"I believe God grant me the Serenity to accept bugs I cannot reproduce, the Courage to fix bugs I can debug, and wisdom to know when it's a feature"</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-0 footer-cyber-bg">
+    <div class="container mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-2">
+          <div class="inline-block [perspective:1000px] sr" data-sr>
+            <img id="footer-logo" src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto footer-tilt" />
+          </div>
+          <p class="mt-4 max-w-xs text-lg leading-relaxed text-muted sr" data-sr data-sr-delay="120">
+            Playlist karir personalmu untuk masa depan yang lebih cerah.
+          </p>
+        </div>
+        <div class="sr" data-sr>
+          <h4 class="font-bold mb-4 text-xl">Perusahaan</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Tentang Kami</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Partner</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Press Kit</a></li>
+          </ul>
+        </div>
+        <div class="sr" data-sr data-sr-delay="80">
+          <h4 class="font-bold mb-4 text-xl">Sosial Media</h4>
+          <ul class="space-y-3 text-lg">
+            <li><a href="#" class="footer-link-hover text-muted">Twitter</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Instagram</a></li>
+            <li><a href="#" class="footer-link-hover text-muted">Threads</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t text-center text-sm text-muted sr" data-sr data-sr-delay="140" style="border-color:var(--border);">
+        &copy; 2025 Arunika. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dependencies untuk session & navbar -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/auth-ui.js"></script>
+  <script src="./assets/js/navbar.js"></script>
+
+  <!-- Halaman-specific scripts (parallax, reveal, modal) -->
+  <script>
+    
+    // --- NAVIGASI ---
+    function navigateTo(page){ window.location.href = page; }
+
+    // --- THEME TOGGLE ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const darkIcon  = document.getElementById('theme-toggle-dark-icon');
+    function setTheme(theme){
+      if(theme === 'dark'){
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark'); document.body.classList.remove('light');
+        darkIcon?.classList.remove('hidden'); lightIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','dark');
+      }else{
+        document.documentElement.classList.remove('dark');
+        document.body.classList.add('light'); document.body.classList.remove('dark');
+        lightIcon?.classList.remove('hidden'); darkIcon?.classList.add('hidden');
+        localStorage.setItem('color-theme','light');
+      }
+    }
+    const savedTheme = localStorage.getItem('color-theme');
+    if(savedTheme){ setTheme(savedTheme); }
+    else if(window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark'); }
+    else{ setTheme('light'); }
+    themeToggleBtn?.addEventListener('click', () => {
+      if(document.documentElement.classList.contains('dark')) setTheme('light'); else setTheme('dark');
+    });
+  <!-- Dependencies untuk session & navbar -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/auth-ui.js"></script>
+  <script src="./assets/js/navbar.js"></script>
+
+
+   
+  <!-- Halaman-specific scripts (parallax, reveal, modal) -->
+  <script>
+
+    (function(){
+      const onScroll = () => {
+        document.body.classList.toggle('scrolled', (window.scrollY || document.documentElement.scrollTop) > 4);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, {passive:true});
+    })();
+
+    // micro parallax hero
+    (function(){
+      const bg = document.getElementById('hero-bg');
+      const grad = document.getElementById('hero-grad');
+      const content = document.getElementById('hero-content');
+      const wave = document.getElementById('hero-wave');
+      if(!bg || !grad || !content || !wave) return;
+      let mx=0,my=0, smx=0,smy=0;
+      const lerp = (a,b,t)=> a+(b-a)*t;
+      window.addEventListener('mousemove',(e)=>{
+        const cx = window.innerWidth/2, cy = window.innerHeight/2;
+        mx = (e.clientX - cx)/cx; my = (e.clientY - cy)/cy;
+      }, {passive:true});
+      function frame(){
+        smx = lerp(smx,mx,0.08); smy = lerp(smy,my,0.08);
+        bg.style.transform     = `translate3d(${smx*15}px, ${smy*10}px,0) scale(1.08)`;
+        grad.style.transform   = `translate3d(${smx*8}px, ${smy*6}px,0)`;
+        content.style.transform= `translate3d(${-smx*10}px, ${-smy*6}px,0)`;
+        const sy = window.scrollY||0;
+        wave.style.transform   = `translateY(${1 + (sy%200)*0.05}px)`;
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    // footer tilt
+    (function(){
+      const logo = document.getElementById('footer-logo');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!logo || reduce) return;
+      const MAX=8;
+      logo.parentElement.addEventListener('mousemove', e=>{
+        const r = logo.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width, y=(e.clientY - r.top)/r.height;
+        logo.style.transform = `rotateX(${-(y-0.5)*MAX*2}deg) rotateY(${(x-0.5)*MAX*2}deg) translateZ(0)`;
+      });
+      logo.parentElement.addEventListener('mouseleave', ()=>{ logo.style.transform='rotateX(0) rotateY(0)'; });
+    })();
+
+    // Scroll-Reveal retriggerable
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = Array.from(document.querySelectorAll('[data-sr]'));
+      if (reduce) { items.forEach(el => el.classList.add('sr-in')); return; }
+      document.querySelectorAll('[data-sr-group]').forEach(group=>{
+        const stagger = parseInt(group.getAttribute('data-sr-stagger') || '120', 10);
+        const children = group.querySelectorAll('[data-sr-item]');
+        children.forEach((el, idx)=>{ el.style.setProperty('--sr-delay', `${idx * stagger}ms`); el.classList.add('sr'); });
+      });
+      items.forEach(el=>{
+        if (!el.classList.contains('sr')) el.classList.add('sr');
+        const d = el.getAttribute('data-sr-delay');
+        if (d) el.style.setProperty('--sr-delay', `${parseInt(d, 10)}ms`);
+      });
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const el = entry.target; const once = el.hasAttribute('data-sr-once');
+          if (entry.isIntersecting) el.classList.add('sr-in'); else if (!once) el.classList.remove('sr-in');
+        });
+      }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15 });
+      items.forEach(el => io.observe(el));
+    })();
+
+    // Modal logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const teamCards = document.querySelectorAll('.team-card');
+      const modals = document.querySelectorAll('.modal');
+      const closeButtons = document.querySelectorAll('.close-btn');
+
+      teamCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const memberId = card.getAttribute('data-id');
+          const modal = document.getElementById('modal-' + memberId);
+          if (modal) { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+        });
+      });
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const modal = btn.closest('.modal');
+          if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+        });
+      });
+      window.addEventListener('click', (event) => {
+        modals.forEach(modal => {
+          if (event.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+        });
+      });
+    });
+  </script>
+    <script src="./assets/js/navbar.js" defer></script>
+    <script src="./assets/js/auth-ui.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arunika — Skill Match</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="./assets/css/skill-match.css" />
+</head>
+
+<body>
+  <!-- top glass -->
+  <div id="top-glass" aria-hidden="true"></div>
+
+  <!-- NAVBAR (komponen) -->
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div id="navbar-root" class="w-full"></div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pt-32 pb-16 flex-1">
+    <!-- Header -->
+    <section id="quiz-header" class="max-w-3xl mx-auto mb-6 sr">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-center grad-text">Kuis Skill Match</h1>
+      <p class="text-center text-muted mt-2">Pilih angka 1–5 untuk tiap pernyataan di bawah ini.</p>
+    </section>
+
+    <!-- Progress -->
+    <section class="max-w-3xl mx-auto mb-6 sr p-4 sm:p-5 flex items-center justify-between gap-4 card-surface rounded-xl shadow-lg">
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <svg id="mascot" width="44" height="44" viewBox="0 0 64 64">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#A259FF"/><stop offset="1" stop-color="#00FFFF"/>
+              </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="28" fill="url(#g1)"/>
+            <circle cx="24" cy="26" r="4" fill="#fff"/>
+            <circle cx="40" cy="26" r="4" fill="#fff"/>
+            <rect id="mouth" x="24" y="36" width="16" height="6" rx="3" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm text-muted">Poin</div>
+          <div id="ui-points" class="text-2xl font-extrabold">0</div>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="progress"><div id="progress-bar" class="progress-fill"></div></div>
+        <div class="flex justify-between text-xs text-muted mt-1">
+          <span id="ui-progress-label">0/0</span>
+          <span id="ui-badge" class="font-semibold">Starter</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form id="quiz-form" novalidate class="max-w-3xl mx-auto">
+      <div id="questions" class="space-y-6"></div>
+      <div id="validation-message" class="text-center text-[var(--red)] font-semibold my-6 hidden"></div>
+      <div class="flex justify-center items-center gap-2 mt-8">
+        <button id="submit-btn" class="px-7 py-3 rounded-xl text-white font-semibold text-lg shadow-md hover:shadow-lg active:scale-[0.99] bg-gradient-to-r from-[var(--blue)] to-[var(--purple)]" type="submit">
+          Cek Hasil
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="mt-8 py-12"></footer>
+
+  <!-- Modal Hasil -->
+  <div id="result-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none" role="dialog">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="result-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-xl shadow-lg card-surface p-8 transform transition-transform duration-300 scale-95">
+      <button class="absolute top-4 right-4 text-2xl opacity-70 hover:opacity-100" id="result-close" aria-label="Tutup">✕</button>
+      <h2 id="result-title" class="text-2xl font-bold grad-text text-center">Rekomendasi Peran Untukmu</h2>
+      <div id="result-body" class="mt-6">
+        <div class="text-center">
+          <span id="result-badge" class="py-1.5 px-4 rounded-full text-base font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300"></span>
+          <div id="result-score" class="text-7xl font-extrabold my-2"></div>
+          <p class="text-muted">Fit Score</p>
+        </div>
+        <div class="mt-8">
+          <h3 class="font-semibold text-lg">Kekuatan Utamamu:</h3>
+          <div id="result-strengths" class="flex flex-wrap gap-3 mt-3"></div>
+        </div>
+        <div class="mt-6">
+          <h3 class="font-semibold text-lg">Saran Aksi:</h3>
+          <ul id="result-actions" class="mt-2 space-y-2 text-muted"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core deps (kalau dipakai di project-mu) -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/guards.js"></script>
+
+  <!-- Navbar component (wajib ada agar header tampil) -->
+  <script src="./assets/js/navbar.js"></script>
+
+  <!-- Page JS -->
+  <script src="./assets/js/user-data.js"></script>
+  <script src="./assets/js/quiz.js" defer></script>
+  
+</body>
+</html>
