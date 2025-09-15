@@ -45,18 +45,128 @@ function runQuizApp() {
         </div>`).join('');
   }
 
-  async function fetchAndProcessResults() {
-    try {
-      const response = await fetch(API_URL);
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
-      const allResults = await response.json();
-      const bestMatch = allResults.sort((a, b) => b.fitScore - a.fitScore)[0];
-      return bestMatch;
-    } catch (error) {
-      console.error("Error saat fetch:", error);
-      return null;
-    }
+  // async function fetchAndProcessResults() {
+  //   try {
+  //     const response = await fetch(API_URL);
+  //     if (!response.ok) throw new Error(`API error: ${response.status}`);
+  //     const allResults = await response.json();
+  //     const bestMatch = allResults.sort((a, b) => b.fitScore - a.fitScore)[0];
+  //     return bestMatch;
+  //   } catch (error) {
+  //     console.error("Error saat fetch:", error);
+  //     return null;
+  //   }
+  // }
+
+  // 1) mapping Q -> trait (sederhana, bisa kamu ubah sesuka hati)
+const TRAITS = ["analytical","creative","leadership","people","structure","adaptability"];
+const ROLE_DEF = {
+  "Product Manager":     { analytical: 0.3, leadership: 0.25, people: 0.2, adaptability: 0.15, structure: 0.1 },
+  "UI/UX Researcher":    { analytical: 0.25, people: 0.25, creative: 0.25, adaptability: 0.15, structure: 0.1 },
+  "Frontend Developer":  { analytical: 0.3, structure: 0.25, creative: 0.2, adaptability: 0.15, people: 0.1 },
+  "The Innovator":       { creative: 0.35, analytical: 0.2, adaptability: 0.2, leadership: 0.15, people: 0.1 }
+};
+
+// Setiap pertanyaan “dominan” ke trait tertentu
+const Q_TRAIT = [
+  "creative",        // 1
+  "people",          // 2
+  "analytical",      // 3
+  "creative",        // 4
+  "structure",       // 5
+  "leadership",      // 6
+  "structure",       // 7
+  "adaptability",    // 8
+  "people",          // 9
+  "analytical",      // 10 -> misal prefer independen = analytical
+  "analytical",      // 11
+  "leadership"       // 12 (risk taking -> leadership/innovation)
+];
+
+// 2) ambil jawaban form → skor trait 0..1
+function getTraitScores() {
+  const answers = [];
+  for (let i = 0; i < Q_TRAIT.length; i++) {
+    const v = Number((document.querySelector(`input[name="q${i+1}"]:checked`)||{}).value || 0);
+    answers.push(v); // 1..5
   }
+  const sums = Object.fromEntries(TRAITS.map(t => [t, 0]));
+  answers.forEach((v, idx) => {
+    const t = Q_TRAIT[idx];
+    if (t) sums[t] += v; // akumulasi
+  });
+  // normalisasi ke 0..1 (max tiap trait = 5 * jumlah pertanyaan trait tsb)
+  const counts = Object.fromEntries(TRAITS.map(t => [t, 0]));
+  Q_TRAIT.forEach(t => { counts[t] = (counts[t]||0) + 1; });
+  const scores = {};
+  TRAITS.forEach(t => {
+    const max = (counts[t] || 1) * 5;
+    scores[t] = max ? (sums[t] / max) : 0;
+  });
+  return scores; // {analytical:0.xx,...}
+}
+
+// 3) hitung kecocokan ke masing² role → pilih terbaik
+function calculateResultFromAnswers() {
+  const traits = getTraitScores();
+
+  let best = null;
+  Object.entries(ROLE_DEF).forEach(([role, weights]) => {
+    // cosine-like: sum(trait_score * weight)
+    let s = 0;
+    Object.entries(weights).forEach(([t, w]) => {
+      s += (traits[t] || 0) * w;
+    });
+    const fitScore = Math.round(s * 100);
+    if (!best || fitScore > best.fitScore) {
+      best = { recommendedRole: role, fitScore };
+    }
+  });
+
+  // strengths sederhana: top 3 trait user
+  const strengths = Object.entries(traits)
+    .sort((a,b)=>b[1]-a[1]).slice(0,3)
+    .map(([t]) => ({
+      analytical: "Berpikir Analitis",
+      creative: "Pemecahan Masalah Kreatif",
+      leadership: "Kepemimpinan",
+      people: "Kolaborasi",
+      structure: "Ketelitian & Struktur",
+      adaptability: "Adaptif pada Perubahan",
+    }[t]));
+
+  // saran aksi default per role
+  const ACTIONS = {
+    "Product Manager": [
+      "Latih stakeholder mapping pada proyek nyata.",
+      "Rutin review metrik produk dan tulis insight mingguan.",
+      "Pimpin sprint planning kecil 2–3 orang."
+    ],
+    "UI/UX Researcher": [
+      "Jadwalkan 5 user interview untuk satu use case.",
+      "Buat research plan + analisis temuan di Notion/FigJam.",
+      "Latihan usability testing dengan skenario sederhana."
+    ],
+    "Frontend Developer": [
+      "Bangun komponen UI reusable dengan React + Tailwind.",
+      "Benchmark performa (LCP/CLS) dan optimasi sederhana.",
+      "Tulis unit test untuk satu fitur UI."
+    ],
+    "The Innovator": [
+      "Ambil kursus singkat Design Thinking.",
+      "Ikut webinar teknologi yang kamu minati.",
+      "Bikin side-project eksperimental 2 minggu."
+    ]
+  };
+
+  return {
+    recommendedRole: best.recommendedRole,
+    fitScore: Math.max(40, Math.min(98, best.fitScore)), // jaga rentang enak dilihat
+    strengths,
+    actions: ACTIONS[best.recommendedRole] || ACTIONS["The Innovator"]
+  };
+}
+
 
   // =================================================================
   // !!! FUNGSI renderResults() YANG DIPERBARUI DENGAN TOMBOL !!!
@@ -178,10 +288,22 @@ function runQuizApp() {
         validationMessage.classList.remove('hidden');
       } else {
         validationMessage.classList.add('hidden');
-        const finalResult = await fetchAndProcessResults();
-        renderResults(finalResult);
-        if (window.SkillMatchUI) window.SkillMatchUI.openResultModal();
+        const finalResult = calculateResultFromAnswers();   // ← hasil berdasar jawaban
+renderResults(finalResult);
+
+// SIMPAN ke localStorage (supaya Lab Career baca)
+if (finalResult && window.UserData?.saveSkillMatchResult) {
+  window.UserData.saveSkillMatchResult({
+    fit: Number(finalResult.fitScore || 0),
+    role: String(finalResult.recommendedRole || ''),
+    strengths: finalResult.strengths || [],
+    actions: finalResult.actions || [],
+  });
+}
+if (window.SkillMatchUI) window.SkillMatchUI.openResultModal();
+
       }
+
     });
   }
 }
