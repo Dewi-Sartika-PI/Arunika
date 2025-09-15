@@ -24,81 +24,57 @@
       --border:#252B3B; --border-soft:#1C2233;
       --glass-bg: rgba(7,8,18,0.22); --glass-border: rgba(255,255,255,0.08);
     }
-    body{
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text);
-    }
+    body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family:'Inter',sans-serif; background:var(--bg-page); color:var(--text); }
     body.dark{
       background-image:
         linear-gradient(rgba(23,25,44,0.6) 1px, transparent 1px),
         linear-gradient(to right, rgba(23,25,44,0.6) 1px, var(--bg-page) 1px);
       background-size:40px 40px;
     }
-    /* Utilities */
-    .bg-brand-cream{background-color:var(--bg-page)} .bg-brand-ivory{background-color:var(--surface-1)}
-    .text-brand-d-brown{color:var(--text)} .text-muted{color:var(--text-muted)}
-    .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
-    .border-soft{border-color:var(--border-soft)} .border-strong{border-color:var(--border)}
-    .bg-brand-gold{background:var(--accent-blue)} .border-brand-gold{border-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
-    .focus\:ring-brand-gold:focus{--tw-ring-color:var(--accent-blue)}
-    .bg-brand-red{background:var(--accent-red)} .border-brand-red{border-color:var(--accent-red)} .text-brand-red{color:var(--accent-red)}
-    .wave-fill{ fill:var(--bg-page) }
-    .ai-gradient-text{
-      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
-    .dark .ai-gradient-text{
-      background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      animation:text-glow-dark 2s ease-in-out infinite alternate;
-    }
-    @keyframes text-glow-dark{
-      from{ text-shadow:0 0 6px var(--accent-cyan),0 0 10px var(--accent-purple) }
-      to{   text-shadow:0 0 10px var(--accent-purple),0 0 20px var(--accent-cyan) }
-    }
-    /* Navbar blur */
+    /* Utilities & navbar styles reused */
+    .bg-brand-cream{background-color:var(--bg-page)} .surface-1{background:var(--surface-1)} .surface-2{background:var(--surface-2)}
+    .text-muted{color:var(--text-muted)} .bg-brand-gold{background-color:var(--accent-blue)} .text-brand-gold{color:var(--accent-blue)}
     .navbar-blur{ background:rgba(255,255,255,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.25) }
     .dark .navbar-blur{ background:rgba(10,12,28,.55); border:1px solid rgba(255,255,255,.08); box-shadow:0 0 24px #00FFFF22,0 0 48px #A259FF22 }
     .nav-link{ color:var(--text-muted); transition:color .3s, background-color .3s }
     .nav-link:hover{ color:var(--text); background-color:rgba(0,0,0,.05) }
     .dark .nav-link:hover{ color:var(--text); text-shadow:0 0 8px var(--accent-cyan); background-color:rgba(255,255,255,.05) }
-    /* Top Glass (blur transparan saat scroll) */
+
+    /* Top Glass */
     #top-glass{
-      position: fixed; top: 0; left: 0; right: 0; height: 64px;
-      z-index: 40; pointer-events: none;
+      position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 40; pointer-events: none;
       background: var(--glass-bg); border-bottom: 1px solid var(--glass-border);
-      -webkit-backdrop-filter: saturate(140%) blur(14px);
-      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
       opacity: 0; transition: opacity .28s ease;
     }
     body.scrolled #top-glass{ opacity: 1; }
+
     /* Hero */
-    .hero-btn{
-      font-size:1.125rem; padding:.875rem 2.5rem; border-radius:9999px;
-      background:linear-gradient(90deg,var(--accent-blue),var(--accent-purple));
-      color:#fff; transition:all .3s ease-in-out; font-weight:600; display:inline-flex; align-items:center;
-    }
-    .hero-btn:hover{ transform:scale(1.05) translateY(-2px); box-shadow:0 10px 20px -5px rgba(107,70,193,.4) }
-    .dark .hero-btn:hover{ box-shadow:0 0 25px var(--accent-cyan),0 0 15px var(--accent-purple) }
-    .hero-bg, .hero-gradient, #particles-bg, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
+    .hero-bg, .hero-gradient, #hero-wave { will-change:transform; transform:translate3d(0,0,0) }
     .animated-gradient-text {
-      background: linear-gradient(
-        -45deg,
-        #A259FF,
-        #00FFFF,
-        #FF00FF,
-        #3182CE
-      );
+      background: linear-gradient(-45deg,#A259FF,#00FFFF,#FF00FF,#3182CE);
       background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: gradientFlow 6s ease infinite;
     }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* Neon cards */
+    .epic-card{ background:var(--surface-1); position:relative; overflow:hidden; transition: transform .4s ease, box-shadow .4s ease; }
+    .epic-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple); }
+    .neon-border{
+      border:2px solid transparent;
+      background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+                  linear-gradient(120deg, var(--accent-cyan), var(--accent-purple), var(--accent-fuchsia)) border-box;
+      border-radius:1.5rem; animation: neon-flow 5s linear infinite;
     }
+    @keyframes neon-flow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    .epic-badge{
+      position:absolute; top:12px; right:16px; background:linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+      color:#fff; padding:2px 8px; border-radius:9999px; font-size:.75rem; font-weight:600; text-transform:uppercase;
+      box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
+    }
+<<<<<<< HEAD
     .bg-brand-gold {
   background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3);
   background-size: 200% auto;
@@ -115,155 +91,58 @@
   transition: transform .4s ease, box-shadow .4s ease;
 }
 
-.epic-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 0 25px var(--accent-cyan), 0 0 45px var(--accent-purple);
-}
-
-/* Border neon animasi */
-.neon-border {
-  border: 2px solid transparent;
-  background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
-              linear-gradient(120deg, var(--accent-cyan), var(--accent-purple), var(--accent-fuchsia)) border-box;
-  border-radius: 1.5rem;
-  animation: neon-flow 5s linear infinite;
-}
-
-@keyframes neon-flow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-/* Badge pojok atas */
-.epic-badge {
-  position: absolute;
-  top: 12px; right: 16px;
-  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
-  color: white;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  box-shadow: 0 0 12px var(--accent-purple), 0 0 20px var(--accent-cyan);
-}
-    /* Komponen lain */
+    /* Footer & misc */
     .card{ background:var(--surface-1); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05); padding:2rem }
-    .section-title{ color:#1e3a8a } .dark .section-title{ color:#90cdf4 } .section-subtitle{ color:var(--text-muted) }
-    .match-bar-bg{ background:#e2e8f0 } .dark .match-bar-bg{ background:#1f2937 }
-    .match-bar-fill{ background-image:linear-gradient(to right,#6366f1,#8b5cf6) } .dark .match-bar-fill{ background-image:linear-gradient(90deg,var(--accent-cyan),var(--accent-fuchsia)) }
-    /* Footer */
     .footer-cyber-bg{ background:linear-gradient(135deg,#E0F7FA 0%,#F0F4F8 100%); position:relative }
     .dark .footer-cyber-bg{ background:linear-gradient(135deg,#0B0C1B 0%,#17192C 100%); border-top:1px solid var(--border) }
-    .dark .footer-cyber-bg::before{
-      content:''; position:absolute; inset:0;
-      background-image:linear-gradient(rgba(23,25,44,.8) 1px, transparent 1px),
-                       linear-gradient(to right, rgba(23,25,44,.8) 1px, var(--bg-page) 1px);
-      background-size:30px 30px; opacity:.1; z-index:0;
-    }
     .footer-tilt{ transition:transform .2s ease-out; transform-style:preserve-3d; }
-    /* -------- Scroll-Reveal (retriggerable) -------- */
     @media (prefers-reduced-motion:no-preference){
-      .sr{
-        opacity:0; filter:blur(6px);
-        transform:translateY(28px);
+      .sr{ opacity:0; filter:blur(6px); transform:translateY(28px);
         will-change:transform,opacity,filter;
-        transition:
-          opacity .7s cubic-bezier(.21,.6,.2,1),
-          transform .7s cubic-bezier(.21,.6,.2,1),
-          filter .7s cubic-bezier(.21,.6,.2,1);
+        transition: opacity .7s cubic-bezier(.21,.6,.2,1), transform .7s cubic-bezier(.21,.6,.2,1), filter .7s cubic-bezier(.21,.6,.2,1);
         transition-delay: var(--sr-delay, 0ms);
       }
       .sr-in{ opacity:1; filter:blur(0); transform:none }
-      .sr-left{ transform:translateX(-28px) }
-      .sr-right{ transform:translateX(28px) }
-      .sr-zoom{ transform: translateY(12px) scale(.96) }
-      .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms); }
+      .sr-left{ transform:translateX(-28px) } .sr-right{ transform:translateX(28px) } .sr-zoom{ transform: translateY(12px) scale(.96) }
+      .sr-stagger > .sr{ transition-delay: var(--sr-delay, 0ms) }
     }
-    /*footer dark light mode*/
-    body.light #footer-logo {
-      filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+    body.light #footer-logo { filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
+
+    /* Modal */
+    .modal{ display:none; position:fixed; z-index:100; inset:0; background:rgba(0,0,0,.8); backdrop-filter:blur(8px) }
+    .modal-content{
+      background:var(--surface-1); margin:10% auto; padding:2rem; border-radius:1.5rem; width:85%; max-width:600px;
+      box-shadow:0 8px 32px rgba(162, 89, 255, .2); border:1px solid var(--border-soft); animation:modal-fade-in .3s cubic-bezier(.25,.46,.45,.94) forwards;
     }
-    /* Pop Up */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-    }
-    .modal-content {
-      background: var(--surface-1);
-      margin: 10% auto;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      width: 85%;
-      max-width: 600px;
-      box-shadow: 0 8px 32px rgba(162, 89, 255, 0.2);
-      border: 1px solid var(--border-soft);
-      animation: modal-fade-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-    .dark .modal-content {
-      box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
-    }
-    @keyframes modal-fade-in {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .close-btn {
-      color: var(--text-muted);
-      float: right;
-      font-size: 2rem;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    .close-btn:hover, .close-btn:focus {
-      color: var(--accent-red);
-      text-decoration: none;
-      cursor: pointer;
-    }
-    /* Team Card */
-    .team-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      position: relative;
-    }
-    .team-card:hover {
-      transform: translateY(-8px) scale(1.05);
-      box-shadow: 0 10px 20px rgba(162, 89, 255, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .team-card img {
-      transition: filter 0.3s ease;
-    }
-    .team-card:hover img {
-      filter: saturate(1.2) brightness(1.1);
-    }
+    .dark .modal-content{ box-shadow:0 8px 32px rgba(0,255,255,.2) }
+    @keyframes modal-fade-in{ from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+    .close-btn{ color:var(--text-muted); float:right; font-size:2rem; font-weight:700; transition:color .3s }
+    .close-btn:hover, .close-btn:focus{ color:var(--accent-red); cursor:pointer }
+
+    .team-card{ transition: transform .3s, box-shadow .3s; cursor:pointer; position:relative }
+    .team-card:hover{ transform: translateY(-8px) scale(1.05); box-shadow: 0 10px 20px rgba(162,89,255,.2), 0 4px 10px rgba(0,0,0,.1) }
+    .team-card img{ transition: filter .3s } .team-card:hover img{ filter:saturate(1.2) brightness(1.1) }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-d-brown">
-  <!-- Top Glass Blur -->
+  <!-- Top Glass & NAVBAR (reusable) -->
   <div id="top-glass" aria-hidden="true"></div>
+
 
   <!-- Navbar placeholder -->
   <div id="navbar-root"></div>
 
+=======
+  <div id="navbar-root"></div>
 
   <main>
     <!-- Hero -->
     <section class="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <!-- BG -->
       <div id="hero-bg" class="hero-bg absolute inset-0 z-0"
            style="background-image:url('./assets/img/team.png'); background-size:cover; background-position:center; transform:scale(1.08)"></div>
-      <!-- Gradient -->
       <div id="hero-grad" class="hero-gradient absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/30 z-10"></div>
-      <!-- Particles -->
       <canvas id="particles-bg" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
-      <!-- Content -->
+
       <div id="hero-content" class="relative z-30 pt-72 pb-16 max-w-4xl mx-auto">
         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tighter">
           Kenali <span class="animated-gradient-text">Arunika</span> Lebih Dalam
@@ -273,7 +152,7 @@
           menemukan irama karir mereka yang paling otentik.
         </p>
       </div>
-      <!-- Wave -->
+
       <svg id="hero-wave" class="absolute bottom-0 left-0 w-full translate-y-px z-40" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
         <path class="wave-fill" d="M0,80 C480,160 960,0 1440,80 L1440,120 L0,120 Z"/>
       </svg>
@@ -289,119 +168,96 @@
             menciptakan alat yang lebih dari sekadar teknologi.
           </p>
         </div>
+
         <div class="mt-16 grid lg:grid-cols-3 gap-12 justify-center sr-stagger" data-sr-group data-sr-stagger="150">
-          <!-- Team Member 1 -->
+          <!-- 1 -->
           <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="1">
-  <span class="epic-badge">ARUNIKA</span>
-<div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
                  style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
               <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-             </div>
+            </div>
             <h3 class="mt-6 text-2xl font-bold text-brand-gold">Sylva</h3>
             <p class="text-muted mt-2">Co-Founder</p>
             <div class="mt-4 flex justify-center space-x-4">
-              <a href="www.linkedin.com/in/sylva-zilyasri" class="text-muted hover:text-brand-gold transition-colors">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Sylva">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
-              <a href="https://github.com/zilyasri" class="text-muted hover:text-brand-gold transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg> </a>  
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Sylva">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
               </a>
             </div>
           </div>
-          
-          <!-- Team Member 2 -->
+
+          <!-- 2 -->
           <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="2">
-  <span class="epic-badge">ARUNIKA</span>
-          <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
                  style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
               <img src="./assets/img/can.png" alt="Candra" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
             </div>
             <h3 class="mt-6 text-2xl font-bold text-brand-gold">Candra</h3>
             <p class="text-muted mt-2">Co-Founder & Chief AI Scientist</p>
             <div class="mt-4 flex justify-center space-x-4">
-              <a href="https://www.linkedin.com/in/candralorensia/" class="text-muted hover:text-brand-gold transition-colors">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Candra">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
-              <a href="https://github.com/clorensia" class="text-muted hover:text-brand-gold transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg> </a>
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Candra">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
               </a>
             </div>
           </div>
-          <!-- Team Member 3 -->
+
+          <!-- 3 -->
           <div class="team-card epic-card neon-border rounded-3xl p-6 text-center sr sr-zoom" data-sr data-sr-item data-id="3">
-  <span class="epic-badge">ARUNIKA</span>
-          <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
+            <span class="epic-badge">ARUNIKA</span>
+            <div class="relative w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-brand-gold shadow-lg"
                  style="box-shadow: 0 0 12px var(--accent-purple), 0 0 24px var(--accent-cyan);">
-              <img src="./assets/img/zuzu.png" alt="Zulfa" 
-     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-</div>
+              <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+            </div>
             <h3 class="mt-6 text-2xl font-bold text-brand-gold">Zulfa</h3>
             <p class="text-muted mt-2">Co-Founder</p>
             <div class="mt-4 flex justify-center space-x-4">
-              <a href="https://www.linkedin.com/in/zulfanikmah/" class="text-muted hover:text-brand-gold transition-colors">
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="LinkedIn Zulfa">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
-              <a href="https://github.com/zulfa-nkmh" class="text-muted hover:text-brand-gold transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg> </a>
-        </a>
+              <a href="#" class="text-muted hover:text-brand-gold transition-colors" aria-label="GitHub Zulfa">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Pop Up Modals (One for each member) -->
+    <!-- Modals -->
     <div id="modal-1" class="modal">
       <div class="modal-content text-center">
-        <span class="close-btn">&times;</span>
+        <span class="close-btn" aria-label="Close">&times;</span>
         <img src="./assets/img/syl.png" alt="Foto Sylva" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
         <h3 class="text-3xl font-bold text-brand-gold">Sylva</h3>
         <p class="text-muted mt-1">Co-Founder</p>
-        <p class="mt-4 text-left leading-relaxed">
-          "Always think about what it is you're doing what is my end goal instead of just starting to code"</p>
-           <div class="mt-6 flex justify-center space-x-4">
-          <a href="https://www.linkedin.com/in/sylva-zilyasri" class="text-muted hover:text-brand-gold transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://github.com/zilyasri" class="text-muted hover:text-brand-gold transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg> </a>
-        </div>
+        <p class="mt-4 text-left leading-relaxed">Sylva adalah .........</p>
       </div>
     </div>
-    <div id="modal-3" class="modal">
-      <div class="modal-content text-center">
-        <span class="close-btn">&times;</span>
-        <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
-        <h3 class="text-3xl font-bold text-brand-gold">Zulfa</h3>
-        <p class="text-muted mt-1">Co-Founder</p>
-        <p class="mt-4 text-left leading-relaxed">
-          “Don’t comment bad code—rewrite it.”</p>
-           <div class="mt-6 flex justify-center space-x-4">
-          <a href="https://www.linkedin.com/in/zulfanikmah/" class="text-muted hover:text-brand-gold transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://github.com/zulfa-nkmh" class="text-muted hover:text-brand-gold transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>  
-          </a>
-        </div>
-      </div>
-    </div>
+
     <div id="modal-2" class="modal">
       <div class="modal-content text-center">
-        <span class="close-btn">&times;</span>
+        <span class="close-btn" aria-label="Close">&times;</span>
         <img src="./assets/img/can.png" alt="Foto Candra" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
         <h3 class="text-3xl font-bold text-brand-gold">Candra</h3>
         <p class="text-muted mt-1">Co-Founder</p>
-        <p class="mt-4 text-left leading-relaxed">
-          "Clarity of purpose matters more than the speed of starting" </p>
-        <div class="mt-6 flex justify-center space-x-4">
-          <a href="https://www.linkedin.com/in/candralorensia" class="text-muted hover:text-brand-gold transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764c.966 0 1.75.788 1.75 1.764s-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://github.com/clorensia" class="text-muted hover:text-brand-gold transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
-          </a>
-        </div>
+        <p class="mt-4 text-left leading-relaxed">Candra adalah ..... </p>
+      </div>
+    </div>
+
+    <div id="modal-3" class="modal">
+      <div class="modal-content text-center">
+        <span class="close-btn" aria-label="Close">&times;</span>
+        <img src="./assets/img/zuzu.png" alt="Zulfa" class="w-48 h-48 mx-auto rounded-full object-cover mb-4" />
+        <h3 class="text-3xl font-bold text-brand-gold">Zulfa</h3>
+        <p class="text-muted mt-1">Co-Founder</p>
+        <p class="mt-4 text-left leading-relaxed">Zulfa adalah ..... </p>
       </div>
     </div>
   </main>
@@ -441,7 +297,15 @@
     </div>
   </footer>
 
+  <!-- Dependencies untuk session & navbar -->
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/session.js"></script>
+  <script src="./assets/js/auth-ui.js"></script>
+  <script src="./assets/js/navbar.js"></script>
+
+  <!-- Halaman-specific scripts (parallax, reveal, modal) -->
   <script>
+<<<<<<< HEAD
     
     // --- NAVIGASI ---
     function navigateTo(page){ window.location.href = page; }
@@ -472,19 +336,18 @@
     });
 
     // --- Body scrolled -> aktifkan top glass ---
+=======
+    // body scrolled -> top glass
+>>>>>>> dev
     (function(){
       const onScroll = () => {
-        if ((window.scrollY || document.documentElement.scrollTop) > 4) {
-          document.body.classList.add('scrolled');
-        } else {
-          document.body.classList.remove('scrolled');
-        }
+        document.body.classList.toggle('scrolled', (window.scrollY || document.documentElement.scrollTop) > 4);
       };
       onScroll();
       window.addEventListener('scroll', onScroll, {passive:true});
     })();
 
-    // --- Hero: Micro Parallax (mouse) ---
+    // micro parallax hero
     (function(){
       const bg = document.getElementById('hero-bg');
       const grad = document.getElementById('hero-grad');
@@ -495,8 +358,7 @@
       const lerp = (a,b,t)=> a+(b-a)*t;
       window.addEventListener('mousemove',(e)=>{
         const cx = window.innerWidth/2, cy = window.innerHeight/2;
-        mx = (e.clientX - cx)/cx;
-        my = (e.clientY - cy)/cy;
+        mx = (e.clientX - cx)/cx; my = (e.clientY - cy)/cy;
       }, {passive:true});
       function frame(){
         smx = lerp(smx,mx,0.08); smy = lerp(smy,my,0.08);
@@ -504,13 +366,13 @@
         grad.style.transform   = `translate3d(${smx*8}px, ${smy*6}px,0)`;
         content.style.transform= `translate3d(${-smx*10}px, ${-smy*6}px,0)`;
         const sy = window.scrollY||0;
-        wave.style.transform = `translateY(${1 + (sy%200)*0.05}px)`;
+        wave.style.transform   = `translateY(${1 + (sy%200)*0.05}px)`;
         requestAnimationFrame(frame);
       }
       frame();
     })();
 
-    // --- Footer: tilt hover ---
+    // footer tilt
     (function(){
       const logo = document.getElementById('footer-logo');
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -524,7 +386,7 @@
       logo.parentElement.addEventListener('mouseleave', ()=>{ logo.style.transform='rotateX(0) rotateY(0)'; });
     })();
 
-    // --- Scroll-Reveal retriggerable (vanilla IO) ---
+    // Scroll-Reveal retriggerable
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const items = Array.from(document.querySelectorAll('[data-sr]'));
@@ -532,10 +394,7 @@
       document.querySelectorAll('[data-sr-group]').forEach(group=>{
         const stagger = parseInt(group.getAttribute('data-sr-stagger') || '120', 10);
         const children = group.querySelectorAll('[data-sr-item]');
-        children.forEach((el, idx)=>{
-          el.style.setProperty('--sr-delay', `${idx * stagger}ms`);
-          el.classList.add('sr');
-        });
+        children.forEach((el, idx)=>{ el.style.setProperty('--sr-delay', `${idx * stagger}ms`); el.classList.add('sr'); });
       });
       items.forEach(el=>{
         if (!el.classList.contains('sr')) el.classList.add('sr');
@@ -544,51 +403,35 @@
       });
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
-          const el = entry.target;
-          const once = el.hasAttribute('data-sr-once');
-          if (entry.isIntersecting) {
-            el.classList.add('sr-in');
-          } else {
-            if (!once) el.classList.remove('sr-in');
-          }
+          const el = entry.target; const once = el.hasAttribute('data-sr-once');
+          if (entry.isIntersecting) el.classList.add('sr-in'); else if (!once) el.classList.remove('sr-in');
         });
       }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.15 });
       items.forEach(el => io.observe(el));
     })();
-    
-    // --- Pop Up Modal Logic ---
+
+    // Modal logic
     document.addEventListener('DOMContentLoaded', () => {
       const teamCards = document.querySelectorAll('.team-card');
       const modals = document.querySelectorAll('.modal');
       const closeButtons = document.querySelectorAll('.close-btn');
-      
+
       teamCards.forEach(card => {
         card.addEventListener('click', () => {
           const memberId = card.getAttribute('data-id');
           const modal = document.getElementById('modal-' + memberId);
-          if (modal) {
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Disable scrolling
-          }
+          if (modal) { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
         });
       });
-
       closeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           const modal = btn.closest('.modal');
-          if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = ''; // Re-enable scrolling
-          }
+          if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
         });
       });
-
       window.addEventListener('click', (event) => {
         modals.forEach(modal => {
-          if (event.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-          }
+          if (event.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
         });
       });
     });

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Masuk — Arunika</title>
+
+  <!-- Tailwind CDN + Font -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles terpisah -->
+  <link rel="stylesheet" href="./assets/css/login.css" />
+</head>
+<body class="antialiased">
+
+  <!-- BG -->
+  <div class="parallax" aria-hidden="true">
+    <div class="stars" data-depth="0.05"></div>
+    <div class="twinkling" data-depth="0.1"></div>
+  </div>
+
+  <!-- Shapes -->
+  <svg class="floating" data-depth="0.25" style="left:10vw;top:15vh" width="84" height="84" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M48.5 0L62.7533 30.7467L97 47.5L62.7533 64.2533L48.5 95L34.2467 64.2533L0 47.5L34.2467 30.7467L48.5 0Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="48.5" y1="0" x2="48.5" y2="95" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".4"/><stop offset="1" stop-color="white" stop-opacity=".01"/></linearGradient></defs></svg>
+  <svg class="floating" data-depth="0.45" style="right:15vw;top:55vh" width="64" height="64" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M48.5 0L62.7533 30.7467L97 47.5L62.7533 64.2533L48.5 95L34.2467 64.2533L0 47.5L34.2467 30.7467L48.5 0Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="48.5" y1="0" x2="48.5" y2="95" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".4"/><stop offset="1" stop-color="white" stop-opacity=".01"/></linearGradient></defs></svg>
+
+  <main class="min-h-screen grid place-items-center p-4">
+    <div class="card-wrap relative w-full max-w-md">
+      <img src="./assets/img/char.svg" alt="Karakter Arunika" class="character" id="char" data-depth="0.14"/>
+
+      <div class="w-full rounded-2xl p-8 login-card" data-depth="0.2" id="card">
+        <div class="flex justify-center mb-8">
+          <img src="./assets/img/logo.png" alt="Logo Arunika" class="h-12 w-auto" />
+        </div>
+
+        <form id="login-form" class="space-y-4" novalidate>
+          <div>
+            <label for="email" class="sr-only">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="username"
+                   placeholder="Email" class="mt-1 w-full rounded-xl px-4 py-3 form-input" />
+            <p id="email-error" class="text-sm text-red-400 mt-1 hidden">Format email tidak valid.</p>
+          </div>
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <input id="password" name="password" type="password" minlength="8" required autocomplete="current-password"
+                   placeholder="Password" class="mt-1 w-full rounded-xl px-4 py-3 form-input" />
+            <p id="pass-error" class="text-sm text-red-400 mt-1 hidden">Minimal 8 karakter.</p>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn-grad w-full rounded-full py-3 font-bold text-lg">
+            <span class="inline-flex items-center gap-2">
+              <svg id="spinner" class="w-4 h-4 animate-spin hidden" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="4"/>
+                <path d="M21 12a9 9 0 00-9-9" stroke="currentColor" stroke-width="4"/>
+              </svg>
+              Masuk
+            </span>
+          </button>
+          <p id="form-error" class="text-center text-red-400 hidden">Email/Password tidak valid.</p>
+        </form>
+
+        <div class="flex items-center my-6">
+          <hr class="flex-grow border-t border-white/20"/>
+          <span class="px-4 text-xs text-white/60">ATAU MASUK DENGAN</span>
+          <hr class="flex-grow border-t border-white/20"/>
+        </div>
+
+        <div class="flex justify-center">
+          <button id="login-google" class="social-btn p-3 rounded-full" aria-label="Masuk dengan Google (dummy)">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.999 10.038h-8.999v3.916h5.211c-.229 1.251-.875 2.318-1.921 3.033v2.532h3.25c1.902-1.756 2.999-4.394 2.999-7.481 0-.747-.072-1.464-.19-2.162zM3.999 10.038v4.156h3.242c-.033-.195-.052-.393-.052-.596 0-1.503.491-2.883 1.321-4.022h-4.511zM12.001 21c-2.42 0-4.577-.798-6.101-2.158l3.25-2.532c.801.541 1.834.861 2.951.861 1.624 0 3.023-.717 3.868-1.789l3.155 2.459c-1.554 1.761-3.803 2.845-6.214 2.959zM12.001 3c2.41 0 4.469.824 5.999 2.191l-2.84 2.781c-.777-.741-1.785-1.182-2.949-1.182-2.17 0-4.032 1.467-4.686 3.465h-4.545c.792-2.836 3.498-4.945 6.97-5.255z"/></svg>
+          </button>
+        </div>
+
+        <p class="text-center text-sm mt-8 text-white/70">
+          Belum punya akun? <a href="signup.html" class="underline font-semibold text-white">Daftar</a>
+        </p>
+
+        <div id="toast" class="hidden mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm">
+          <span id="toastText">Berhasil masuk. Mengalihkan…</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- KONFIG & LOGIKA -->
+  <script src="./assets/js/config.js" defer></script>
+  <script src="./assets/js/session.js" defer></script>
+  <script src="./assets/js/login.js" defer></script>
+</body>
+</html>

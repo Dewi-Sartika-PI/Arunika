@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arunika - Playlist Karir Personalmu</title>
+  <!-- Guard: require login -->
+<!-- <script>
+(function () {
+  // cek session di localStorage (nama key dari session.js)
+  var KEY = 'arunika.session';
+  try {
+    var s = localStorage.getItem(KEY);
+    if (!s) location.replace('./login.html'); // belum login -> kirim ke login
+  } catch (e) {
+    location.replace('./login.html');
+  }
+})();
+</script> -->
+
 
   <!-- Tailwind (CSS framework OK) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/auth.css">
+
 
   <style>
     /* ---------- Warna Adaptif (Light/Dark) ---------- */
@@ -240,12 +257,55 @@
 }
     
   </style>
+
 </head>
 
 <body class="bg-brand-cream text-brand-d-brown">
   <!-- Top Glass Blur -->
   <div id="top-glass" aria-hidden="true"></div>
   <div id="navbar-root"></div>
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 p-4">
+    <div class="container mx-auto flex justify-center">
+      <div class="flex items-center gap-4 navbar-blur shadow-xl rounded-full p-2 border"
+           style="background-color:#481057; border:1px solid #481057; box-shadow:0 0 24px #A259FF, 0 0 48px #A259FF66;">
+        <a href="index.html" title="Halaman Utama Arunika" class="pl-2">
+          <img src="./assets/img/logo.png" alt="Arunika Logo" class="h-12 w-auto" />
+        </a>
+        <nav class="flex items-center space-x-1">
+          <a href="lab-career.html" title="Lab Career" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/lab_career.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Lab Career</span>
+          </a>
+          <a href="road-map.html" title="Roadmap" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/roadmap.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">Roadmap</span>
+          </a>
+          <a href="about-us.html" title="About Us" class="nav-link flex items-center gap-2 px-4 py-2.5 rounded-full text-white">
+            <img src="./assets/img/about_us.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+            <span class="hidden lg:inline font-semibold text-base">About Us</span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-2 pr-2" id="auth-area"></div>
+          <!-- <a href="#" class="p-3 rounded-full bg-brand-gold text-white" title="Account" aria-label="Account">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a> -->
+          <button id="theme-toggle" class="p-3 rounded-full bg-black/5 dark:bg-white/10">
+            <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden text-brand-d-brown" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden text-brand-cream" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+>>>>>>> dev
 
   <main>
     <!-- Hero -->
@@ -476,6 +536,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- sebelum script lain yang butuh session -->
+<script src="./assets/js/config.js"></script>
+<script src="./assets/js/session.js"></script>
+<script src="./assets/js/auth-ui.js"></script>
+<script src="./assets/js/guards.js"></script>
 
   <script>
     // --- NAVIGASI ---
